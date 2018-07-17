@@ -1,0 +1,13 @@
+﻿{
+  "components": [
+    {
+      "type": "WorkData.Code.JwtSecurityTokens.WorkDataBaseJwt,WorkData.Code",
+      "injectProperties": true,
+      "properties": {
+        "SecretKey": "WorkDataJwtSecretKey",
+        "Issuer": "http://localhost:49701/",
+        "Audience": "http://localhost:49701/"
+      }
+    }
+  ]
+}

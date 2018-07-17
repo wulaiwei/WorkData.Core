@@ -1,0 +1,16 @@
+﻿{
+  "modules": [
+    {
+      "type": "WorkData.Web.WorkDataWebModule,WorkData.Web"
+    },
+    {
+      "type": "WorkData.Domain.EntityFramework.DomainEntityFrameworkModule,WorkData.Domain.EntityFramework"
+    },
+    {
+      "type": "WorkData.EntityFramework.EntityFrameworkModule,WorkData.EntityFramework"
+    },
+    {
+      "type": "WorkData.Code.WorkDataCodeModule,WorkData.Code"
+    }
+  ]
+}

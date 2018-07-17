@@ -1,0 +1,2 @@
+# WorkData.Core
+WorkData.Core

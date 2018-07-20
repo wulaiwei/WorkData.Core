@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WorkData.ElasticSearch\WorkData.ElasticSearch.csproj" />
+    <ProjectReference Include="..\WorkData.Util.Common\WorkData.Util.Common.csproj" />
+    <ProjectReference Include="..\WorkData\WorkData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Config\commonConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Config\moduleConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

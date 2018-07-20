@@ -1,0 +1,10 @@
+﻿{
+  "modules": [
+    {
+      "type": "WorkDataEs.BaseUnitModule,WorkDataEs"
+    },
+    {
+      "type": "WorkData.ElasticSearch.ElasticSearchModule, WorkData.ElasticSearch"
+    }
+  ]
+}

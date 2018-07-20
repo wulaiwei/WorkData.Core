@@ -134,6 +134,38 @@ namespace WorkData
         }
 
         /// <summary>
+        /// InitiateConfig
+        /// </summary>
+        /// <param name="paths"></param>
+        public void InitiateConfig(List<string> paths)
+        {
+            if (_isInit) return;
+            var builder = new ContainerBuilder();
+
+            #region RegisterConfig
+            var config = new ConfigurationBuilder();
+            config.SetBasePath(AppDomain.CurrentDomain.BaseDirectory);
+            if (paths != null)
+            {
+                foreach (var item in paths)
+                {
+                    config.AddJsonFile(item);
+                }
+            }
+
+            var module = new ConfigurationModule(config.Build());
+            builder.RegisterModule(module);
+
+            #endregion
+
+            //注入初始module
+            builder.RegisterModule(new WorkDataModule());
+
+            IocManager.SetContainer(builder);
+            _isInit = true;
+        }
+
+        /// <summary>
         /// UpdateContainer
         /// </summary>
         /// <param name="services"></param>
@@ -144,5 +176,7 @@ namespace WorkData
             builder.Populate(services);
             IocManager.UpdateContainer(builder);
         }
+
+       
     }
 }

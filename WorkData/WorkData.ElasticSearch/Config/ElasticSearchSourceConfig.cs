@@ -9,6 +9,8 @@
 // 修改描述：
 //  ------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace WorkData.ElasticSearch.Config
 {
     /// <summary>
@@ -19,7 +21,7 @@ namespace WorkData.ElasticSearch.Config
         /// <summary>
         ///     Uri
         /// </summary>
-        public string Uri { get; set; }
+        public List<string> Uris { get; set; }
 
         /// <summary>
         ///     DefaultIndex

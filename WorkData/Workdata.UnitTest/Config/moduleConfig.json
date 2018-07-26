@@ -1,0 +1,19 @@
+﻿{
+  "modules": [
+    {
+      "type": "WorkData.ElasticSearch.ElasticSearchModule, WorkData.ElasticSearch"
+    },
+    {
+      "type": "WorkData.Domain.EntityFramework.DomainEntityFrameworkModule,WorkData.Domain.EntityFramework"
+    },
+    {
+      "type": "WorkData.EntityFramework.EntityFrameworkModule,WorkData.EntityFramework"
+    },
+    {
+      "type": "WorkData.Code.WorkDataCodeModule,WorkData.Code"
+    },
+    {
+      "type": "Workdata.UnitTest.BaseUnitModule,Workdata.UnitTest"
+    }
+  ]
+}

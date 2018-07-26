@@ -35,8 +35,7 @@ namespace WorkData.Code.UnitOfWorks
         /// <returns></returns>
         public IUnitOfWorkCompleteHandle Begin()
         {
-            var unitOfWork = _currentUnitOfWorkProvider.Current;
-            unitOfWork = _resolver.Resolve<IUnitOfWork>();
+            var unitOfWork = _resolver.Resolve<IUnitOfWork>();
             //开启事务
             unitOfWork.Begin();
             //设置定位

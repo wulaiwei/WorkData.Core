@@ -11,7 +11,7 @@
 
 using System;
 
-namespace WorkData.Extensions.Types
+namespace WorkData.Extensions.TypeFinders
 {
     public class EntityTypeInfo
     {

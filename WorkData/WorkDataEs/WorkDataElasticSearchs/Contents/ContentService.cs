@@ -1,10 +1,8 @@
 ﻿#region
 
 using Nest;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using WorkData.ElasticSearch;
 using WorkData.ElasticSearch.Entity;
 using WorkData.ElasticSearch.Interfaces;

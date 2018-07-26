@@ -4,7 +4,7 @@
       "type": "WorkData.ElasticSearch.Config.ElasticSearchSourceConfig,WorkData.ElasticSearch",
       "injectProperties": true,
       "properties": {
-        "Uri": "http://*:*",
+        "Uris": [ "http://10.130.0.196:9200" ],
         "DefaultIndex": "workdata"
       }
     }

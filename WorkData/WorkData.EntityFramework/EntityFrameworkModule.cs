@@ -21,7 +21,7 @@ using WorkData.EntityFramework.Extensions;
 using WorkData.EntityFramework.Repositories;
 using WorkData.EntityFramework.UnitOfWorks;
 using WorkData.Extensions.Modules;
-using WorkData.Extensions.Types;
+using WorkData.Extensions.TypeFinders;
 
 #endregion
 
@@ -32,11 +32,10 @@ namespace WorkData.EntityFramework
     /// </summary>
     public class EntityFrameworkModule : WorkDataBaseModule
     {
-        private readonly ILoadType _loadType;
-
+        private readonly ITypeFinder _typeFinder;
         public EntityFrameworkModule()
         {
-            _loadType = NullLoadType.Instance;
+            _typeFinder = NullTypeFinder.Instance;
         }
 
         protected override void Load(ContainerBuilder builder)
@@ -53,17 +52,17 @@ namespace WorkData.EntityFramework
             builder.RegisterType<EfUnitOfWork>()
                 .As<IUnitOfWork, IActiveUnitOfWork, IUnitOfWorkCompleteHandle>();
 
-            var auditTypes = _loadType.GetAll(x => x.IsPublic && x.IsClass && !x.IsAbstract
-                                && typeof(IAuditable).IsAssignableFrom(x));
+            #region 动态审计注入
+            var auditTypes = _typeFinder.FindClassesOfType<IAuditable>();
 
             foreach (var auditType in auditTypes)
             {
                 builder.RegisterType(auditType).Named<IAuditable>(auditType.FullName);
             }
+            #endregion
 
             #region Repository注入
-            var types = _loadType.GetAll(x => x.IsPublic && x.IsClass && !x.IsAbstract
-                                                 && typeof(WorkDataBaseDbContext).IsAssignableFrom(x));
+            var types = _typeFinder.FindClassesOfType<WorkDataBaseDbContext>();
 
             foreach (var type in types)
             {

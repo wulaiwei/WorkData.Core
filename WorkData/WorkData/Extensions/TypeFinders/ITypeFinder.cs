@@ -17,7 +17,7 @@ using System.Reflection;
 
 #endregion
 
-namespace WorkData.Extensions.Types
+namespace WorkData.Extensions.TypeFinders
 {
     /// <summary>
     ///     Classes implementing this interface provide information about types

@@ -9,6 +9,8 @@
 // 修改描述：
 //  ------------------------------------------------------------------------------
 
+using System.Security.Claims;
+using System.Security.Principal;
 using Autofac;
 using Microsoft.AspNetCore.Identity;
 using WorkData.Domain.Permissions.Users;

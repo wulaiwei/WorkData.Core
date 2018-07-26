@@ -6,7 +6,7 @@
 // 创建描述：
 //  
 // 修改标识：吴来伟2018-06-23 21:18
-// 修改描述：
+// 修改描述：源文件来自：NopCommerce
 //  ------------------------------------------------------------------------------
 
 #region
@@ -21,7 +21,7 @@ using System.Text.RegularExpressions;
 
 #endregion
 
-namespace WorkData.Extensions.Types
+namespace WorkData.Extensions.TypeFinders
 {
     /// <summary>
     ///     A class that finds types needed by Nop by looping assemblies in the

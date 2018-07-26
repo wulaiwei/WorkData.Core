@@ -14,18 +14,21 @@ namespace WorkDataEs
         ///     Gets a reference to the <see cref="Bootstrap" /> instance.
         /// </summary>
         public static Bootstrap BootstrapWarpper { get; } = Bootstrap.Instance();
+
         public static List<Content> Contents { get; set; }
 
         private static void Main(string[] args)
         {
             #region 初始化
+
             var paths = new List<string>
             {
                 "Config/moduleConfig.json",
                 "Config/commonConfig.json"
             };
             BootstrapWarpper.InitiateConfig(paths);
-            #endregion
+
+            #endregion 初始化
 
             //初始化service
             var service = BootstrapWarpper.IocManager.Resolve<IContentService>();
@@ -38,10 +41,12 @@ namespace WorkDataEs
             //复杂查询
             var request = new RequestContentDto
             {
-                PageSize=5,
-                SearchKey= "赛乐"
+                PageSize = 5,
+                SearchKey = "赛乐"
             };
+
             #region 高亮
+
             var highlightConfig = new HighlightConfig<Content>
             {
                 Tag = "i",
@@ -60,13 +65,14 @@ namespace WorkDataEs
             //更新
             service.UpdateByKey("123754", new Content
             {
-                Key="123"
+                Key = "123"
             });
-            #endregion
 
+            #endregion 高亮
         }
 
         #region 初始化数据
+
         /// <summary>
         /// InitData
         /// </summary>
@@ -165,10 +171,9 @@ namespace WorkDataEs
                    BrandGroupBy="红色营地&G",
                    ClassificationGroupBy="登山攀岩&,1,1862,1917,1930,"
                 }
-
-
             };
         }
-        #endregion
+
+        #endregion 初始化数据
     }
 }

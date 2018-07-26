@@ -16,7 +16,7 @@ using System.Linq;
 using System.Reflection;
 using WorkData.Code.Entities;
 using WorkData.Code.Helpers;
-using WorkData.Extensions.Types;
+using WorkData.Extensions.TypeFinders;
 
 namespace WorkData.EntityFramework.Extensions
 {

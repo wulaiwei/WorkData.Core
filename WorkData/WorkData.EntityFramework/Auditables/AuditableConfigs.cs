@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WorkData.Code.Entities.BaseInterfaces;
 using WorkData.Dependency;
-using WorkData.Extensions.Types;
+using WorkData.Extensions.TypeFinders;
 
 namespace WorkData.EntityFramework.Auditables
 {
@@ -28,11 +28,11 @@ namespace WorkData.EntityFramework.Auditables
 
         public List<Auditable> Auditables { get; set; }
 
-        private readonly ILoadType _loadType;
+        private readonly ITypeFinder _typeFinder;
 
-        public AuditableConfigs(ILoadType loadType)
+        public AuditableConfigs(ITypeFinder typeFinder)
         {
-            _loadType = loadType;
+            _typeFinder = typeFinder;
         }
 
         /// <summary>
@@ -47,8 +47,7 @@ namespace WorkData.EntityFramework.Auditables
             {
                 Auditables = new List<Auditable>();
             }
-            var types = _loadType.GetAll(x => x.IsPublic && x.IsClass
-                                              && typeof(IAuditable).IsAssignableFrom(x));
+            var types= _typeFinder.FindClassesOfType<IAuditable>();
 
             foreach (var type in types)
             {

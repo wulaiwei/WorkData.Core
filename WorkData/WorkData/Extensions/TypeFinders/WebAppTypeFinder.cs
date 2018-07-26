@@ -6,7 +6,7 @@
 // 创建描述：
 //  
 // 修改标识：吴来伟2018-06-23 21:21
-// 修改描述：
+// 修改描述：源文件来自：NopCommerce
 //  ------------------------------------------------------------------------------
 
 #region
@@ -17,7 +17,7 @@ using System.Reflection;
 
 #endregion
 
-namespace WorkData.Extensions.Types
+namespace WorkData.Extensions.TypeFinders
 {
     /// <summary>
     ///     Provides information about types in the current web application.

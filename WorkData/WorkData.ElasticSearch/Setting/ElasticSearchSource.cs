@@ -15,6 +15,8 @@ using WorkData.ElasticSearch.Config;
 using Nest;
 using System;
 using WorkData.Dependency;
+using System.Linq;
+using Elasticsearch.Net;
 
 #endregion
 
@@ -34,12 +36,13 @@ namespace WorkData.ElasticSearch.Setting
         /// <summary>
         /// Node
         /// </summary>
-        public static Uri Node => new Uri(ElasticSearchSourceConfig.Uri);
+        public static Uri[] Node => ElasticSearchSourceConfig.Uris.Select(x => new Uri(x)).ToArray();
 
         public static ConnectionSettings CreateInstance(string connectionString = null)
         {
+            var connectionPool = new SniffingConnectionPool(Node);
             //设置连接
-           return new ConnectionSettings(Node)
+            return new ConnectionSettings(connectionPool)
                 .DefaultIndex(ElasticSearchSourceConfig.DefaultIndex)
                 .BasicAuthentication("cloud", "jwellcloud");
         }

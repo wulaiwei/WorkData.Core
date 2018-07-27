@@ -33,22 +33,8 @@ namespace WorkData.Web
         /// </summary>s
         public IWorkDataSessionExtension WorkDataSession { get; set; } =
             IocManager.Instance.Resolve<IWorkDataSessionExtension>();
-
-        private readonly IBaseRepository<BaseUser, string> _baseUserRepository;
-
-        public HomeController(IBaseRepository<BaseUser, string> baseUserRepository)
-        {
-            _baseUserRepository = baseUserRepository;
-        }
-
         public IActionResult Index()
         {
-            var user = new BaseUser
-            {
-                Id = Guid.NewGuid().ToString(),
-                UserName = "cessdfa"
-            };
-            _baseUserRepository.Insert(user);
             return View();
         }
     }

@@ -26,15 +26,14 @@ namespace WorkData.EntityFramework
     /// </summary>
     public abstract class WorkDataBaseDbContext : DbContext
     {
+        protected WorkDataBaseDbContext(DbContextOptions options)
+            : base(options)
+        {
+        }
         /// <summary>
         /// Used to get current session values.
         /// </summary>
         public IWorkDataSession WorkDataSession { get; set; }
-
-        /// <summary>
-        /// AuditableConfigs
-        /// </summary>
-        public AuditableConfigs AuditableConfigs { get; set; } = IocManager.Instance.Resolve<AuditableConfigs>();
 
         /// <summary>
         /// WorkDataDbConfig
@@ -48,20 +47,6 @@ namespace WorkData.EntityFramework
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            switch (WorkDataDbConfig.WorkDataDbType)
-            {
-                case WorkDataDbType.SqlServer:
-                    optionsBuilder.UseSqlServer(WorkDataDbConfig.ConnectionString);
-                    break;
-
-                case WorkDataDbType.MySql:
-                case WorkDataDbType.PgSql:
-                    throw new ArgumentOutOfRangeException();
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            AuditableConfigs.InitializedAuditables();
             base.OnConfiguring(optionsBuilder);
         }
 

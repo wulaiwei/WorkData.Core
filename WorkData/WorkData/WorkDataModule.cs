@@ -26,7 +26,7 @@ namespace WorkData
             builder.RegisterType<IocManager>()
                 .As<IIocManager, IResolver, IRegistrar>();
 
-            builder.RegisterType<WebAppTypeFinder>().As<ITypeFinder>();
+            //builder.RegisterType<WebAppTypeFinder>().As<ITypeFinder>();
         }
     }
 }

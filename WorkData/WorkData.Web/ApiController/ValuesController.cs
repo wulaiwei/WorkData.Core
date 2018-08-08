@@ -14,11 +14,8 @@ namespace WorkData.Web.ApiController
     {
         // GET: api/<controller>
         [HttpGet]
-        [UnitOfWork]
         public IEnumerable<string> Get()
         {
-            var ss = WorkDataSession;
-            var user = GetClaimValue(ClaimTypes.Name);
             return new string[] { "value1", "value2" };
         }
 

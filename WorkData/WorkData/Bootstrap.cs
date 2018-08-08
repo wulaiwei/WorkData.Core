@@ -106,6 +106,10 @@ namespace WorkData
             if (_isInit) return;
             var builder = new ContainerBuilder();
 
+            //初始化IServiceCollection
+            IocManager.SetServiceCollection(services);
+            builder.Populate(services);
+
             #region RegisterConfig
             var config = new ConfigurationBuilder();
             config.SetBasePath(AppDomain.CurrentDomain.BaseDirectory);
@@ -116,19 +120,12 @@ namespace WorkData
                     config.AddJsonFile(item);
                 }
             }
-
             var module = new ConfigurationModule(config.Build());
             builder.RegisterModule(module);
-
             #endregion
 
             //注入初始module
             builder.RegisterModule(new WorkDataModule());
-
-            IocManager.SetServiceCollection(services);
-
-            builder.Populate(services);
-
             IocManager.SetContainer(builder);
             _isInit = true;
         }

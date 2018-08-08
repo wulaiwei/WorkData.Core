@@ -16,39 +16,38 @@ using System.Security.Principal;
 using Microsoft.AspNetCore.Mvc;
 using WorkData.Code.JwtSecurityTokens;
 using WorkData.Code.Repositories;
+using WorkData.Code.UnitOfWorks;
 using WorkData.Dependency;
 using WorkData.Domain.EntityFramework.EntityFramework.Sessions;
 using WorkData.Domain.Permissions.Users;
+using WorkData.EntityFramework.Auditables;
+using WorkData.Web.Extensions.Infrastructure;
 
 #endregion
 
 namespace WorkData.Web
 {
-    public class HomeController : Controller
+    public class HomeController : WorkDataBaseController
     {
-        public WorkDataBaseJwt WorkDataBaseJwt { get; set; } =
-            IocManager.Instance.ResolveServiceValue<WorkDataBaseJwt>();
-        /// <summary>
-        /// WorkDataSession
-        /// </summary>s
-        public IWorkDataSessionExtension WorkDataSession { get; set; } =
-            IocManager.Instance.Resolve<IWorkDataSessionExtension>();
+        private readonly IBaseRepository<BaseUser, string> _baseRepository;
 
-        private readonly IBaseRepository<BaseUser, string> _baseUserRepository;
-
-        public HomeController(IBaseRepository<BaseUser, string> baseUserRepository)
+        public HomeController(IBaseRepository<BaseUser, string> baseRepository)
         {
-            _baseUserRepository = baseUserRepository;
+            _baseRepository = baseRepository;
         }
 
+        /// <summary>
+        /// Index
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
-            var user = new BaseUser
+            var user=new BaseUser
             {
-                Id = Guid.NewGuid().ToString(),
-                UserName = "cessdfa"
+                UserName="sadfasdf",
+                CreateUserId = "123123"
             };
-            _baseUserRepository.Insert(user);
+            var ss= _baseRepository.Insert(user);
             return View();
         }
     }

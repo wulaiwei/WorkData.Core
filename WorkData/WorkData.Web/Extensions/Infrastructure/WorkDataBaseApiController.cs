@@ -20,14 +20,8 @@ using WorkData.Domain.EntityFramework.EntityFramework.Sessions;
 
 namespace WorkData.Web.Extensions.Infrastructure
 {
-    public class WorkDataBaseApiController : Controller
+    public class WorkDataBaseApiController : WorkDataBaseController
     {
-        /// <summary>
-        /// WorkDataSession
-        /// </summary>s
-        public IWorkDataSessionExtension WorkDataSession { get; set; } =
-            IocManager.Instance.Resolve<IWorkDataSessionExtension>();
-
         /// <summary>
         /// AsSuccess
         /// </summary>

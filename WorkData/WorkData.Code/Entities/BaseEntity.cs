@@ -75,6 +75,7 @@ namespace WorkData.Code.Entities
         /// <summary>
         /// 是否删除
         /// </summary>
+        [Column("IsDelete")]
         public virtual bool IsDelete { get; set; }
 
         #endregion 软删除

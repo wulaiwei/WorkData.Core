@@ -14,8 +14,10 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using WorkData.Dependency;
 using WorkData.Domain.EntityFramework.Mappings.Permissions;
 using WorkData.Domain.Permissions.Roles;
+using WorkData.Domain.Permissions.UserRoles;
 using WorkData.Domain.Permissions.Users;
 using WorkData.EntityFramework;
 using WorkData.EntityFramework.Auditables;
@@ -24,16 +26,16 @@ using WorkData.EntityFramework.Auditables;
 
 namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
 {
-    public class WorkDataIdentityContext : WorkDataBaseDbContext
+    public class WorkDataContext : WorkDataBaseDbContext
     {
+        public WorkDataContext(DbContextOptions options) : base(options)
+        {
+        }
         public DbSet<BaseUser> BaseUsers { get; set; }
 
         public DbSet<BaseRole> BaseRoles { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-        }
+        public DbSet<UserRole> UserRoles { get; set; }
 
         /// <summary>
         ///     重写模型创建函数
@@ -56,7 +58,7 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
         {
             ChangeTracker.DetectChanges();
 
-            //过滤所有修改了的实体，包括：增加 / 修改 / 删除
+            #region 过滤所有修改了的实体，包括：增加 / 修改 / 删除
             var objectStateEntryList = ChangeTracker.Entries().Where(obj => obj.State != EntityState.Unchanged);
             foreach (var entry in objectStateEntryList)
             {
@@ -93,6 +95,8 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
                         throw new ArgumentOutOfRangeException();
                 }
             }
+            #endregion
+
             return base.SaveChanges();
         }
 

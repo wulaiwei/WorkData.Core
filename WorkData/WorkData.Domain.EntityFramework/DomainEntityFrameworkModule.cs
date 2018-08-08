@@ -12,6 +12,7 @@
 #region
 
 using Autofac;
+using Microsoft.EntityFrameworkCore;
 using WorkData.Code.Sessions;
 using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
 using WorkData.Domain.EntityFramework.EntityFramework.Sessions;
@@ -28,7 +29,7 @@ namespace WorkData.Domain.EntityFramework
             builder.RegisterType<WorkDataSessionExtension>()
                 .As<IWorkDataSessionExtension>();
 
-            builder.Register(c => new WorkDataIdentityContext
+            builder.Register(c => new WorkDataContext(c.Resolve<DbContextOptions>())
             {
                 WorkDataSession = c.Resolve<IWorkDataSession>()
             });

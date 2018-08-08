@@ -23,8 +23,7 @@ namespace WorkData.EntityFramework.Auditables
         /// <summary>
         /// InitializedAuditables
         /// </summary>
-        public static Dictionary<EntityState, List<IAuditable>> AuditableDictionary { get; set; } =
-            new Dictionary<EntityState, List<IAuditable>>();
+        public static Dictionary<EntityState, List<IAuditable>> AuditableDictionary { get; set; } 
 
         public List<Auditable> Auditables { get; set; }
 
@@ -48,6 +47,8 @@ namespace WorkData.EntityFramework.Auditables
                 Auditables = new List<Auditable>();
             }
             var types= _typeFinder.FindClassesOfType<IAuditable>();
+
+            AuditableDictionary = new Dictionary<EntityState, List<IAuditable>>();
 
             foreach (var type in types)
             {

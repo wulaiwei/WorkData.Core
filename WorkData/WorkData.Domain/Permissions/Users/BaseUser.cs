@@ -25,7 +25,7 @@ namespace WorkData.Domain.Permissions.Users
         /// <summary>
         /// Id
         /// </summary>
-        [Column(Order = 1)]
+        [Column(Order = 0)]
         public override string Id { get; set; }
 
         public IList<UserRole> UserRoles { get; set; }

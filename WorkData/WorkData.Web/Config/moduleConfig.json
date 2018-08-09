@@ -4,6 +4,12 @@
       "type": "WorkData.Web.WorkDataWebModule,WorkData.Web"
     },
     {
+      "type": "WorkData.Service.WorkDataServiceModule,WorkData.Service"
+    },
+    {
+      "type": "WorkData.Domain.WorkDataDomainModule,WorkData.Domain"
+    },
+    {
       "type": "WorkData.Domain.EntityFramework.DomainEntityFrameworkModule,WorkData.Domain.EntityFramework"
     },
     {

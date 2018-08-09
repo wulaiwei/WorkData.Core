@@ -26,6 +26,11 @@ namespace WorkData.Domain.Permissions.Roles
         /// </summary>
         public override string Id { get; set; }
 
+        /// <summary>
+        /// 角色代码
+        /// </summary>
+        public string Code { get; set; }
+
         public IList<UserRole> UserRoles { get; set; }
     }
 }

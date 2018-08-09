@@ -11,17 +11,17 @@
 
 #region
 
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WorkData.Code.Sessions;
-using WorkData.Dependency;
 using WorkData.EntityFramework.Auditables;
 
 #endregion
 
 namespace WorkData.EntityFramework
 {
+    /// <inheritdoc />
     /// <summary>
     ///     WorkDataDbContext
     /// </summary>
@@ -31,33 +31,14 @@ namespace WorkData.EntityFramework
             : base(options)
         {
         }
+
         /// <summary>
-        /// Used to get current session values.
+        ///     WorkDataSession
         /// </summary>
         public IWorkDataSession WorkDataSession { get; set; }
 
         /// <summary>
-        /// OnConfiguring
-        /// </summary>
-        /// <param name="optionsBuilder"></param>
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-        }
-
-        /// <summary>
-        ///     重写模型创建函数
-        /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //默认移除级联删除
-            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-            base.OnModelCreating(modelBuilder);
-        }
-
-        /// <summary>
-        /// SaveChange
+        ///     SaveChange
         /// </summary>
         /// <returns></returns>
         public override int SaveChanges()
@@ -65,9 +46,9 @@ namespace WorkData.EntityFramework
             ChangeTracker.DetectChanges();
 
             #region 过滤所有修改了的实体，包括：增加 / 修改 / 删除
+
             var objectStateEntryList = ChangeTracker.Entries().Where(obj => obj.State != EntityState.Unchanged);
             foreach (var entry in objectStateEntryList)
-            {
                 switch (entry.State)
                 {
                     case EntityState.Added:
@@ -100,14 +81,14 @@ namespace WorkData.EntityFramework
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-            }
+
             #endregion
 
             return base.SaveChanges();
         }
 
         /// <summary>
-        /// 动态数据筛选器
+        ///     动态数据筛选器
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected abstract void InitDynamicFilters(ModelBuilder modelBuilder);

@@ -32,8 +32,8 @@ namespace WorkData.Code.WorkDataIdentity
         /// <summary>
         /// Name
         /// </summary>
-        [StringLength(500)]
-        [Column("Name")]
-        public virtual string Name { get; set; }
+        [StringLength(150)]
+        [Column("RoleName")]
+        public virtual string RoleName { get; set; }
     }
 }

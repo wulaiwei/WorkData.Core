@@ -29,6 +29,6 @@ namespace WorkData.Code.WorkDataIdentity
 
         //
         //     Gets or sets the name for this role.
-        string Name { get; set; }
+        string RoleName { get; set; }
     }
 }

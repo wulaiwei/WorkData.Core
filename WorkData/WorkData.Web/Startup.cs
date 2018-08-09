@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Security.Principal;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using WorkData.Code.AutoMappers;
 using WorkData.Code.JwtSecurityTokens;
 using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
 using WorkData.EntityFramework;
@@ -69,6 +70,10 @@ namespace WorkData.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
             services.AddSingleton<ITypeFinder,WebAppTypeFinder>();
+
+            #region AutoMapper
+            services.AddWorkDataAutoMapper(); 
+            #endregion
 
             #region WorkDataContext
             services.AddWorkDataDbContext<WorkDataContext>();

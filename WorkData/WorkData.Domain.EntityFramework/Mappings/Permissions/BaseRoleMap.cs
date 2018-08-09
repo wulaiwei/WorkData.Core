@@ -28,6 +28,11 @@ namespace WorkData.Domain.EntityFramework.Mappings.Permissions
                 .IsRequired()
                 .HasValueGenerator<AuditValueGenerator>(); //默认实现的
 
+            builder.Property(t => t.Code)
+                .HasMaxLength(20)
+                .HasColumnName("Code")
+                .IsRequired();
+
             builder.ToTable("BaseRole");
         }
     }

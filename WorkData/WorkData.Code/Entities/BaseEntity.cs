@@ -33,7 +33,7 @@ namespace WorkData.Code.Entities
         /// <summary>
         /// 创建人
         /// </summary>
-        [StringLength(500)]
+        [StringLength(200)]
         [Column("CreateUserId")]
         public virtual string CreateUserId { get; set; }
 
@@ -46,7 +46,7 @@ namespace WorkData.Code.Entities
         /// <summary>
         /// 编辑用户
         /// </summary>
-        [StringLength(500)]
+        [StringLength(200)]
         [Column("ModifierUserId")]
         public virtual string ModifierUserId { get; set; }
 
@@ -57,14 +57,14 @@ namespace WorkData.Code.Entities
         /// <summary>
         /// 所属用户
         /// </summary>
-        [StringLength(500)]
+        [StringLength(200)]
         [Column("BelongUserId")]
         public virtual string BelongUserId { get; set; }
 
         /// <summary>
         /// 所属Member
         /// </summary>
-        [StringLength(500)]
+        [StringLength(200)]
         [Column("MemberUserId")]
         public virtual string MemberUserId { get; set; }
 

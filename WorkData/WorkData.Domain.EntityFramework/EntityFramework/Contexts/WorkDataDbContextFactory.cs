@@ -35,9 +35,6 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
             ServiceCollection.Configure<WorkDataDbConfig>(config.GetSection("WorkDataDbContextConfig"));
 
             var workDataDbConfig = ServiceCollection.ResolveServiceValue<WorkDataDbConfig>();
-            Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
-            Console.WriteLine(workDataDbConfig.WorkDataDbType);
-            Console.WriteLine(workDataDbConfig.ConnectionString);
 
             var dbContextOptionsBuilder = new DbContextOptionsBuilder<WorkDataContext>();
 

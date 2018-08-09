@@ -25,9 +25,22 @@ namespace WorkData.Domain.Permissions.Users
         /// <summary>
         /// Id
         /// </summary>
-        [Column(Order = 0)]
         public override string Id { get; set; }
 
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string Password { get; set; }
+
+        /// <summary>
+        /// 加密盐
+        /// </summary>
+        public string Salt { get; set; }
+
+        #region Relation
         public IList<UserRole> UserRoles { get; set; }
+
+        public IList<BaseUserMember> BaseUserClaims { get; set; } 
+        #endregion
     }
 }

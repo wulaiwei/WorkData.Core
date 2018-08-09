@@ -10,7 +10,7 @@ using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
 namespace WorkData.Domain.EntityFramework.Migrations
 {
     [DbContext(typeof(WorkDataContext))]
-    [Migration("20180808095220_Init")]
+    [Migration("20180809032743_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,32 +30,37 @@ namespace WorkData.Domain.EntityFramework.Migrations
 
                     b.Property<string>("BelongUserId")
                         .HasColumnName("BelongUserId")
-                        .HasMaxLength(500);
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnName("Code")
+                        .HasMaxLength(20);
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnName("CreateTime");
 
                     b.Property<string>("CreateUserId")
                         .HasColumnName("CreateUserId")
-                        .HasMaxLength(500);
+                        .HasMaxLength(200);
 
                     b.Property<bool>("IsDelete")
                         .HasColumnName("IsDelete");
 
                     b.Property<string>("MemberUserId")
                         .HasColumnName("MemberUserId")
-                        .HasMaxLength(500);
+                        .HasMaxLength(200);
 
                     b.Property<DateTime?>("ModifierTime")
                         .HasColumnName("ModifierTime");
 
                     b.Property<string>("ModifierUserId")
                         .HasColumnName("ModifierUserId")
-                        .HasMaxLength(500);
+                        .HasMaxLength(200);
 
-                    b.Property<string>("Name")
-                        .HasColumnName("Name")
-                        .HasMaxLength(500);
+                    b.Property<string>("RoleName")
+                        .HasColumnName("RoleName")
+                        .HasMaxLength(150);
 
                     b.HasKey("Id");
 
@@ -88,34 +93,84 @@ namespace WorkData.Domain.EntityFramework.Migrations
 
                     b.Property<string>("BelongUserId")
                         .HasColumnName("BelongUserId")
-                        .HasMaxLength(500);
+                        .HasMaxLength(200);
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnName("CreateTime");
 
                     b.Property<string>("CreateUserId")
                         .HasColumnName("CreateUserId")
-                        .HasMaxLength(500);
+                        .HasMaxLength(200);
 
                     b.Property<bool>("IsDelete")
                         .HasColumnName("IsDelete");
 
                     b.Property<string>("MemberUserId")
                         .HasColumnName("MemberUserId")
-                        .HasMaxLength(500);
+                        .HasMaxLength(200);
 
                     b.Property<DateTime?>("ModifierTime")
                         .HasColumnName("ModifierTime");
 
                     b.Property<string>("ModifierUserId")
                         .HasColumnName("ModifierUserId")
-                        .HasMaxLength(500);
+                        .HasMaxLength(200);
 
-                    b.Property<string>("UserName");
+                    b.Property<string>("Password");
+
+                    b.Property<string>("Salt");
+
+                    b.Property<string>("UserName")
+                        .HasColumnName("UserName")
+                        .HasMaxLength(150);
 
                     b.HasKey("Id");
 
                     b.ToTable("BaseUser");
+                });
+
+            modelBuilder.Entity("WorkData.Domain.Permissions.Users.BaseUserMember", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("BaseUserId")
+                        .IsRequired()
+                        .HasColumnName("BaseUserId")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("BelongUserId")
+                        .HasColumnName("BelongUserId")
+                        .HasMaxLength(200);
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnName("CreateTime");
+
+                    b.Property<string>("CreateUserId")
+                        .HasColumnName("CreateUserId")
+                        .HasMaxLength(200);
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnName("IsDelete");
+
+                    b.Property<string>("MemberUserId")
+                        .HasColumnName("MemberUserId")
+                        .HasMaxLength(200);
+
+                    b.Property<DateTime?>("ModifierTime")
+                        .HasColumnName("ModifierTime");
+
+                    b.Property<string>("ModifierUserId")
+                        .HasColumnName("ModifierUserId")
+                        .HasMaxLength(200);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BaseUserId");
+
+                    b.ToTable("BaseUserMember");
                 });
 
             modelBuilder.Entity("WorkData.Domain.Permissions.UserRoles.UserRole", b =>
@@ -127,6 +182,14 @@ namespace WorkData.Domain.EntityFramework.Migrations
 
                     b.HasOne("WorkData.Domain.Permissions.Users.BaseUser", "BaseUser")
                         .WithMany("UserRoles")
+                        .HasForeignKey("BaseUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WorkData.Domain.Permissions.Users.BaseUserMember", b =>
+                {
+                    b.HasOne("WorkData.Domain.Permissions.Users.BaseUser", "BaseUser")
+                        .WithMany("BaseUserClaims")
                         .HasForeignKey("BaseUserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

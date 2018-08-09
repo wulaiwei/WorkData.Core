@@ -12,6 +12,8 @@
 #region
 
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using WorkData.Code.Entities;
 
 #endregion
@@ -32,6 +34,8 @@ namespace WorkData.Code.WorkDataIdentity
         /// <summary>
         ///     用户名
         /// </summary>
+        [StringLength(150)]
+        [Column("UserName")]
         public virtual string UserName { get; set; }
     }
 }

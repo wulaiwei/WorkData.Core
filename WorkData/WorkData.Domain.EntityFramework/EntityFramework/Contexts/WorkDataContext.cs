@@ -37,6 +37,8 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
 
         public DbSet<UserRole> UserRoles { get; set; }
 
+        public DbSet<BaseUserMember> BaseUserMembers { get; set; }
+
         /// <summary>
         ///     重写模型创建函数
         /// </summary>
@@ -48,6 +50,7 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new BaseUserMap());
             modelBuilder.ApplyConfiguration(new BaseRoleMap());
             modelBuilder.ApplyConfiguration(new UserRoleMap());
+            modelBuilder.ApplyConfiguration(new BaseUserMemberMap());
         }
 
         /// <summary>

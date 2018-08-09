@@ -24,6 +24,9 @@ namespace WorkData.EntityFramework
         public WorkDataDbType WorkDataDbType { get; set; }
     }
 
+    /// <summary>
+    /// WorkDataDbType
+    /// </summary>
     public enum WorkDataDbType
     {
         SqlServer = 0,

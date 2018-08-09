@@ -13,6 +13,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using WorkData.Code.Sessions;
 using WorkData.Dependency;
 using WorkData.EntityFramework.Auditables;
@@ -36,12 +37,6 @@ namespace WorkData.EntityFramework
         public IWorkDataSession WorkDataSession { get; set; }
 
         /// <summary>
-        /// WorkDataDbConfig
-        /// </summary>
-        public WorkDataDbConfig WorkDataDbConfig { get; set; } =
-            IocManager.Instance.ResolveServiceValue<WorkDataDbConfig>();
-
-        /// <summary>
         /// OnConfiguring
         /// </summary>
         /// <param name="optionsBuilder"></param>
@@ -59,6 +54,56 @@ namespace WorkData.EntityFramework
             //默认移除级联删除
             //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             base.OnModelCreating(modelBuilder);
+        }
+
+        /// <summary>
+        /// SaveChange
+        /// </summary>
+        /// <returns></returns>
+        public override int SaveChanges()
+        {
+            ChangeTracker.DetectChanges();
+
+            #region 过滤所有修改了的实体，包括：增加 / 修改 / 删除
+            var objectStateEntryList = ChangeTracker.Entries().Where(obj => obj.State != EntityState.Unchanged);
+            foreach (var entry in objectStateEntryList)
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        AuditableConfigs.AuditableDictionary[EntityState.Added].ForEach(x =>
+                        {
+                            x.AttemptSetEntityProperty(entry.Entity, WorkDataSession);
+                        });
+                        break;
+
+                    case EntityState.Deleted:
+                        AuditableConfigs.AuditableDictionary[EntityState.Deleted].ForEach(x =>
+                        {
+                            x.AttemptSetEntityProperty(entry.Entity, WorkDataSession);
+                        });
+                        break;
+
+                    case EntityState.Modified:
+                        AuditableConfigs.AuditableDictionary[EntityState.Modified].ForEach(x =>
+                        {
+                            x.AttemptSetEntityProperty(entry.Entity, WorkDataSession);
+                        });
+                        break;
+
+                    case EntityState.Detached:
+                        break;
+
+                    case EntityState.Unchanged:
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            #endregion
+
+            return base.SaveChanges();
         }
 
         /// <summary>

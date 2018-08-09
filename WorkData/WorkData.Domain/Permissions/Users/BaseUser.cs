@@ -10,7 +10,6 @@
 //  ------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using WorkData.Code.Entities;
 using WorkData.Code.Repositories;
 using WorkData.Code.WorkDataIdentity;
@@ -39,9 +38,11 @@ namespace WorkData.Domain.Permissions.Users
         public string Salt { get; set; }
 
         #region Relation
+
         public IList<UserRole> UserRoles { get; set; }
 
-        public IList<BaseUserMember> BaseUserClaims { get; set; } 
-        #endregion
+        public IList<BaseUserMember> BaseUserClaims { get; set; }
+
+        #endregion Relation
     }
 }

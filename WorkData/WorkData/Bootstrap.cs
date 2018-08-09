@@ -173,7 +173,5 @@ namespace WorkData
             builder.Populate(services);
             IocManager.UpdateContainer(builder);
         }
-
-       
     }
 }

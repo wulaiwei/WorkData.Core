@@ -1,19 +1,19 @@
 ﻿// ------------------------------------------------------------------------------
-// Copyright  吴来伟个人 版权所有。 
+// Copyright  吴来伟个人 版权所有。
 // 项目名：WorkData.ElasticSearch
 // 文件名：SearchRequestExtension.cs
 // 创建标识：吴来伟 2018-07-17 13:30
 // 创建描述：
-//  
+//
 // 修改标识：吴来伟2018-07-17 13:33
 // 修改描述：
 //  ------------------------------------------------------------------------------
 
 #region
 
+using Nest;
 using System.Collections.Generic;
 using System.Linq;
-using Nest;
 using WorkData.ElasticSearch.Config;
 using WorkData.Util.Common.Helpers;
 
@@ -76,8 +76,8 @@ namespace WorkData.ElasticSearch.Entity
             }
             searchRequest.Highlight = new Highlight
             {
-                PreTags = new[] {$"<{config.Tag}>"},
-                PostTags = new[] {$"</{config.Tag}>"},
+                PreTags = new[] { $"<{config.Tag}>" },
+                PostTags = new[] { $"</{config.Tag}>" },
                 Encoder = HighlighterEncoder.Html,
                 Fields = dic
             };

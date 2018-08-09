@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WorkData.Code.Entities;
+﻿using WorkData.Code.Entities;
 
 namespace WorkData.Domain.Permissions.Users
 {
     /// <summary>
     /// BaseUserMember
     /// </summary>
-    public class BaseUserMember: BaseEntity, IEntity<string>
+    public class BaseUserMember : BaseEntity, IEntity<string>
     {
         /// <summary>
         /// Id
@@ -20,9 +17,10 @@ namespace WorkData.Domain.Permissions.Users
         /// </summary>
         public string BaseUserId { get; set; }
 
-
         #region Relation
-        public BaseUser BaseUser { get; set; } 
-        #endregion
+
+        public BaseUser BaseUser { get; set; }
+
+        #endregion Relation
     }
 }

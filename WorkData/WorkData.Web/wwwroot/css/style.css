@@ -458,11 +458,9 @@ color:#fff;
 
 /* Extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
-
 	.content-1-4 .image-container {
 		display: none;
 	}
-
 }
 /* Misc
 ----------------------------------------------------------------------------- */
@@ -587,7 +585,6 @@ text-align:center;padding: 60px 0;background: #2C3E50;color: #8D9DAD;}
 .hero-caption h2{
 text-align:center;color: #fff;}
 .hero-caption p{
-
 font-size: 15px;
 }
 /* Template Components
@@ -743,7 +740,7 @@ padding: 44px 0;
 	filter: alpha(opacity=100);
 	opacity: 1;
 }
- 
+
 @media (min-width:1200px) {
 	.modal-lg {
 		width: 1140px;
@@ -786,7 +783,7 @@ padding: 44px 0;
 }
 
 /* carousel */
-#quote-carousel 
+#quote-carousel
 {
   padding: 0 10px 30px 10px;
   margin-top: 30px;
@@ -802,17 +799,17 @@ padding: 44px 0;
   margin-top: 30px;
 }
 /* Previous button  */
-#quote-carousel .carousel-control.left 
+#quote-carousel .carousel-control.left
 {
   left: -12px;
 }
 /* Next button  */
-#quote-carousel .carousel-control.right 
+#quote-carousel .carousel-control.right
 {
   right: -12px !important;
 }
 /* Changes the position of the indicators */
-#quote-carousel .carousel-indicators 
+#quote-carousel .carousel-indicators
 {
   right: 50%;
   top: auto;
@@ -820,11 +817,11 @@ padding: 44px 0;
   margin-right: -19px;
 }
 /* Changes the color of the indicators */
-#quote-carousel .carousel-indicators li 
+#quote-carousel .carousel-indicators li
 {
   background: #2C3E50;
 }
-#quote-carousel .carousel-indicators .active 
+#quote-carousel .carousel-indicators .active
 {
   background: #FFFFFF;
 }
@@ -852,30 +849,26 @@ padding: 44px 0;
     margin-right: 10px;
 }
 
-
-
 /**
   MEDIA QUERIES
 */
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) { 
-    #quote-carousel 
+@media (min-width: 768px) {
+    #quote-carousel
     {
       margin-bottom: 0;
       padding: 0 40px 30px 40px;
       color: #fff;
     }
-    
 }
 
 /* Small devices (tablets, up to 768px) */
-@media (max-width: 768px) { 
-    
+@media (max-width: 768px) {
     /* Make the indicators larger for easier clicking with fingers/thumb on mobile */
-    
+
     #quote-carousel .carousel-indicators {
-        bottom: -20px !important;  
+        bottom: -20px !important;
     }
     #quote-carousel .carousel-indicators li {
         display: inline-block;

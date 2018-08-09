@@ -51,7 +51,7 @@ namespace WorkData.ElasticSearch.Impl
         /// <param name="index"></param>
         /// <param name="numberOfShards"></param>
         /// <param name="numberOfReplicas"></param>
-        public static void InitializeIndexMap<T>(this IElasticClient client, string index,int numberOfShards,int numberOfReplicas) where T : class
+        public static void InitializeIndexMap<T>(this IElasticClient client, string index, int numberOfShards, int numberOfReplicas) where T : class
         {
             var descriptor = new CreateIndexDescriptor(index)
                 .Mappings(ms => ms

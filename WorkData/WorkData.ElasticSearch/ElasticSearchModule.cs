@@ -22,7 +22,7 @@ namespace WorkData.ElasticSearch
             builder.RegisterType<NullElasticClient>();
 
             builder.RegisterType<ElasticsearchProvider>()
-                .As(typeof(IDeleteProvider),typeof(ISearchProvider),typeof(IIndexProvider),typeof(IAliasProvider),typeof(IUpdateProvider))
+                .As(typeof(IDeleteProvider), typeof(ISearchProvider), typeof(IIndexProvider), typeof(IAliasProvider), typeof(IUpdateProvider))
                 .EnableInterfaceInterceptors();
         }
     }

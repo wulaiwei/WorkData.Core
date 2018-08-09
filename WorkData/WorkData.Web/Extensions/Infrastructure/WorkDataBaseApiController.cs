@@ -13,8 +13,6 @@
 
 using Microsoft.AspNetCore.Mvc;
 using WorkData.Code.ResponseExtensions;
-using WorkData.Dependency;
-using WorkData.Domain.EntityFramework.EntityFramework.Sessions;
 
 #endregion
 

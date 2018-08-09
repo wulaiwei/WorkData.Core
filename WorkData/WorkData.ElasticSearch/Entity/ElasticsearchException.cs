@@ -1,10 +1,10 @@
 ﻿// ------------------------------------------------------------------------------
-// Copyright  吴来伟个人 版权所有。 
+// Copyright  吴来伟个人 版权所有。
 // 项目名：WorkData.ElasticSearch
 // 文件名：ElasticsearchException.cs
 // 创建标识：吴来伟 2018-05-02 11:07
 // 创建描述：
-//  
+//
 // 修改标识：吴来伟2018-05-02 11:07
 // 修改描述：
 //  ------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ using WorkData.Util.Common.ExceptionExtensions;
 namespace WorkData.ElasticSearch.Entity
 {
     [Serializable]
-    public class ElasticsearchException: WorkDataException
+    public class ElasticsearchException : WorkDataException
     {
         /// <summary>
         /// Additional information about the exception.

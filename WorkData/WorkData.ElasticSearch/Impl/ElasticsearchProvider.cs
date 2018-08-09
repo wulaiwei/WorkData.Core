@@ -12,12 +12,11 @@
 #region
 
 using Autofac.Extras.DynamicProxy;
-using WorkData.ElasticSearch.Interfaces;
 using Nest;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using WorkData.ElasticSearch.Entity;
+using WorkData.ElasticSearch.Interfaces;
 
 #endregion
 
@@ -80,7 +79,7 @@ namespace WorkData.ElasticSearch.Impl
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
         /// <param name="index"></param>
-        public void BulkIndex<T>(List<T> entity,string index) where T : class
+        public void BulkIndex<T>(List<T> entity, string index) where T : class
         {
             if (!IndexExists(index))
             {

@@ -1,10 +1,10 @@
 ﻿// ------------------------------------------------------------------------------
-// Copyright  吴来伟个人 版权所有。 
+// Copyright  吴来伟个人 版权所有。
 // 项目名：WorkData.ElasticSearch
 // 文件名：DeleteRequestExtension.cs
 // 创建标识：吴来伟 2018-05-03 16:32
 // 创建描述：
-//  
+//
 // 修改标识：吴来伟2018-05-03 16:32
 // 修改描述：
 //  ------------------------------------------------------------------------------
@@ -27,7 +27,6 @@ namespace WorkData.ElasticSearch.Entity
                 searchRequest.Query = predicate.GetQuery(searchRequest.Query);
             }
             return searchRequest;
-
         }
     }
 }

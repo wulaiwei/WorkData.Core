@@ -3,7 +3,7 @@
 using System;
 using System.Linq;
 
-#endregion
+#endregion NameSpace
 
 namespace WorkData.Util.Common.Extensions
 {
@@ -19,7 +19,7 @@ namespace WorkData.Util.Common.Extensions
         /// <param name="key"></param>
         /// <param name="isFirst"></param>
         /// <returns></returns>
-        public static string SplitString(this string str, char key, bool isFirst=false)
+        public static string SplitString(this string str, char key, bool isFirst = false)
         {
             var strArray = str.Split(new[] { key }, StringSplitOptions.RemoveEmptyEntries);
             if (strArray.Length <= 0)
@@ -114,6 +114,7 @@ namespace WorkData.Util.Common.Extensions
             var isDate = DateTime.TryParse(str, out DateTime date);
             return !isDate ? string.Empty : date.ToString(format);
         }
+
         /// <summary>
         ///     Dateyyyymmdds the specified date.
         /// </summary>
@@ -141,7 +142,6 @@ namespace WorkData.Util.Common.Extensions
         {
             return !str.HasValue ? string.Empty : str.ToString();
         }
-
 
         /// <summary>
         ///     将传入的字符串中间部分字符替换成特殊字符

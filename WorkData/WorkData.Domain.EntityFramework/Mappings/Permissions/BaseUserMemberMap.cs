@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using WorkData.Domain.EntityFramework.EntityFramework.Extensions;
 using WorkData.Domain.Permissions.Users;
 
 namespace WorkData.Domain.EntityFramework.Mappings.Permissions
 {
-    public class BaseUserMemberMap: IEntityTypeConfiguration<BaseUserMember>
+    public class BaseUserMemberMap : IEntityTypeConfiguration<BaseUserMember>
     {
         public void Configure(EntityTypeBuilder<BaseUserMember> builder)
         {

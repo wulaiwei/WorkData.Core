@@ -10,9 +10,7 @@
  */
 (function($) {
     $.fn.appear = function(fn, options) {
-
         var settings = $.extend({
-
             //arbitrary data to pass to fn
             data: undefined,
 
@@ -22,18 +20,15 @@
             // X & Y accuracy
             accX: 0,
             accY: 0
-
         }, options);
 
         return this.each(function() {
-
             var t = $(this);
 
             //whether the element is currently visible
             t.appeared = false;
 
             if (!fn) {
-
                 //trigger the custom event
                 t.trigger('appear', settings.data);
                 return;
@@ -43,10 +38,8 @@
 
             //fires the appear event when appropriate
             var check = function() {
-
                 //is the element hidden?
                 if (!t.is(':visible')) {
-
                     //it became hidden
                     t.appeared = false;
                     return;
@@ -70,12 +63,9 @@
                     y <= b + wh + ay &&
                     x + tw + ax >= a &&
                     x <= a + ww + ax) {
-
                     //trigger the custom event
                     if (!t.appeared) t.trigger('appear', settings.data);
-
                 } else {
-
                     //it scrolled out of view
                     t.appeared = false;
                 }
@@ -83,13 +73,11 @@
 
             //create a modified fn with some additional logic
             var modifiedFn = function() {
-
                 //mark the element as visible
                 t.appeared = true;
 
                 //is this supposed to happen only once?
                 if (settings.one) {
-
                     //remove the check
                     w.unbind('scroll', check);
                     var i = $.inArray(check, $.fn.appear.checks);
@@ -117,7 +105,6 @@
 
     //keep a queue of appearance checks
     $.extend($.fn.appear, {
-
         checks: [],
         timeout: null,
 
@@ -147,5 +134,4 @@
             }
         }
     });
-
 })(jQuery);

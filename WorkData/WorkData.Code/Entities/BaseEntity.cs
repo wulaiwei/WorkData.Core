@@ -26,7 +26,7 @@ namespace WorkData.Code.Entities
         /// <summary>
         /// 创建时间
         /// </summary>
-        [Column("CreateTime", Order = 99,TypeName = "timestamp(0)")]
+        [Column("CreateTime", Order = 99, TypeName = "timestamp(0)")]
         [Required]
         public virtual DateTime CreateTime { get; set; }
 

@@ -11,12 +11,10 @@
 
 #region
 
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Threading.Tasks;
 using WorkData.Code.Entities;
 using WorkData.Code.Repositories;
 
@@ -52,6 +50,7 @@ namespace WorkData.EntityFramework.Repositories
         }
 
         #region Query
+
         /// <summary>
         /// FindBy
         /// </summary>
@@ -71,9 +70,11 @@ namespace WorkData.EntityFramework.Repositories
         {
             return DbSet;
         }
+
         #endregion
 
         #region Insert
+
         /// <summary>
         ///     Insert
         /// </summary>
@@ -111,9 +112,11 @@ namespace WorkData.EntityFramework.Repositories
 
             Context.SaveChanges();
         }
+
         #endregion
 
         #region Delete
+
         /// <summary>
         /// Delete
         /// </summary>
@@ -137,9 +140,11 @@ namespace WorkData.EntityFramework.Repositories
 
             Context.SaveChanges();
         }
+
         #endregion
 
         #region Update
+
         /// <summary>
         /// Update
         /// </summary>
@@ -162,7 +167,8 @@ namespace WorkData.EntityFramework.Repositories
             DbSet.UpdateRange(entities);
 
             Context.SaveChanges();
-        } 
+        }
+
         #endregion
 
         /// <summary>

@@ -11,9 +11,9 @@
 
 #region
 
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using WorkData.Code.Sessions;
 using WorkData.EntityFramework.Auditables;
 

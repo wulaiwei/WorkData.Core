@@ -33,6 +33,7 @@ namespace WorkData.EntityFramework
     public class EntityFrameworkModule : WorkDataBaseModule
     {
         private readonly ITypeFinder _typeFinder;
+
         public EntityFrameworkModule()
         {
             _typeFinder = NullTypeFinder.Instance;

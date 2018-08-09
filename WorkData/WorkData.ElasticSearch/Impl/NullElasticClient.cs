@@ -9,8 +9,8 @@
 // 修改描述：
 //  ------------------------------------------------------------------------------
 
-using WorkData.ElasticSearch.Setting;
 using Nest;
+using WorkData.ElasticSearch.Setting;
 
 namespace WorkData.ElasticSearch.Impl
 {

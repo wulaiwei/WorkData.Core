@@ -12,15 +12,11 @@
 #region
 
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using WorkData.Dependency;
 using WorkData.Domain.EntityFramework.Mappings.Permissions;
 using WorkData.Domain.Permissions.Roles;
 using WorkData.Domain.Permissions.UserRoles;
 using WorkData.Domain.Permissions.Users;
 using WorkData.EntityFramework;
-using WorkData.EntityFramework.Auditables;
 
 #endregion
 
@@ -31,6 +27,7 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
         public WorkDataContext(DbContextOptions options) : base(options)
         {
         }
+
         public DbSet<BaseUser> BaseUsers { get; set; }
 
         public DbSet<BaseRole> BaseRoles { get; set; }

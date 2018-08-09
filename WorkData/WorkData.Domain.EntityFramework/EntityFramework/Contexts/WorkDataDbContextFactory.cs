@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using WorkData.EntityFramework;
 using WorkData.Extensions.ServiceCollections;
 
@@ -29,8 +27,7 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
 
             var config = builder.Build();
 
-            #endregion
-
+            #endregion ConfigurationBuilder
 
             ServiceCollection.Configure<WorkDataDbConfig>(config.GetSection("WorkDataDbContextConfig"));
 
@@ -43,17 +40,18 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
                 case WorkDataDbType.SqlServer:
                     dbContextOptionsBuilder.UseSqlServer(workDataDbConfig.ConnectionString);
                     break;
+
                 case WorkDataDbType.MySql:
                     throw new ArgumentOutOfRangeException();
                 case WorkDataDbType.PgSql:
                     dbContextOptionsBuilder.UseNpgsql(workDataDbConfig.ConnectionString);
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
             return new WorkDataContext(dbContextOptionsBuilder.Options);
         }
-
     }
 }

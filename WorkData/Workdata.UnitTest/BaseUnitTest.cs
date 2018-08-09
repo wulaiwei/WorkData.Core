@@ -1,23 +1,22 @@
 ﻿// ------------------------------------------------------------------------------
-// Copyright  吴来伟个人 版权所有。 
+// Copyright  吴来伟个人 版权所有。
 // 项目名：Workdata.UnitTest
 // 文件名：BaseUnitTest.cs
 // 创建标识：吴来伟 2018-07-25 17:57
 // 创建描述：
-//  
+//
 // 修改标识：吴来伟2018-07-25 22:37
 // 修改描述：
 //  ------------------------------------------------------------------------------
 
 #region
 
-using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
 using WorkData;
 using WorkData.Code.JwtSecurityTokens;
-using WorkData.Dependency;
 using WorkData.Domain.EntityFramework.EntityFramework.Sessions;
 using WorkData.EntityFramework;
 
@@ -32,6 +31,7 @@ namespace Workdata.UnitTest
         /// </summary>
         public static Bootstrap BootstrapWarpper { get; } =
             Bootstrap.Instance();
+
         /// <summary>
         /// WorkDataSession
         /// </summary>s

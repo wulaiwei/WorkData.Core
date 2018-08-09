@@ -12,7 +12,6 @@
 #region
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -45,7 +44,6 @@ namespace WorkData.Code.Helpers
             return givenTypeInfo.BaseType != null && IsAssignableToGenericType(givenTypeInfo.BaseType, genericType);
         }
 
-
         /// <summary>
         ///     Checks whether <paramref name="givenType" /> implements/inherits <paramref name="type" />.
         /// </summary>
@@ -55,13 +53,12 @@ namespace WorkData.Code.Helpers
         {
             var givenTypeInfo = givenType.GetTypeInfo();
 
-            if (givenType.GetInterfaces().Any(interfaceType =>interfaceType == type))
+            if (givenType.GetInterfaces().Any(interfaceType => interfaceType == type))
             {
                 return true;
             }
 
             return givenTypeInfo.BaseType != null && IsAssignableToType(givenTypeInfo.BaseType, type);
         }
-
     }
 }

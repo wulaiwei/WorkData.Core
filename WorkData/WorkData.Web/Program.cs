@@ -14,8 +14,8 @@
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using System.IO;
 using Microsoft.Extensions.Configuration;
+using System.IO;
 
 #endregion
 

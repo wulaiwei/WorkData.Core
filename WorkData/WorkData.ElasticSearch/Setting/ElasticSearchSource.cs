@@ -11,12 +11,12 @@
 
 #region
 
-using WorkData.ElasticSearch.Config;
+using Elasticsearch.Net;
 using Nest;
 using System;
-using WorkData.Dependency;
 using System.Linq;
-using Elasticsearch.Net;
+using WorkData.Dependency;
+using WorkData.ElasticSearch.Config;
 
 #endregion
 

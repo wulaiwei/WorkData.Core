@@ -1,22 +1,22 @@
 // ------------------------------------------------------------------------------
-// Copyright  吴来伟个人 版权所有。 
+// Copyright  吴来伟个人 版权所有。
 // 项目名：WorkData.ElasticSearch
 // 文件名：Predicates.cs
 // 创建标识：吴来伟 2018-05-02 14:39
 // 创建描述：
-//  
+//
 // 修改标识：吴来伟2018-05-03 15:25
 // 修改描述：
 //  ------------------------------------------------------------------------------
 
 #region
 
+using Nest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using WorkData.ElasticSearch.Entity;
-using Nest;
 using WorkData.Util.Common.Helpers;
 
 #endregion
@@ -36,19 +36,18 @@ namespace WorkData.ElasticSearch
         /// <param name="searchKey"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        public static IFieldTerms FieldTerms<T>(Expression<Func<T, object>> expression,string searchKey,int size) where T : class
+        public static IFieldTerms FieldTerms<T>(Expression<Func<T, object>> expression, string searchKey, int size) where T : class
         {
             var propertySearchName = (PropertySearchNameAttribute)
                 LoadAttributeHelper.LoadAttributeByType<T, PropertySearchNameAttribute>(expression);
 
             return new FieldTerms
             {
-                SearchKey= searchKey,
+                SearchKey = searchKey,
                 PropertyName = propertySearchName.Name,
                 Size = size
             };
         }
-
 
         /// <summary>
         ///     工厂方法创建一个新的  IFieldPredicate 谓语: [FieldName] [Operator] [Value].
@@ -137,6 +136,7 @@ namespace WorkData.ElasticSearch
     public abstract class BasePredicate : IBasePredicate
     {
         public string PropertyName { get; set; }
+
         public abstract QueryContainer GetQuery(QueryContainer query);
     }
 
@@ -183,6 +183,7 @@ namespace WorkData.ElasticSearch
                         Value = Value
                     };
                     break;
+
                 case ExpressOperator.Gt:
                     query = new TermRangeQuery
                     {
@@ -190,6 +191,7 @@ namespace WorkData.ElasticSearch
                         GreaterThan = Value.ToString()
                     };
                     break;
+
                 case ExpressOperator.Ge:
                     query = new TermRangeQuery
                     {
@@ -197,6 +199,7 @@ namespace WorkData.ElasticSearch
                         GreaterThanOrEqualTo = Value.ToString()
                     };
                     break;
+
                 case ExpressOperator.Lt:
                     query = new TermRangeQuery
                     {
@@ -204,6 +207,7 @@ namespace WorkData.ElasticSearch
                         LessThan = Value.ToString()
                     };
                     break;
+
                 case ExpressOperator.Le:
                     query = new TermRangeQuery
                     {
@@ -211,6 +215,7 @@ namespace WorkData.ElasticSearch
                         LessThanOrEqualTo = Value.ToString()
                     };
                     break;
+
                 case ExpressOperator.Like:
                     query = new MatchPhraseQuery
                     {
@@ -218,13 +223,15 @@ namespace WorkData.ElasticSearch
                         Query = Value.ToString()
                     };
                     break;
+
                 case ExpressOperator.In:
                     query = new TermsQuery
                     {
                         Field = PropertyName,
-                        Terms=(List<object>)Value
+                        Terms = (List<object>)Value
                     };
                     break;
+
                 default:
                     throw new ElasticsearchException("构建Elasticsearch查询谓词异常");
             }
@@ -249,6 +256,7 @@ namespace WorkData.ElasticSearch
         /// </summary>
         int Size { get; set; }
     }
+
     /// <summary>
     /// FieldTerms
     /// </summary>
@@ -331,8 +339,10 @@ namespace WorkData.ElasticSearch
             {
                 case GroupOperator.And:
                     return Predicates.Aggregate(query, (q, p) => q && p.GetQuery(query));
+
                 case GroupOperator.Or:
                     return Predicates.Aggregate(query, (q, p) => q || p.GetQuery(query));
+
                 default:
                     throw new ElasticsearchException("构建Elasticsearch查询谓词异常");
             }

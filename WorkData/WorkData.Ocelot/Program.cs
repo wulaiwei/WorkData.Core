@@ -35,7 +35,7 @@ namespace WorkData.Ocelot
             BuildWebHost(args, config).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args,IConfiguration configuration) =>
+        public static IWebHost BuildWebHost(string[] args, IConfiguration configuration) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseContentRoot(Directory.GetCurrentDirectory())
                .UseConfiguration(configuration)

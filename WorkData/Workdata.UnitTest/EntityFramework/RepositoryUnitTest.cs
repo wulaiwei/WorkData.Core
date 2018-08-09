@@ -1,10 +1,10 @@
 ﻿// ------------------------------------------------------------------------------
-// Copyright  吴来伟个人 版权所有。 
+// Copyright  吴来伟个人 版权所有。
 // 项目名：Workdata.UnitTest
 // 文件名：RepositoryUnitTest.cs
 // 创建标识：吴来伟 2018-07-26 11:02
 // 创建描述：
-//  
+//
 // 修改标识：吴来伟2018-07-26 15:00
 // 修改描述：
 //  ------------------------------------------------------------------------------
@@ -37,7 +37,6 @@ namespace Workdata.UnitTest.EntityFramework
             _baseUserRepository = IocManager.Instance.Resolve<IBaseRepository<BaseUser, string>>();
             var workDataSession = IocManager.Instance.Resolve<IWorkDataSession>();
         }
-
 
         [Fact]
         public void Insert()

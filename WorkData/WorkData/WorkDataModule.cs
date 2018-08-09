@@ -13,7 +13,6 @@
 
 using Autofac;
 using WorkData.Dependency;
-using WorkData.Extensions.TypeFinders;
 
 #endregion
 

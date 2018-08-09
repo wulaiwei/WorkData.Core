@@ -10,9 +10,6 @@
  */
 
 ( function( window ) {
-
-
-
 // -------------------------- utils -------------------------- //
 
 var slice = Array.prototype.slice;
@@ -22,7 +19,6 @@ function noop() {}
 // -------------------------- definition -------------------------- //
 
 function defineBridget( $ ) {
-
 // bail if no jQuery
 if ( !$ ) {
   return;
@@ -49,7 +45,6 @@ function addOptionMethod( PluginClass ) {
     this.options = $.extend( true, this.options, opts );
   };
 }
-
 
 // -------------------------- plugin bridge -------------------------- //
 
@@ -111,7 +106,6 @@ function bridge( namespace, PluginClass ) {
       });
     }
   };
-
 }
 
 // -------------------------- bridget -------------------------- //
@@ -128,7 +122,6 @@ $.bridget = function( namespace, PluginClass ) {
 };
 
 return $.bridget;
-
 }
 
 // transport
@@ -139,7 +132,6 @@ if ( typeof define === 'function' && define.amd ) {
   // get jquery from browser global
   defineBridget( window.jQuery );
 }
-
 })( window );
 
 /*!
@@ -154,9 +146,6 @@ if ( typeof define === 'function' && define.amd ) {
 /*global define: false, module: false */
 
 ( function( window ) {
-
-
-
 var docElem = document.documentElement;
 
 var bind = function() {};
@@ -222,7 +211,6 @@ if ( typeof define === 'function' && define.amd ) {
   // browser global
   window.eventie = eventie;
 }
-
 })( this );
 
 /*!
@@ -234,9 +222,6 @@ if ( typeof define === 'function' && define.amd ) {
 /*global define: false */
 
 ( function( window ) {
-
-
-
 var document = window.document;
 // collection of functions to be triggered on ready
 var queue = [];
@@ -292,7 +277,6 @@ if ( typeof define === 'function' && define.amd ) {
   // browser global
   window.docReady = defineDocReady( window.eventie );
 }
-
 })( this );
 
 /*!
@@ -303,8 +287,6 @@ if ( typeof define === 'function' && define.amd ) {
  */
 
 (function () {
-	
-
 	/**
 	 * Class for managing events.
 	 * Can be extended to provide event functionality in other classes.
@@ -778,9 +760,6 @@ if ( typeof define === 'function' && define.amd ) {
 /*global define: false, exports: false, module: false */
 
 ( function( window ) {
-
-
-
 var prefixes = 'Webkit Moz ms Ms O'.split(' ');
 var docElemStyle = document.documentElement.style;
 
@@ -820,7 +799,6 @@ if ( typeof define === 'function' && define.amd ) {
   // browser global
   window.getStyleProperty = getStyleProperty;
 }
-
 })( window );
 
 /**
@@ -832,9 +810,6 @@ if ( typeof define === 'function' && define.amd ) {
 /*global define: false, exports: false, require: false, module: false */
 
 ( function( window, undefined ) {
-
-
-
 // -------------------------- helpers -------------------------- //
 
 var getComputedStyle = window.getComputedStyle;
@@ -887,10 +862,7 @@ function getZeroSize() {
   return size;
 }
 
-
-
 function defineGetSize( getStyleProperty ) {
-
 // -------------------------- box sizing -------------------------- //
 
 var boxSizingProp = getStyleProperty('boxSizing');
@@ -919,7 +891,6 @@ var isBoxSizeOuter;
   isBoxSizeOuter = getStyleSize( style.width ) === 200;
   body.removeChild( div );
 })();
-
 
 // -------------------------- getSize -------------------------- //
 
@@ -1021,7 +992,6 @@ function mungeNonPixel( elem, value ) {
 }
 
 return getSize;
-
 }
 
 // transport
@@ -1035,7 +1005,6 @@ if ( typeof define === 'function' && define.amd ) {
   // browser global
   window.getSize = defineGetSize( window.getStyleProperty );
 }
-
 })( window );
 
 /**
@@ -1050,9 +1019,6 @@ if ( typeof define === 'function' && define.amd ) {
 /*global define: false */
 
 ( function( global, ElemProto ) {
-
-  
-
   var matchesMethod = ( function() {
     // check un-prefixed
     if ( ElemProto.matchesSelector ) {
@@ -1138,7 +1104,6 @@ if ( typeof define === 'function' && define.amd ) {
     // browser global
     window.matchesSelector = matchesSelector;
   }
-
 })( this, Element.prototype );
 
 /**
@@ -1146,9 +1111,6 @@ if ( typeof define === 'function' && define.amd ) {
  */
 
 ( function( window ) {
-
-
-
 // ----- get style ----- //
 
 var getComputedStyle = window.getComputedStyle;
@@ -1159,7 +1121,6 @@ var getStyle = getComputedStyle ?
   function( elem ) {
     return elem.currentStyle;
   };
-
 
 // extend objects
 function extend( a, b ) {
@@ -1187,7 +1148,6 @@ function toDash( str ) {
 // -------------------------- Outlayer definition -------------------------- //
 
 function outlayerItemDefinition( EventEmitter, getSize, getStyleProperty ) {
-
 // -------------------------- CSS3 support -------------------------- //
 
 var transitionProperty = getStyleProperty('transition');
@@ -1331,7 +1291,6 @@ Item.prototype.layoutPosition = function() {
   this.emitEvent( 'layout', [ this ] );
 };
 
-
 // transform translate function
 var translate = is3d ?
   function( x, y ) {
@@ -1340,7 +1299,6 @@ var translate = is3d ?
   function( x, y ) {
     return 'translate(' + x + 'px, ' + y + 'px)';
   };
-
 
 Item.prototype._transitionTo = function( x, y ) {
   this.getPosition();
@@ -1455,7 +1413,6 @@ Item.prototype._transition = function( args ) {
   this.css( args.to );
 
   this.isTransitioning = true;
-
 };
 
 var itemTransitionProperties = transformProperty && ( toDash( transformProperty ) +
@@ -1640,7 +1597,6 @@ Item.prototype.destroy = function() {
 };
 
 return Item;
-
 }
 
 // -------------------------- transport -------------------------- //
@@ -1662,7 +1618,6 @@ if ( typeof define === 'function' && define.amd ) {
     window.getStyleProperty
   );
 }
-
 })( window );
 
 /*!
@@ -1672,9 +1627,6 @@ if ( typeof define === 'function' && define.amd ) {
  */
 
 ( function( window ) {
-
-
-
 // ----- vars ----- //
 
 var document = window.document;
@@ -1692,7 +1644,6 @@ function extend( a, b ) {
   }
   return a;
 }
-
 
 var objToString = Object.prototype.toString;
 function isArray( obj ) {
@@ -1753,16 +1704,13 @@ function toDashed( str ) {
   }).toLowerCase();
 }
 
-
 function outlayerDefinition( eventie, docReady, EventEmitter, getSize, matchesSelector, Item ) {
-
 // -------------------------- Outlayer -------------------------- //
 
 // globally unique identifiers
 var GUID = 0;
 // internal store of all Outlayer intances
 var instances = {};
-
 
 /**
  * @param {Element, String} element
@@ -1860,14 +1808,12 @@ Outlayer.prototype.reloadItems = function() {
   this.items = this._itemize( this.element.children );
 };
 
-
 /**
  * turn elements into Outlayer.Items to be used in layout
  * @param {Array or NodeList or HTMLElement} elems
  * @returns {Array} items - collection of new Outlayer Items
  */
 Outlayer.prototype._itemize = function( elems ) {
-
   var itemElems = this._filterFindItemElements( elems );
   var Item = this.constructor.Item;
 
@@ -1958,7 +1904,6 @@ Outlayer.prototype._init = Outlayer.prototype.layout;
 Outlayer.prototype._resetLayout = function() {
   this.getSize();
 };
-
 
 Outlayer.prototype.getSize = function() {
   this.size = getSize( this.element );
@@ -2173,7 +2118,6 @@ Outlayer.prototype._itemsOn = function( items, eventName, callback ) {
 
 // -------------------------- ignore & stamps -------------------------- //
 
-
 /**
  * keep item in collection, but do not lay it out
  * ignored items do not get skipped in layout
@@ -2231,7 +2175,6 @@ Outlayer.prototype.unstamp = function( elems ) {
     removeFrom( elem, this.stamps );
     this.unignore( elem );
   }
-
 };
 
 /**
@@ -2541,7 +2484,6 @@ Outlayer.prototype.destroy = function() {
   if ( jQuery ) {
     jQuery.removeData( this.element, this.constructor.namespace );
   }
-
 };
 
 // -------------------------- data -------------------------- //
@@ -2555,7 +2497,6 @@ Outlayer.data = function( elem ) {
   var id = elem && elem.outlayerGUID;
   return id && instances[ id ];
 };
-
 
 // -------------------------- create Outlayer class -------------------------- //
 
@@ -2645,7 +2586,6 @@ Outlayer.create = function( namespace, options ) {
 Outlayer.Item = Item;
 
 return Outlayer;
-
 }
 
 // -------------------------- transport -------------------------- //
@@ -2672,7 +2612,6 @@ if ( typeof define === 'function' && define.amd ) {
     window.Outlayer.Item
   );
 }
-
 })( window );
 
 /**
@@ -2680,13 +2619,9 @@ if ( typeof define === 'function' && define.amd ) {
 **/
 
 ( function( window ) {
-
-
-
 // -------------------------- Item -------------------------- //
 
 function itemDefinition( Outlayer ) {
-
 // sub-class Outlayer Item
 function Item() {
   Outlayer.Item.apply( this, arguments );
@@ -2720,7 +2655,6 @@ Item.prototype.updateSortData = function() {
 };
 
 return Item;
-
 }
 
 // -------------------------- transport -------------------------- //
@@ -2738,17 +2672,12 @@ if ( typeof define === 'function' && define.amd ) {
     window.Outlayer
   );
 }
-
 })( window );
 
 ( function( window ) {
-
-
-
 // --------------------------  -------------------------- //
 
 function layoutModeDefinition( getSize, Outlayer ) {
-
   // layout mode class
   function LayoutMode( isotope ) {
     this.isotope = isotope;
@@ -2855,7 +2784,6 @@ function layoutModeDefinition( getSize, Outlayer ) {
   LayoutMode.modes = {};
 
   LayoutMode.create = function( namespace, options ) {
-
     function Mode() {
       LayoutMode.apply( this, arguments );
     }
@@ -2874,9 +2802,7 @@ function layoutModeDefinition( getSize, Outlayer ) {
     return Mode;
   };
 
-
   return LayoutMode;
-
 }
 
 if ( typeof define === 'function' && define.amd ) {
@@ -2894,8 +2820,6 @@ if ( typeof define === 'function' && define.amd ) {
     window.Outlayer
   );
 }
-
-
 })( window );
 
 /*!
@@ -2907,9 +2831,6 @@ if ( typeof define === 'function' && define.amd ) {
  */
 
 ( function( window ) {
-
-
-
 // -------------------------- helpers -------------------------- //
 
 var indexOf = Array.prototype.indexOf ?
@@ -3101,7 +3022,6 @@ if ( typeof define === 'function' && define.amd ) {
     window.getSize
   );
 }
-
 })( window );
 
 /*!
@@ -3111,9 +3031,6 @@ if ( typeof define === 'function' && define.amd ) {
  */
 
 ( function( window ) {
-
-
-
 // -------------------------- helpers -------------------------- //
 
 // extend objects
@@ -3178,15 +3095,10 @@ if ( typeof define === 'function' && define.amd ) {
     window.Masonry
   );
 }
-
 })( window );
 
 ( function( window ) {
-
-
-
 function fitRowsDefinition( LayoutMode ) {
-
 var FitRows = LayoutMode.create('fitRows');
 
 FitRows.prototype._resetLayout = function() {
@@ -3220,7 +3132,6 @@ FitRows.prototype._getContainerSize = function() {
 };
 
 return FitRows;
-
 }
 
 if ( typeof define === 'function' && define.amd ) {
@@ -3235,15 +3146,10 @@ if ( typeof define === 'function' && define.amd ) {
     window.Isotope.LayoutMode
   );
 }
-
 })( window );
 
 ( function( window ) {
-
-
-
 function verticalDefinition( LayoutMode ) {
-
 var Vertical = LayoutMode.create( 'vertical', {
   horizontalAlignment: 0
 });
@@ -3266,7 +3172,6 @@ Vertical.prototype._getContainerSize = function() {
 };
 
 return Vertical;
-
 }
 
 if ( typeof define === 'function' && define.amd ) {
@@ -3281,7 +3186,6 @@ if ( typeof define === 'function' && define.amd ) {
     window.Isotope.LayoutMode
   );
 }
-
 })( window );
 
 /*!
@@ -3291,9 +3195,6 @@ if ( typeof define === 'function' && define.amd ) {
  */
 
 ( function( window ) {
-
-
-
 // -------------------------- vars -------------------------- //
 
 var jQuery = window.jQuery;
@@ -3420,7 +3321,6 @@ function isotopeDefinition( Outlayer, getSize, matchesSelector, Item, LayoutMode
     return items;
   };
 
-
   // -------------------------- layout -------------------------- //
 
   Isotope.prototype._initLayoutMode = function( name ) {
@@ -3433,7 +3333,6 @@ function isotopeDefinition( Outlayer, getSize, matchesSelector, Item, LayoutMode
     // init layout mode instance
     this.modes[ name ] = new Mode( this );
   };
-
 
   Isotope.prototype.layout = function() {
     // if first time doing layout, do all magic
@@ -3885,6 +3784,4 @@ if ( typeof define === 'function' && define.amd ) {
     window.Isotope.LayoutMode
   );
 }
-
 })( window );
-

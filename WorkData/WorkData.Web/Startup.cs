@@ -12,24 +12,19 @@
 #region
 
 using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Security.Principal;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
 using WorkData.Code.AutoMappers;
 using WorkData.Code.JwtSecurityTokens;
 using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
 using WorkData.EntityFramework;
 using WorkData.EntityFramework.Extensions;
-using WorkData.Extensions.ServiceCollections;
 using WorkData.Extensions.TypeFinders;
 using WorkData.Web.Extensions.Filters;
 using WorkData.Web.Extensions.Infrastructure;
@@ -69,10 +64,10 @@ namespace WorkData.Web
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
-            services.AddSingleton<ITypeFinder,WebAppTypeFinder>();
+            services.AddSingleton<ITypeFinder, WebAppTypeFinder>();
 
             #region AutoMapper
-            services.AddWorkDataAutoMapper(); 
+            services.AddWorkDataAutoMapper();
             #endregion
 
             #region WorkDataContext

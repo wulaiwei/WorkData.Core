@@ -20,7 +20,7 @@ namespace WorkData.ElasticSearch.Entity
     public class ElasticsearchPage<T> : PageEntity
     {
         public string Index { get; set; }
-        
+
         public ElasticsearchPage(string index)
         {
             Index = index;

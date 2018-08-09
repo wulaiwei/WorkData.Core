@@ -29,6 +29,9 @@
     <Content Update="Config\appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="Config\hosting.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Config\moduleConfig.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

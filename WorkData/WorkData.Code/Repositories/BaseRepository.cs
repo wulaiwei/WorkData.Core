@@ -27,7 +27,7 @@ namespace WorkData.Code.Repositories
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TPrimaryKey"></typeparam>
     public abstract class BaseRepository<TEntity, TPrimaryKey> :
-        IBaseRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+        IBaseRepository<TEntity, TPrimaryKey> where TEntity : class, IAggregateRoot, IEntity<TPrimaryKey>
     {
         /// <summary>
         ///     UnitOfWorkManager

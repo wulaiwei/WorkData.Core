@@ -22,7 +22,7 @@ namespace WorkData.EntityFramework.Repositories
     public static class EfRepositoryExtensions
     {
         public static DbContext GetDbContext<TEntity, TPrimaryKey>(this IBaseRepository<TEntity, TPrimaryKey> repository)
-            where TEntity : class, IEntity<TPrimaryKey>
+            where TEntity : class, IAggregateRoot, IEntity<TPrimaryKey>
         {
             // ReSharper disable once SuspiciousTypeConversion.Global
             if (!(repository is IRepositoryDbConntext repositoryWithDbContext))

@@ -11,9 +11,9 @@ namespace WorkData.Domain.EntityFramework.Migrations
                 name: "BaseRole",
                 columns: table => new
                 {
-                    CreateTime = table.Column<DateTime>(nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "timestamp(0)", nullable: false),
                     CreateUserId = table.Column<string>(maxLength: 200, nullable: true),
-                    ModifierTime = table.Column<DateTime>(nullable: true),
+                    ModifierTime = table.Column<DateTime>(type: "timestamp(0)", nullable: true),
                     ModifierUserId = table.Column<string>(maxLength: 200, nullable: true),
                     BelongUserId = table.Column<string>(maxLength: 200, nullable: true),
                     MemberUserId = table.Column<string>(maxLength: 200, nullable: true),
@@ -31,9 +31,9 @@ namespace WorkData.Domain.EntityFramework.Migrations
                 name: "BaseUser",
                 columns: table => new
                 {
-                    CreateTime = table.Column<DateTime>(nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "timestamp(0)", nullable: false),
                     CreateUserId = table.Column<string>(maxLength: 200, nullable: true),
-                    ModifierTime = table.Column<DateTime>(nullable: true),
+                    ModifierTime = table.Column<DateTime>(type: "timestamp(0)", nullable: true),
                     ModifierUserId = table.Column<string>(maxLength: 200, nullable: true),
                     BelongUserId = table.Column<string>(maxLength: 200, nullable: true),
                     MemberUserId = table.Column<string>(maxLength: 200, nullable: true),
@@ -52,9 +52,9 @@ namespace WorkData.Domain.EntityFramework.Migrations
                 name: "BaseUserMember",
                 columns: table => new
                 {
-                    CreateTime = table.Column<DateTime>(nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "timestamp(0)", nullable: false),
                     CreateUserId = table.Column<string>(maxLength: 200, nullable: true),
-                    ModifierTime = table.Column<DateTime>(nullable: true),
+                    ModifierTime = table.Column<DateTime>(type: "timestamp(0)", nullable: true),
                     ModifierUserId = table.Column<string>(maxLength: 200, nullable: true),
                     BelongUserId = table.Column<string>(maxLength: 200, nullable: true),
                     MemberUserId = table.Column<string>(maxLength: 200, nullable: true),

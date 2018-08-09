@@ -11,6 +11,7 @@
 
 using System.Collections.Generic;
 using WorkData.Code.Entities;
+using WorkData.Code.Repositories;
 using WorkData.Code.WorkDataIdentity;
 using WorkData.Domain.Permissions.UserRoles;
 
@@ -19,7 +20,7 @@ namespace WorkData.Domain.Permissions.Roles
     /// <summary>
     /// 基础RoleBase
     /// </summary>
-    public class BaseRole : BaseRoleIdentity<string>, IEntity<string>
+    public class BaseRole : BaseRoleIdentity<string>, IEntity<string>, IAggregateRoot
     {
         /// <summary>
         /// Id

@@ -26,7 +26,7 @@ namespace WorkData.Code.Entities
         /// <summary>
         /// 创建时间
         /// </summary>
-        [Column("CreateTime")]
+        [Column("CreateTime", Order = 99,TypeName = "timestamp(0)")]
         [Required]
         public virtual DateTime CreateTime { get; set; }
 
@@ -34,20 +34,20 @@ namespace WorkData.Code.Entities
         /// 创建人
         /// </summary>
         [StringLength(200)]
-        [Column("CreateUserId")]
+        [Column("CreateUserId", Order = 99)]
         public virtual string CreateUserId { get; set; }
 
         /// <summary>
         /// 编辑时间
         /// </summary>
-        [Column("ModifierTime")]
+        [Column("ModifierTime", Order = 99, TypeName = "timestamp(0)")]
         public virtual DateTime? ModifierTime { get; set; }
 
         /// <summary>
         /// 编辑用户
         /// </summary>
         [StringLength(200)]
-        [Column("ModifierUserId")]
+        [Column("ModifierUserId", Order = 99)]
         public virtual string ModifierUserId { get; set; }
 
         #endregion 审计

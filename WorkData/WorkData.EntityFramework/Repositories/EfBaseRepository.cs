@@ -31,7 +31,7 @@ namespace WorkData.EntityFramework.Repositories
     /// <typeparam name="TPrimaryKey"></typeparam>
     /// <typeparam name="TDbContext"></typeparam>
     public class EfBaseRepository<TDbContext, TEntity, TPrimaryKey> :
-        BaseRepository<TEntity, TPrimaryKey>, IRepositoryDbConntext where TEntity : class, IEntity<TPrimaryKey>
+        BaseRepository<TEntity, TPrimaryKey>, IRepositoryDbConntext where TEntity : class, IAggregateRoot, IEntity<TPrimaryKey>
         where TDbContext : DbContext
     {
         /// <summary>

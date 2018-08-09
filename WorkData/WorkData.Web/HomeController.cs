@@ -29,12 +29,21 @@ namespace WorkData.Web
 {
     public class HomeController : WorkDataBaseController
     {
+        private readonly IBaseRepository<BaseUser, string> _baseUserRepository;
+
+        public HomeController(IBaseRepository<BaseUser, string> baseUserRepository)
+        {
+            _baseUserRepository = baseUserRepository;
+        }
+
         /// <summary>
         /// Index
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
+            var user=new BaseUser();
+            _baseUserRepository.Insert(user);
             return View();
         }
     }

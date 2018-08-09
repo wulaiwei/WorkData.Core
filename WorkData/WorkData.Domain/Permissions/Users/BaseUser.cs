@@ -12,6 +12,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using WorkData.Code.Entities;
+using WorkData.Code.Repositories;
 using WorkData.Code.WorkDataIdentity;
 using WorkData.Domain.Permissions.UserRoles;
 
@@ -20,7 +21,7 @@ namespace WorkData.Domain.Permissions.Users
     /// <summary>
     /// BaseUser
     /// </summary>
-    public class BaseUser : BaseUserIdentity<string>, IEntity<string>
+    public class BaseUser : BaseUserIdentity<string>, IAggregateRoot, IEntity<string>
     {
         /// <summary>
         /// Id

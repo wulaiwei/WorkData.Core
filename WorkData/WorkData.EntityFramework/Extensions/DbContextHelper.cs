@@ -16,6 +16,7 @@ using System.Linq;
 using System.Reflection;
 using WorkData.Code.Entities;
 using WorkData.Code.Helpers;
+using WorkData.Code.Repositories;
 using WorkData.Extensions.TypeFinders;
 
 namespace WorkData.EntityFramework.Extensions
@@ -28,6 +29,7 @@ namespace WorkData.EntityFramework.Extensions
                 from property in dbContextType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 where
                  ReflectionHelper.IsAssignableToGenericType(property.PropertyType, typeof(DbSet<>)) &&
+                 ReflectionHelper.IsAssignableToType(property.PropertyType.GenericTypeArguments[0], typeof(IAggregateRoot)) &&
                 ReflectionHelper.IsAssignableToGenericType(property.PropertyType.GenericTypeArguments[0], typeof(IEntity<>))
                 select new EntityTypeInfo(property.PropertyType.GenericTypeArguments[0], property.DeclaringType);
         }

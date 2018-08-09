@@ -36,7 +36,8 @@ namespace WorkData.Domain.EntityFramework.Migrations
                         .HasMaxLength(20);
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnName("CreateTime");
+                        .HasColumnName("CreateTime")
+                        .HasColumnType("timestamp(0)");
 
                     b.Property<string>("CreateUserId")
                         .HasColumnName("CreateUserId")
@@ -50,7 +51,8 @@ namespace WorkData.Domain.EntityFramework.Migrations
                         .HasMaxLength(200);
 
                     b.Property<DateTime?>("ModifierTime")
-                        .HasColumnName("ModifierTime");
+                        .HasColumnName("ModifierTime")
+                        .HasColumnType("timestamp(0)");
 
                     b.Property<string>("ModifierUserId")
                         .HasColumnName("ModifierUserId")
@@ -94,7 +96,8 @@ namespace WorkData.Domain.EntityFramework.Migrations
                         .HasMaxLength(200);
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnName("CreateTime");
+                        .HasColumnName("CreateTime")
+                        .HasColumnType("timestamp(0)");
 
                     b.Property<string>("CreateUserId")
                         .HasColumnName("CreateUserId")
@@ -108,7 +111,8 @@ namespace WorkData.Domain.EntityFramework.Migrations
                         .HasMaxLength(200);
 
                     b.Property<DateTime?>("ModifierTime")
-                        .HasColumnName("ModifierTime");
+                        .HasColumnName("ModifierTime")
+                        .HasColumnType("timestamp(0)");
 
                     b.Property<string>("ModifierUserId")
                         .HasColumnName("ModifierUserId")
@@ -144,7 +148,8 @@ namespace WorkData.Domain.EntityFramework.Migrations
                         .HasMaxLength(200);
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnName("CreateTime");
+                        .HasColumnName("CreateTime")
+                        .HasColumnType("timestamp(0)");
 
                     b.Property<string>("CreateUserId")
                         .HasColumnName("CreateUserId")
@@ -158,7 +163,8 @@ namespace WorkData.Domain.EntityFramework.Migrations
                         .HasMaxLength(200);
 
                     b.Property<DateTime?>("ModifierTime")
-                        .HasColumnName("ModifierTime");
+                        .HasColumnName("ModifierTime")
+                        .HasColumnType("timestamp(0)");
 
                     b.Property<string>("ModifierUserId")
                         .HasColumnName("ModifierUserId")

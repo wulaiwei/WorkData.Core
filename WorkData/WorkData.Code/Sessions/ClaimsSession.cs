@@ -24,27 +24,17 @@ namespace WorkData.Code.Sessions
     /// </summary>
     public class ClaimsSession : WorkDataBaseSession
     {
-        private readonly ClaimsPrincipal _principal;
+        public ClaimsPrincipal Principal;
 
         public ClaimsSession(IPrincipal principal)
         {
-            _principal = principal as ClaimsPrincipal;
+            Principal = principal as ClaimsPrincipal;
         }
 
         /// <summary>
         ///     UserId
         /// </summary>
-        public override string UserId => GetClaimValue(WorkDataClaimsType.UserId);
+        public override string UserId => Principal.GetClaimValue(WorkDataClaimsType.UserId);
 
-        /// <summary>
-        ///     获取申明值
-        /// </summary>
-        /// <returns></returns>
-        public string GetClaimValue(string claimType)
-        {
-            var claim = _principal?.FindFirst(c => c.Type == claimType);
-
-            return string.IsNullOrEmpty(claim?.Value) ? null : claim.Value;
-        }
     }
 }

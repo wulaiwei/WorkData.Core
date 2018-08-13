@@ -10,7 +10,7 @@ using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
 namespace WorkData.Domain.EntityFramework.Migrations
 {
     [DbContext(typeof(WorkDataContext))]
-    [Migration("20180809071630_Init")]
+    [Migration("20180813085044_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,8 +122,6 @@ namespace WorkData.Domain.EntityFramework.Migrations
 
                     b.Property<string>("Password");
 
-                    b.Property<string>("Salt");
-
                     b.Property<string>("UserName")
                         .HasColumnName("UserName")
                         .HasMaxLength(150);
@@ -174,7 +172,8 @@ namespace WorkData.Domain.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BaseUserId");
+                    b.HasIndex("BaseUserId")
+                        .IsUnique();
 
                     b.ToTable("BaseUserMember");
                 });
@@ -195,8 +194,8 @@ namespace WorkData.Domain.EntityFramework.Migrations
             modelBuilder.Entity("WorkData.Domain.Permissions.Users.BaseUserMember", b =>
                 {
                     b.HasOne("WorkData.Domain.Permissions.Users.BaseUser", "BaseUser")
-                        .WithMany("BaseUserClaims")
-                        .HasForeignKey("BaseUserId")
+                        .WithOne("BaseUserMember")
+                        .HasForeignKey("WorkData.Domain.Permissions.Users.BaseUserMember", "BaseUserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

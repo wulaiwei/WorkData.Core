@@ -22,6 +22,7 @@ namespace WorkData.Web
 {
     public class HomeController : WorkDataBaseController
     {
+
         /// <summary>
         /// Index
         /// </summary>

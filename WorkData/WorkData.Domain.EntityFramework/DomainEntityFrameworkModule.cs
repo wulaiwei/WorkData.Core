@@ -11,6 +11,8 @@
 
 #region
 
+using System.Security.Claims;
+using System.Security.Principal;
 using Autofac;
 using Microsoft.EntityFrameworkCore;
 using WorkData.Code.Sessions;
@@ -31,7 +33,8 @@ namespace WorkData.Domain.EntityFramework
 
             builder.Register(c => new WorkDataContext(c.Resolve<DbContextOptions>())
             {
-                WorkDataSession = c.Resolve<IWorkDataSession>()
+                WorkDataSession = c.Resolve<IWorkDataSession>(),
+                ClaimsPrincipal = c.Resolve<IPrincipal>() as ClaimsPrincipal
             });
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace WorkData.Domain
+﻿namespace WorkData.Code.Domain
 {
     /// <summary>
     /// IWorkDataBaseManage

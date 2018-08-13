@@ -11,11 +11,19 @@
 
 #region
 
+using System;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using WorkData.Dependency;
+using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
+using WorkData.Domain.EntityFramework.Migrations;
 
 #endregion
 
@@ -29,8 +37,11 @@ namespace WorkData.Web
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("Config/hosting.json", optional: true, reloadOnChange: true)
                 .Build();
+            var host = BuildWebHost(args, config);
 
-            BuildWebHost(args, config).Run();
+            SeedData.Initialize(new WorkDataContext(IocManager.Instance.Resolve<DbContextOptions>()));
+
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args, IConfiguration configuration) =>

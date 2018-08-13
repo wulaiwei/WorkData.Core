@@ -9,6 +9,7 @@
 // 修改描述：
 //  ------------------------------------------------------------------------------
 
+using System.Security.Claims;
 using WorkData.Code.Sessions;
 
 namespace WorkData.Code.Entities.BaseInterfaces
@@ -21,6 +22,6 @@ namespace WorkData.Code.Entities.BaseInterfaces
         /// <summary>
         /// AttemptSetEntityProperty
         /// </summary>
-        void AttemptSetEntityProperty(object entityAsObj, IWorkDataSession workDataSession);
+        void AttemptSetEntityProperty(object entityAsObj, IWorkDataSession workDataSession, ClaimsPrincipal claimsPrincipal);
     }
 }

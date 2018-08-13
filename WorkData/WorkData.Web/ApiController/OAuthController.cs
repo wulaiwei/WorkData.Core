@@ -42,6 +42,7 @@ namespace WorkData.Web.ApiController
         {
             var claim = new[]
             {
+                new Claim(ClaimTypes.NameIdentifier,"1"), 
                 new Claim(ClaimTypes.Name, requestOAuthViewModel.UserName),
                 new Claim(ClaimTypes.Role, "admin")
             };

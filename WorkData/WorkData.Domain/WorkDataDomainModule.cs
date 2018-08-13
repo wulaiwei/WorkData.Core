@@ -1,7 +1,10 @@
 ﻿#region
 
+using System;
+using System.Linq;
 using Autofac;
 using WorkData.Extensions.Modules;
+using WorkData.Extensions.TypeFinders;
 
 #endregion
 
@@ -14,6 +17,12 @@ namespace WorkData.Domain
     {
         protected override void Load(ContainerBuilder builder)
         {
+            var assemblys = AppDomain.CurrentDomain.GetAssemblies().ToList();
+
+            builder.RegisterAssemblyTypes(assemblys.ToArray())
+                .Where(t => t.Name.EndsWith("Manage"))
+                .AsSelf();
+
         }
     }
 }

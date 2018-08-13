@@ -32,16 +32,11 @@ namespace WorkData.Domain.Permissions.Users
         /// </summary>
         public string Password { get; set; }
 
-        /// <summary>
-        /// 加密盐
-        /// </summary>
-        public string Salt { get; set; }
-
         #region Relation
 
         public IList<UserRole> UserRoles { get; set; }
 
-        public IList<BaseUserMember> BaseUserClaims { get; set; }
+        public BaseUserMember BaseUserMember { get; set; }
 
         #endregion Relation
     }

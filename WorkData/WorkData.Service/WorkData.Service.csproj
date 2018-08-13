@@ -5,7 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WorkData.Code\WorkData.Code.csproj" />
+    <ProjectReference Include="..\WorkData.Domain\WorkData.Domain.csproj" />
     <ProjectReference Include="..\WorkData\WorkData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Permissions\Roles\Dto\" />
   </ItemGroup>
 
 </Project>

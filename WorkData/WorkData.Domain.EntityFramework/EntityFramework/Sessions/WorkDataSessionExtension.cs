@@ -24,6 +24,6 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Sessions
         /// <summary>
         /// UserName
         /// </summary>
-        public string UserName => GetClaimValue(ClaimTypes.Name);
+        public string UserName => Principal.GetClaimValue(ClaimTypes.Name);
     }
 }

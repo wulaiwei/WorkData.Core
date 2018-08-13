@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WorkData.Domain.EntityFramework.Migrations
 {
@@ -40,8 +40,7 @@ namespace WorkData.Domain.EntityFramework.Migrations
                     IsDelete = table.Column<bool>(nullable: false),
                     UserName = table.Column<string>(maxLength: 150, nullable: true),
                     Id = table.Column<string>(maxLength: 128, nullable: false),
-                    Password = table.Column<string>(nullable: true),
-                    Salt = table.Column<string>(nullable: true)
+                    Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -100,7 +99,8 @@ namespace WorkData.Domain.EntityFramework.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_BaseUserMember_BaseUserId",
                 table: "BaseUserMember",
-                column: "BaseUserId");
+                column: "BaseUserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_BaseUserId",

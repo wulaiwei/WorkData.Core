@@ -23,8 +23,8 @@ namespace WorkData.Domain.EntityFramework.Mappings.Permissions
                 .IsRequired();
 
             builder.HasOne(u => u.BaseUser)
-                .WithMany(g => g.BaseUserClaims)
-                .HasForeignKey(s => s.BaseUserId);
+                .WithOne(g => g.BaseUserMember)
+                .HasForeignKey<BaseUserMember>(x => x.BaseUserId);
 
             builder.ToTable("BaseUserMember");
         }

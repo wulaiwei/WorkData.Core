@@ -14,7 +14,10 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using WorkData.Code.Sessions;
+using WorkData.Dependency;
 using WorkData.EntityFramework.Auditables;
 
 #endregion
@@ -38,6 +41,11 @@ namespace WorkData.EntityFramework
         public IWorkDataSession WorkDataSession { get; set; }
 
         /// <summary>
+        /// ClaimsPrincipal
+        /// </summary>
+        public ClaimsPrincipal ClaimsPrincipal { get; set; }
+
+        /// <summary>
         ///     SaveChange
         /// </summary>
         /// <returns></returns>
@@ -54,21 +62,21 @@ namespace WorkData.EntityFramework
                     case EntityState.Added:
                         AuditableConfigs.AuditableDictionary[EntityState.Added].ForEach(x =>
                         {
-                            x.AttemptSetEntityProperty(entry.Entity, WorkDataSession);
+                            x.AttemptSetEntityProperty(entry.Entity, WorkDataSession, ClaimsPrincipal);
                         });
                         break;
 
                     case EntityState.Deleted:
                         AuditableConfigs.AuditableDictionary[EntityState.Deleted].ForEach(x =>
                         {
-                            x.AttemptSetEntityProperty(entry.Entity, WorkDataSession);
+                            x.AttemptSetEntityProperty(entry.Entity, WorkDataSession, ClaimsPrincipal);
                         });
                         break;
 
                     case EntityState.Modified:
                         AuditableConfigs.AuditableDictionary[EntityState.Modified].ForEach(x =>
                         {
-                            x.AttemptSetEntityProperty(entry.Entity, WorkDataSession);
+                            x.AttemptSetEntityProperty(entry.Entity, WorkDataSession, ClaimsPrincipal);
                         });
                         break;
 

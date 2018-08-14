@@ -11,9 +11,13 @@
 
 #region
 
+using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using WorkData.Code.AutoMappers;
 using WorkData.Code.Repositories;
 using WorkData.Domain.Permissions.Users;
+using WorkData.Service.Permissions.Users.Dto;
 using WorkData.Web.Extensions.Infrastructure;
 
 #endregion
@@ -22,7 +26,6 @@ namespace WorkData.Web
 {
     public class HomeController : WorkDataBaseController
     {
-
         /// <summary>
         /// Index
         /// </summary>

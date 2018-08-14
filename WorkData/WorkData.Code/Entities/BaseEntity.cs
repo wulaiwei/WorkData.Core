@@ -18,7 +18,6 @@ namespace WorkData.Code.Entities
     /// <summary>
     /// 基础实体
     /// </summary>
-    [Serializable]
     public abstract class BaseEntity : IAudit, IGroup, ISoftDelete
     {
         #region 审计

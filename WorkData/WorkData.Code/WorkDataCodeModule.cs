@@ -10,6 +10,7 @@
 //  ------------------------------------------------------------------------------
 
 using Autofac;
+using AutoMapper;
 using WorkData.Code.Repositories;
 using WorkData.Code.Sessions;
 using WorkData.Code.UnitOfWorks;

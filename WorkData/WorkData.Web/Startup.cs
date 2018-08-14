@@ -20,6 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Security.Principal;
+using AutoMapper;
 using WorkData.Code.AutoMappers;
 using WorkData.Code.JwtSecurityTokens;
 using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
@@ -27,6 +28,8 @@ using WorkData.Domain.EntityFramework.Migrations;
 using WorkData.EntityFramework;
 using WorkData.EntityFramework.Extensions;
 using WorkData.Extensions.TypeFinders;
+using WorkData.Service;
+using WorkData.Service.Permissions.DtoProfiles;
 using WorkData.Web.Extensions.Filters;
 using WorkData.Web.Extensions.Infrastructure;
 

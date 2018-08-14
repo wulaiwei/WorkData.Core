@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using WorkData.Web.Extensions.Infrastructure.WorkDataMiddlewares;
 
-namespace WorkData.Web.Extensions.Infrastructure
+namespace WorkData.Code.Webs.WorkDataMiddlewares
 {
     public static class WorkDataMiddlewareExtension
     {

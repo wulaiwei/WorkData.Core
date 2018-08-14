@@ -18,8 +18,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using WorkData.Code.JwtSecurityTokens;
+using WorkData.Code.Webs.Infrastructure;
 using WorkData.Dependency;
-using WorkData.Web.Extensions.Infrastructure;
 using WorkData.Web.Models.OAuths;
 
 #endregion

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using WorkData.Web.Extensions.Infrastructure;
+using WorkData.Code.Webs.Infrastructure;
 
 namespace WorkData.Web.ApiController
 {
@@ -15,19 +15,6 @@ namespace WorkData.Web.ApiController
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
-        }
-
-        /// <summary>
-        ///     从申明中获取值
-        /// </summary>
-        /// <param name="claimType">申明类型（姓名，年龄，国籍，爱好等）</param>
-        /// <returns></returns>
-        private string GetClaimValue(string claimType)
-        {
-            var ss = HttpContext.User as ClaimsPrincipal;
-            var claim = HttpContext.User?.Claims.FirstOrDefault(c => c.Type == claimType);
-
-            return string.IsNullOrEmpty(claim?.Value) ? "" : claim.Value;
         }
     }
 }

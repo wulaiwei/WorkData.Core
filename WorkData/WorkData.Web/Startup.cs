@@ -11,27 +11,24 @@
 
 #region
 
+using System;
+using System.Collections.Generic;
+using System.Security.Principal;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Security.Principal;
-using AutoMapper;
 using WorkData.Code.AutoMappers;
 using WorkData.Code.JwtSecurityTokens;
+using WorkData.Code.Webs.Extension;
+using WorkData.Code.Webs.Filters;
+using WorkData.Code.Webs.WorkDataMiddlewares;
 using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
-using WorkData.Domain.EntityFramework.Migrations;
 using WorkData.EntityFramework;
 using WorkData.EntityFramework.Extensions;
 using WorkData.Extensions.TypeFinders;
-using WorkData.Service;
-using WorkData.Service.Permissions.DtoProfiles;
-using WorkData.Web.Extensions.Filters;
-using WorkData.Web.Extensions.Infrastructure;
 
 #endregion
 
@@ -39,22 +36,22 @@ namespace WorkData.Web
 {
     public class Startup
     {
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("Config/appsettings.json", true, true)
+                .AddJsonFile($"Config/appsettings.{env.EnvironmentName}.json", true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
+
         /// <summary>
         ///     Gets a reference to the <see cref="Bootstrap" /> instance.
         /// </summary>
         public static Bootstrap BootstrapWarpper { get; } = Bootstrap.Instance();
 
         public IConfigurationRoot Configuration { get; }
-
-        public Startup(IHostingEnvironment env)
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("Config/appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"Config/appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            this.Configuration = builder.Build();
-        }
 
         /// <summary>
         ///     ConfigureServices
@@ -67,35 +64,48 @@ namespace WorkData.Web
             services.Configure<WorkDataDbConfig>(Configuration.GetSection("WorkDataDbContextConfig"));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext?.User);
+            services.AddTransient<IPrincipal>(provider =>
+                provider.GetService<IHttpContextAccessor>().HttpContext?.User);
             services.AddSingleton<ITypeFinder, WebAppTypeFinder>();
 
             #region AutoMapper
+
             services.AddWorkDataAutoMapper();
+
             #endregion
 
             #region WorkDataContext
+
             services.AddWorkDataDbContext<WorkDataContext>();
+
             #endregion
 
             #region WebUowFilter
+
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(WebUowFilter));
                 options.Filters.Add(typeof(WorkDataExpectionFilter));
             });
+
             #endregion
 
             #region JWT
+
             services.AddWorkDataJwt();
+
             #endregion
 
             #region Autofac
-            BootstrapWarpper.InitiateConfig(services, new List<string> { "Config/moduleConfig.json" });
+
+            BootstrapWarpper.InitiateConfig(services, new List<string> {"Config/moduleConfig.json"});
+
             #endregion
 
             #region 初始化审计
+
             services.InitAuditable();
+
             #endregion
 
             return new AutofacServiceProvider
@@ -105,10 +115,7 @@ namespace WorkData.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             //静态资源
             app.UseStaticFiles();
@@ -120,8 +127,8 @@ namespace WorkData.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

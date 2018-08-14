@@ -16,9 +16,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WorkData.Code.AutoMappers;
 using WorkData.Code.Repositories;
+using WorkData.Code.Webs.Infrastructure;
 using WorkData.Domain.Permissions.Users;
 using WorkData.Service.Permissions.Users.Dto;
-using WorkData.Web.Extensions.Infrastructure;
 
 #endregion
 

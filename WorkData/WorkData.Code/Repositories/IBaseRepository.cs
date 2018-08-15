@@ -27,6 +27,7 @@ namespace WorkData.Code.Repositories
     public interface IBaseRepository<TEntity, TPrimaryKey>
         where TEntity : class, IAggregateRoot, IEntity<TPrimaryKey>
     {
+
         /// <summary>
         ///     Insert
         /// </summary>

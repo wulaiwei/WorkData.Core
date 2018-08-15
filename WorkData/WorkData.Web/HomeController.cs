@@ -11,14 +11,8 @@
 
 #region
 
-using System;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using WorkData.Code.AutoMappers;
-using WorkData.Code.Repositories;
 using WorkData.Code.Webs.Infrastructure;
-using WorkData.Domain.Permissions.Users;
-using WorkData.Service.Permissions.Users.Dto;
 
 #endregion
 
@@ -27,7 +21,7 @@ namespace WorkData.Web
     public class HomeController : WorkDataBaseController
     {
         /// <summary>
-        /// Index
+        ///     Index
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()

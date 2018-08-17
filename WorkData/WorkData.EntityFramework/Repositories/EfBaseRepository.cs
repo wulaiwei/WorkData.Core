@@ -15,8 +15,13 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using WorkData.Code.Entities;
 using WorkData.Code.Repositories;
+using WorkData.Code.Repositories.Predicates;
+using WorkData.EntityFramework.Extensions;
+using Z.EntityFramework.Plus;
 
 #endregion
 
@@ -41,12 +46,17 @@ namespace WorkData.EntityFramework.Repositories
         ///     Gets DbSet for given entity.
         /// </summary>
         public virtual DbSet<TEntity> DbSet => Context.Set<TEntity>();
+        //public IQueryable<EntityType> EntityTypes => Context.Model.EntityTypes.Where(t => t.Something == true);
 
         private readonly IDbContextProvider<TDbContext> _dbContextProvider;
+        private readonly IPredicateGroup<TEntity> _predicateGroup;
 
-        public EfBaseRepository(IDbContextProvider<TDbContext> dbContextProvider)
+        public EfBaseRepository(
+            IDbContextProvider<TDbContext> dbContextProvider,
+            IPredicateGroup<TEntity> predicateGroup)
         {
             _dbContextProvider = dbContextProvider;
+            _predicateGroup = predicateGroup;
         }
 
         #region Query
@@ -58,7 +68,10 @@ namespace WorkData.EntityFramework.Repositories
         /// <returns></returns>
         public override TEntity FindBy(TPrimaryKey primaryKey)
         {
-            var entity = DbSet.Find(primaryKey);
+            _predicateGroup.AddPredicate(true,x=>x.Id.Equals(primaryKey));
+
+            var entity = DbSet.WhereIf(_predicateGroup)
+                .FirstOrDefault();
             return entity;
         }
 
@@ -171,6 +184,7 @@ namespace WorkData.EntityFramework.Repositories
 
         #endregion
 
+        #region DbContext
         /// <summary>
         /// GetDbContext
         /// </summary>
@@ -178,6 +192,7 @@ namespace WorkData.EntityFramework.Repositories
         public DbContext GetDbContext()
         {
             return Context;
-        }
+        } 
+        #endregion
     }
 }

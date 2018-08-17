@@ -16,13 +16,13 @@ namespace WorkData.Code.Repositories.Predicates
         /// </summary>
         public PredicateGroup()
         {
-            Predicates = new List<WorkDataPredicate<T>>();
+            Predicates = new List<IPredicate<T>>();
         }
 
         /// <summary>
         /// Predicates
         /// </summary>
-        public List<WorkDataPredicate<T>> Predicates { get; set; }
+        public List<IPredicate<T>> Predicates { get; set; }
 
         /// <summary>
         /// AddPredicate

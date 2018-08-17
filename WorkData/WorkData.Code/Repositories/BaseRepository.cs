@@ -14,6 +14,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WorkData.Code.Entities;
+using WorkData.Code.Repositories.Predicates;
 using WorkData.Code.UnitOfWorks;
 using WorkData.Dependency;
 

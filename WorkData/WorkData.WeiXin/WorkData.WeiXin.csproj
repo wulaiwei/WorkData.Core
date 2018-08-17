@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Senparc.Weixin" Version="5.1.7" />
+    <PackageReference Include="Senparc.Weixin.MP" Version="15.2.2" />
+    <PackageReference Include="ServiceStack" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WorkData.Util.Redis\WorkData.Util.Redis.csproj" />
+    <ProjectReference Include="..\WorkData\WorkData.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -12,7 +12,10 @@
 #region
 
 using Microsoft.AspNetCore.Mvc;
+using WorkData.Code.Repositories;
 using WorkData.Code.Webs.Infrastructure;
+using WorkData.Domain.Permissions.Users;
+using WorkData.EntityFramework.Repositories;
 
 #endregion
 
@@ -20,12 +23,21 @@ namespace WorkData.Web
 {
     public class HomeController : WorkDataBaseController
     {
+        private readonly IBaseRepository<BaseUser, string> _baseRepository;
+
+        public HomeController(IBaseRepository<BaseUser, string> baseRepository)
+        {
+            _baseRepository = baseRepository;
+        }
+
         /// <summary>
         ///     Index
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
+            var db = _baseRepository.GetDbContext();
+            var item = _baseRepository.FindBy("f1f7ef6e-dd3b-4e93-9afc-c6d8f6c5acdc");
             return View();
         }
     }

@@ -45,6 +45,7 @@ namespace WorkData.EntityFramework
         /// </summary>
         public ClaimsPrincipal ClaimsPrincipal { get; set; }
 
+
         /// <summary>
         ///     SaveChange
         /// </summary>

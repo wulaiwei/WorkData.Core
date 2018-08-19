@@ -30,6 +30,7 @@
     <ProjectReference Include="..\WorkData.Domain.EntityFramework\WorkData.Domain.EntityFramework.csproj" />
     <ProjectReference Include="..\WorkData.Domain\WorkData.Domain.csproj" />
     <ProjectReference Include="..\WorkData.Service\WorkData.Service.csproj" />
+    <ProjectReference Include="..\WorkData.WeiXin\WorkData.WeiXin.csproj" />
     <ProjectReference Include="..\WorkData\WorkData.csproj" />
   </ItemGroup>
 

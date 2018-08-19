@@ -29,6 +29,7 @@ using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
 using WorkData.EntityFramework;
 using WorkData.EntityFramework.Extensions;
 using WorkData.Extensions.TypeFinders;
+using WorkData.WeiXin.Config;
 
 #endregion
 
@@ -62,6 +63,7 @@ namespace WorkData.Web
         {
             services.Configure<WorkDataBaseJwt>(Configuration.GetSection("WorkDataBaseJwt"));
             services.Configure<WorkDataDbConfig>(Configuration.GetSection("WorkDataDbContextConfig"));
+            services.Configure<WechatAppSettings>(Configuration.GetSection("WechatAppSettings"));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IPrincipal>(provider =>

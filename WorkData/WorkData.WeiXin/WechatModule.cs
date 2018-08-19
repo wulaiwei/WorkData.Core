@@ -10,14 +10,14 @@
 //  ------------------------------------------------------------------------------
 
 using Autofac;
-using Jwell.Wechat.Common;
 using WorkData.Extensions.Modules;
+using WorkData.WeiXin.Impl;
 using WorkData.WeiXin.Interface;
 
 namespace WorkData.WeiXin
 {
     /// <summary>
-    /// Wechat layer module of the Jwell.Wechat.Common
+    /// Wechat 
     /// </summary>
     public class WechatModule : WorkDataBaseModule
     {

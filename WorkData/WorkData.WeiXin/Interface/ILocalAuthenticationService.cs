@@ -1,11 +1,16 @@
-﻿namespace WorkData.WeiXin.Interface
+﻿using Senparc.Weixin.MP.Entities.Request;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace WorkData.WeiXin.Interface
 {
     public interface ILocalAuthenticationService
     {
         /// <summary>
         /// 验证回调地址
         /// </summary>
-        void VerifyCallBackUrl();
+        bool VerifyCallBackUrl(PostModel postModel, string echostr);
 
         /// <summary>
         /// 回调处理程序
@@ -13,22 +18,12 @@
         /// callback 返回Null或 XML格式字符串
         /// </para>
         /// </summary>
-        void CallbackHandle();
-
-        /// <summary>
-        /// 自动注册
-        /// </summary>
-        /// <param name="weiXinNumber"></param>
-        void AutoRegister(string weiXinNumber);
-
+        bool CallbackHandle(PostModel postModel);
+        
         /// <summary>
         /// Authorize
         /// </summary>
-        void Authorize(string code, string returnUrl);
+        string Authorize(string code, string returnUrl);
 
-        /// <summary>
-        /// RedirectUrl
-        /// </summary>
-        string RedirectUrl(string returnUrl);
     }
 }

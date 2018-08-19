@@ -10,6 +10,12 @@
       "type": "WorkData.Domain.WorkDataDomainModule,WorkData.Domain"
     },
     {
+      "type": "WorkData.WeiXin.WechatModule,WorkData.WeiXin"
+    },
+    {
+      "type": "WorkData.Util.Redis.WorkDataRedisModule,WorkData.Util.Redis"
+    },
+    {
       "type": "WorkData.Domain.EntityFramework.DomainEntityFrameworkModule,WorkData.Domain.EntityFramework"
     },
     {

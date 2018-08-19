@@ -13,14 +13,12 @@ namespace WorkData.WeiXin.Config
 {
     public class WechatAppSettings
     {
-        public static class WechatManagement
-        {
-            public static string AppId { get; set; }
-            public static string Token { get; set; }
-            public static string CorpId { get; set; }
-            public static string CorpSecret { get; set; }
-            public static string EncodingAesKey { get; set; }
-            public static string AuthorizeUrl { get; set; }
-        }
+
+        public static string AppId { get; set; }
+        public static string Token { get; set; }
+        public static string CorpId { get; set; }
+        public static string CorpSecret { get; set; }
+        public static string EncodingAesKey { get; set; }
+        public static string AuthorizeUrl { get; set; }
     }
 }

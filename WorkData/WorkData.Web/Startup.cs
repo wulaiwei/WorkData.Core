@@ -20,6 +20,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Senparc.CO2NET;
+using Senparc.CO2NET.RegisterServices;
+using Senparc.Weixin;
+using Senparc.Weixin.Entities;
+using Senparc.Weixin.RegisterServices;
 using WorkData.Code.AutoMappers;
 using WorkData.Code.JwtSecurityTokens;
 using WorkData.Code.Webs.Extension;
@@ -110,14 +116,24 @@ namespace WorkData.Web
 
             #endregion
 
+            services.AddMemoryCache();//使用本地缓存必须添加
+            services.AddSession();//使用Session
+
+            services.AddSenparcGlobalServices(Configuration)//Senparc.CO2NET 全局注册
+                .AddSenparcWeixinServices(Configuration);//Senparc.Weixin 注册
+
             return new AutofacServiceProvider
                 (BootstrapWarpper.IocManager.IocContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+
+            var register = RegisterService.Start(env, senparcSetting.Value).UseSenparcGlobal();// 启动 CO2NET 全局注册，必须！
+
+            register.UseSenparcWeixin(senparcWeixinSetting.Value, senparcSetting.Value);//微信全局注册，必须！
 
             //静态资源
             app.UseStaticFiles();

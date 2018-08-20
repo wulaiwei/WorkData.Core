@@ -13,9 +13,11 @@
 
 using Microsoft.EntityFrameworkCore;
 using WorkData.Domain.EntityFramework.Mappings.Permissions;
+using WorkData.Domain.EntityFramework.Mappings.WeiXin;
 using WorkData.Domain.Permissions.Roles;
 using WorkData.Domain.Permissions.UserRoles;
 using WorkData.Domain.Permissions.Users;
+using WorkData.Domain.WeiXin;
 using WorkData.EntityFramework;
 
 #endregion
@@ -36,6 +38,8 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
 
         public DbSet<BaseUserMember> BaseUserMembers { get; set; }
 
+        public DbSet<WeiXinShare> WeiXinShare { get; set; }
+
         /// <summary>
         ///     重写模型创建函数
         /// </summary>
@@ -48,6 +52,7 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new BaseRoleMap());
             modelBuilder.ApplyConfiguration(new UserRoleMap());
             modelBuilder.ApplyConfiguration(new BaseUserMemberMap());
+            modelBuilder.ApplyConfiguration(new WeiXinShareMap());
         }
 
         /// <summary>

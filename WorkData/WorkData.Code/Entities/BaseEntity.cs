@@ -63,8 +63,6 @@ namespace WorkData.Code.Entities
         /// <summary>
         /// 所属Member
         /// </summary>
-        [StringLength(200)]
-        [Column("MemberUserId")]
         public virtual string MemberUserId { get; set; }
 
         #endregion 用户组

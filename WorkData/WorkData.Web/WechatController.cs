@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senparc.Weixin.MP.Entities.Request;
+using Senparc.Weixin.MP.Helpers;
 using WorkData.Code.Webs.Infrastructure;
 using WorkData.Dependency;
 using WorkData.WeiXin.Config;
@@ -13,7 +15,7 @@ namespace WorkData.Web
 {
     public class WechatController : WorkDataBaseController
     {
-        public WechatAppSettings WechatAppSettings => IocManager.Instance.Resolve<WechatAppSettings>();
+        public WechatAppSettings WechatAppSettings => IocManager.Instance.ResolveServiceValue<WechatAppSettings>();
         private readonly ILocalAuthenticationService _authSrv;
 
         public WechatController(
@@ -27,7 +29,7 @@ namespace WorkData.Web
         ///验证回调地址
         /// </summary>
         [HttpGet, ActionName("WeiXinCallBackHandler")]
-        public ActionResult VerifyCallBackUrl(PostModel postModel, string echostr)
+        public IActionResult VerifyCallBackUrl(PostModel postModel, string echostr)
         {
             if (_authSrv.VerifyCallBackUrl(postModel, echostr))
             {
@@ -47,7 +49,7 @@ namespace WorkData.Web
         /// </summary>
         /// <returns></returns>
         [HttpPost, ActionName("WeiXinCallBackHandler")]
-        public ActionResult CallbackHandle(PostModel postModel)
+        public IActionResult CallbackHandle(PostModel postModel)
         {
             _authSrv.CallbackHandle(postModel);
             return null;
@@ -60,16 +62,26 @@ namespace WorkData.Web
         /// <param name="code">用户同意授权后，返回的code，用于获取access_token获取用户信息</param>
         /// <param name="state">state参数，这里传递公众号id</param>
         /// <param name="returnUrl"></param>
-        public ActionResult AuthorizeUrl(string code, string state, string returnUrl)
+        public IActionResult AuthorizeUrl(string code, string state, string returnUrl)
         {
             if (string.IsNullOrWhiteSpace(code) || code == "authdeny")
                 return Content("授权失败");
 
-            _authSrv.Authorize(code, returnUrl);
+            var url= _authSrv.Authorize(code, returnUrl);
 
-            return null;
+            return Redirect(url);
         }
         
         #endregion 微信OAuth授权回调地址 AuthorizeUrl(string code, string state, string rurl)
+
+        /// <summary>
+        /// 分享
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Share()
+        {
+            var jssdkUiPackage = JSSDKHelper.GetJsSdkUiPackage(WechatAppSettings.AppId, WechatAppSettings.CorpSecret, Request.AbsoluteUri());
+            return View(jssdkUiPackage);
+        }
     }
 }

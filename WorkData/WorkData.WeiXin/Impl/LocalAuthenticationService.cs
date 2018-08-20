@@ -14,7 +14,7 @@ namespace WorkData.WeiXin.Impl
 {
     public class LocalAuthenticationService : ILocalAuthenticationService
     {
-        public WechatAppSettings WechatAppSettings => IocManager.Instance.Resolve<WechatAppSettings>();
+        public WechatAppSettings WechatAppSettings => IocManager.Instance.ResolveServiceValue<WechatAppSettings>();
 
         public LocalAuthenticationService()
         {
@@ -35,6 +35,9 @@ namespace WorkData.WeiXin.Impl
              WechatAppSettings.CorpSecret,
              code);
 
+            if (oAuthAccessTokenResult==null)
+                throw new Exception("错误消息:oAuthAccessTokenResult为空");
+
             if (oAuthAccessTokenResult != null
                 && oAuthAccessTokenResult.errcode
                 != ReturnCode.请求成功)
@@ -46,6 +49,7 @@ namespace WorkData.WeiXin.Impl
                 oAuthAccessTokenResult.access_token,
                 oAuthAccessTokenResult.openid
                 );
+
             returnUrl = returnUrl + "?access_token=" + oAuthAccessTokenResult.access_token + "&openid=" + oAuthAccessTokenResult.openid;
 
             return returnUrl;

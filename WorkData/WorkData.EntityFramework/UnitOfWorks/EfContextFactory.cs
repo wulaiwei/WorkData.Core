@@ -15,7 +15,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using WorkData.Code.Entities.BaseInterfaces;
 using WorkData.Dependency;
+using WorkData.EntityFramework.Repositories.Filters;
+using Z.EntityFramework.Plus;
 
 #endregion
 
@@ -70,6 +74,9 @@ namespace WorkData.EntityFramework.UnitOfWorks
                 dic.Remove(conString + "DbContext");
             }
             dbContext = _resolver.Resolve<TDbContext>();
+
+            //初始化拦截器
+            dbContext.AddDynamicFilter();
 
             //我们在创建一个，放到数据槽中去
             dic.Add(conString + "DbContext", dbContext);

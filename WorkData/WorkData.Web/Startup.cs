@@ -13,6 +13,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Principal;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -27,15 +28,22 @@ using Senparc.Weixin;
 using Senparc.Weixin.Entities;
 using Senparc.Weixin.RegisterServices;
 using WorkData.Code.AutoMappers;
+using WorkData.Code.Entities;
 using WorkData.Code.JwtSecurityTokens;
+using WorkData.Code.Sessions;
 using WorkData.Code.Webs.Extension;
 using WorkData.Code.Webs.Filters;
 using WorkData.Code.Webs.WorkDataMiddlewares;
+using WorkData.Dependency;
 using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
+using WorkData.Domain.EntityFramework.EntityFramework.Filters;
 using WorkData.EntityFramework;
 using WorkData.EntityFramework.Extensions;
+using WorkData.EntityFramework.Repositories.Filters.Configs;
+using WorkData.Extensions.ServiceCollections;
 using WorkData.Extensions.TypeFinders;
 using WorkData.WeiXin.Config;
+using Z.EntityFramework.Plus;
 
 #endregion
 
@@ -68,8 +76,9 @@ namespace WorkData.Web
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.Configure<WorkDataBaseJwt>(Configuration.GetSection("WorkDataBaseJwt"));
-            services.Configure<WorkDataDbConfig>(Configuration.GetSection("WorkDataDbContextConfig"));
+            services.Configure<WorkDataDbContextOptions>(Configuration.GetSection("WorkDataDbContextOptions"));
             services.Configure<WechatAppSettings>(Configuration.GetSection("WechatAppSettings"));
+            services.Configure<DynamicFilterConfig>(Configuration.GetSection("DynamicFilterConfig"));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IPrincipal>(provider =>
@@ -84,7 +93,7 @@ namespace WorkData.Web
 
             #region WorkDataContext
 
-            services.AddWorkDataDbContext<WorkDataContext>();
+            services.AddWorkDataDbContext<WorkDataContext>("BaseWorkData");
 
             #endregion
 
@@ -121,6 +130,7 @@ namespace WorkData.Web
 
             services.AddSenparcGlobalServices(Configuration)//Senparc.CO2NET 全局注册
                 .AddSenparcWeixinServices(Configuration);//Senparc.Weixin 注册
+
 
             return new AutofacServiceProvider
                 (BootstrapWarpper.IocManager.IocContainer);

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 using WorkData.EntityFramework;
 using WorkData.Extensions.ServiceCollections;
 
@@ -29,11 +30,14 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
 
             #endregion ConfigurationBuilder
 
-            ServiceCollection.Configure<WorkDataDbConfig>(config.GetSection("WorkDataDbContextConfig"));
+            ServiceCollection.Configure<WorkDataDbContextOptions>(config.GetSection("WorkDataDbContextOptions"));
 
-            var workDataDbConfig = ServiceCollection.ResolveServiceValue<WorkDataDbConfig>();
+            var workDataDbContextOptions = ServiceCollection.ResolveServiceValue<WorkDataDbContextOptions>();
 
             var dbContextOptionsBuilder = new DbContextOptionsBuilder<WorkDataContext>();
+
+            var workDataDbConfig = workDataDbContextOptions.WorkDataDbConfigs
+                .Single(x => x.KeyName == "BaseWorkData");
 
             switch (workDataDbConfig.WorkDataDbType)
             {

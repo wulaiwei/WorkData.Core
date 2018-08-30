@@ -9,10 +9,23 @@
 // 修改描述：
 //  ------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace WorkData.EntityFramework
 {
+    public class WorkDataDbContextOptions
+    {
+        public List<WorkDataDbConfig> WorkDataDbConfigs { get; set; }
+    }
+
+
     public class WorkDataDbConfig
     {
+        /// <summary>
+        /// KeyName
+        /// </summary>
+        public string KeyName { get; set; }
+
         /// <summary>
         /// 链接字符串
         /// </summary>

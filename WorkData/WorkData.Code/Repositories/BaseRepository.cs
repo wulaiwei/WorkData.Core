@@ -67,11 +67,86 @@ namespace WorkData.Code.Repositories
         public abstract IQueryable<TEntity> GetAll();
 
         /// <summary>
+        /// GetAll
+        /// </summary>
+        /// <param name="includeNames"></param>
+        /// <returns></returns>
+        public abstract IQueryable<TEntity> GetAll(string[] includeNames);
+
+        /// <summary>
+        /// GetAll
+        /// </summary>
+        /// <param name="filterStrings"></param>
+        /// <returns></returns>
+        public abstract IQueryable<TEntity> GetAll(params object[] filterStrings);
+
+        /// <summary>
+        /// GetAll
+        /// </summary>
+        /// <param name="includeNames"></param>
+        /// <param name="filterStrings"></param>
+        /// <returns></returns>
+        public abstract IQueryable<TEntity> GetAll(string[] includeNames, params object[] filterStrings);
+
+        /// <summary>
+        /// AsNoFilterGetAll
+        /// </summary>
+        /// <returns></returns>
+        public abstract IQueryable<TEntity> AsNoFilterGetAll();
+
+        /// <summary>
+        /// AsNoFilterGetAll
+        /// </summary>
+        /// <param name="includeNames"></param>
+        /// <returns></returns>
+        public abstract IQueryable<TEntity> AsNoFilterGetAll(string[] includeNames);
+
+        /// <summary>
         /// FindBy
         /// </summary>
         /// <param name="primaryKey"></param>
         /// <returns></returns>
         public abstract TEntity FindBy(TPrimaryKey primaryKey);
+
+        /// <summary>
+        /// FindBy
+        /// </summary>
+        /// <param name="primaryKey"></param>
+        /// <param name="includeNames"></param>
+        /// <returns></returns>
+        public abstract TEntity FindBy(TPrimaryKey primaryKey, string[] includeNames);
+
+        /// <summary>
+        /// AsNoFilterFindBy
+        /// </summary>
+        /// <param name="primaryKey"></param>
+        /// <returns></returns>
+        public abstract TEntity AsNoFilterFindBy(TPrimaryKey primaryKey);
+
+        /// <summary>
+        /// AsNoFilterFindBy
+        /// </summary>
+        /// <param name="primaryKey"></param>
+        /// <param name="includeNames"></param>
+        /// <returns></returns>
+        public abstract TEntity AsNoFilterFindBy(TPrimaryKey primaryKey, string[] includeNames);
+
+        /// <summary>
+        /// FindBy
+        /// </summary>
+        /// <param name="primaryKey"></param>
+        /// <param name="filterStrings"></param>
+        /// <returns></returns>
+        public abstract TEntity FindBy(TPrimaryKey primaryKey, params object[] filterStrings);
+
+        /// <summary>
+        /// FindBy
+        /// </summary>
+        /// <param name="primaryKey"></param>
+        /// <param name="includeNames"></param>
+        /// <param name="filterStrings"></param>
+        /// <returns></returns>
+        public abstract TEntity FindBy(TPrimaryKey primaryKey, string[] includeNames, params object[] filterStrings);
 
         /// <summary>
         /// Delete

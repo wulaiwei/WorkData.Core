@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 using WorkData.EntityFramework.Auditables;
 using WorkData.Extensions.ServiceCollections;
 
@@ -13,10 +14,21 @@ namespace WorkData.EntityFramework.Extensions
         /// </summary>
         /// <typeparam name="TContext"></typeparam>
         /// <param name="serviceCollection"></param>
+        /// <param name="keyName"></param>
         /// <returns></returns>
-        public static IServiceCollection AddWorkDataDbContext<TContext>(this IServiceCollection serviceCollection) where TContext : DbContext
+        public static IServiceCollection AddWorkDataDbContext<TContext>(this IServiceCollection serviceCollection,string keyName) where TContext : DbContext
         {
-            var workDataDbConfig = serviceCollection.ResolveServiceValue<WorkDataDbConfig>();
+            var dbContextOptions = serviceCollection.ResolveServiceValue<WorkDataDbContextOptions>() ?? 
+                throw new Exception("WorkDataDbContextOptions 不能为空！");
+
+            if (dbContextOptions.WorkDataDbConfigs==null)
+                throw new Exception("dbContextOptions.WorkDataDbConfigs 不能为空！");
+
+            var workDataDbConfig = dbContextOptions.WorkDataDbConfigs
+                .Single(x => x.KeyName == keyName);
+
+            if(workDataDbConfig==null)
+                throw  new Exception("workDataDbConfig 不能为空！");
 
             return serviceCollection.AddDbContext<TContext>(optionsAction =>
             {

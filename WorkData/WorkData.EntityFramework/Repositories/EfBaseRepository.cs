@@ -11,16 +11,14 @@
 
 #region
 
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore;
 using WorkData.Code.Entities;
 using WorkData.Code.Repositories;
 using WorkData.Code.Repositories.Predicates;
-using WorkData.EntityFramework.Extensions;
+using WorkData.EntityFramework.Repositories.Filters;
 using Z.EntityFramework.Plus;
 
 #endregion
@@ -34,18 +32,10 @@ namespace WorkData.EntityFramework.Repositories
     /// <typeparam name="TPrimaryKey"></typeparam>
     /// <typeparam name="TDbContext"></typeparam>
     public class EfBaseRepository<TDbContext, TEntity, TPrimaryKey> :
-        BaseRepository<TEntity, TPrimaryKey>, IRepositoryDbConntext where TEntity : class, IAggregateRoot, IEntity<TPrimaryKey>
+        BaseRepository<TEntity, TPrimaryKey>,
+        IRepositoryDbConntext where TEntity : class, IAggregateRoot, IEntity<TPrimaryKey>
         where TDbContext : DbContext
     {
-        /// <summary>
-        ///     Gets EF DbContext object.
-        /// </summary>
-        public virtual TDbContext Context => _dbContextProvider.GetContent();
-
-        /// <summary>
-        ///     Gets DbSet for given entity.
-        /// </summary>
-        public virtual DbSet<TEntity> DbSet => Context.Set<TEntity>();
         //public IQueryable<EntityType> EntityTypes => Context.Model.EntityTypes.Where(t => t.Something == true);
 
         private readonly IDbContextProvider<TDbContext> _dbContextProvider;
@@ -59,21 +49,124 @@ namespace WorkData.EntityFramework.Repositories
             _predicateGroup = predicateGroup;
         }
 
-        #region Query
+        /// <summary>
+        ///     Gets EF DbContext object.
+        /// </summary>
+        public TDbContext Context => _dbContextProvider.GetContent();
 
         /// <summary>
-        /// FindBy
+        ///     Gets DbSet for given entity.
+        /// </summary>
+        public virtual DbSet<TEntity> DbSet => Context.Set<TEntity>();
+
+        #region DbContext
+
+        /// <summary>
+        ///     GetDbContext
+        /// </summary>
+        /// <returns></returns>
+        public DbContext GetDbContext()
+        {
+            return Context;
+        }
+
+        #endregion
+
+        #region Query
+
+
+
+        /// <summary>
+        ///     FindBy
         /// </summary>
         /// <param name="primaryKey"></param>
         /// <returns></returns>
         public override TEntity FindBy(TPrimaryKey primaryKey)
         {
-            _predicateGroup.AddPredicate(true,x=>x.Id.Equals(primaryKey));
-
-            var entity = DbSet.WhereIf(_predicateGroup)
-                .FirstOrDefault();
+            var entity = DbSet.Find(primaryKey);
             return entity;
         }
+
+        /// <summary>
+        /// FindBy
+        /// </summary>
+        /// <param name="primaryKey"></param>
+        /// <param name="includeNames"></param>
+        /// <returns></returns>
+        public override TEntity FindBy(TPrimaryKey primaryKey, string[] includeNames)
+        {
+            var query = DbSet;
+            foreach (var includeName in includeNames)
+            {
+                query.Include(includeName);
+            }
+            var entity = query.Find(primaryKey);
+            return entity;
+        }
+
+        /// <summary>
+        ///     AsNoFilterFindBy
+        /// </summary>
+        /// <param name="primaryKey"></param>
+        /// <returns></returns>
+        public override TEntity AsNoFilterFindBy(TPrimaryKey primaryKey)
+        {
+            var entity = DbSet.AsNoFilter()
+                .SingleOrDefault(x => x.Id.Equals(primaryKey));
+            return entity;
+        }
+
+        /// <summary>
+        /// AsNoFilterFindBy
+        /// </summary>
+        /// <param name="primaryKey"></param>
+        /// <param name="includeNames"></param>
+        /// <returns></returns>
+        public override TEntity AsNoFilterFindBy(TPrimaryKey primaryKey, string[] includeNames)
+        {
+            var query = DbSet.AsNoFilter();
+            foreach (var includeName in includeNames)
+            {
+                query.Include(includeName);
+            }
+            var entity = query.SingleOrDefault(x => x.Id.Equals(primaryKey));
+
+            return entity;
+        }
+
+
+        /// <summary>
+        ///     FindBy
+        /// </summary>
+        /// <param name="primaryKey"></param>
+        /// <param name="filterStrings"></param>
+        /// <returns></returns>
+        public override TEntity FindBy(TPrimaryKey primaryKey, params object[] filterStrings)
+        {
+            var entity = DbSet.AsWorkDataNoFilter(Context, filterStrings)
+                .SingleOrDefault(x => x.Id.Equals(primaryKey));
+            return entity;
+        }
+
+        /// <summary>
+        /// FindBy
+        /// </summary>
+        /// <param name="primaryKey"></param>
+        /// <param name="includeNames"></param>
+        /// <param name="filterStrings"></param>
+        /// <returns></returns>
+        public override TEntity FindBy(TPrimaryKey primaryKey, string[] includeNames, params object[] filterStrings)
+        {
+            var query = DbSet.AsWorkDataNoFilter(Context, filterStrings);
+            foreach (var includeName in includeNames)
+            {
+                query.Include(includeName);
+            }
+            var entity = query.SingleOrDefault(x => x.Id.Equals(primaryKey));
+
+            return entity;
+        }
+
 
         /// <summary>
         ///     GetAll
@@ -84,6 +177,73 @@ namespace WorkData.EntityFramework.Repositories
             return DbSet;
         }
 
+
+        /// <summary>
+        /// GetAll
+        /// </summary>
+        /// <param name="includeNames"></param>
+        /// <returns></returns>
+        public override IQueryable<TEntity> GetAll(string[] includeNames)
+        {
+            var query = DbSet;
+            foreach (var includeName in includeNames)
+            {
+                query.Include(includeName);
+            }
+            return query;
+        }
+
+        /// <summary>
+        /// GetAll
+        /// </summary>
+        /// <param name="filterStrings"></param>
+        /// <returns></returns>
+        public override IQueryable<TEntity> GetAll(params object[] filterStrings)
+        {
+            return DbSet.AsWorkDataNoFilter(Context, filterStrings);
+        }
+
+        /// <summary>
+        /// GetAll
+        /// </summary>
+        /// <param name="includeNames"></param>
+        /// <param name="filterStrings"></param>
+        /// <returns></returns>
+        public override IQueryable<TEntity> GetAll(string[] includeNames, params object[] filterStrings)
+        {
+            var query = DbSet.AsWorkDataNoFilter(Context, filterStrings);
+
+            foreach (var includeName in includeNames)
+            {
+                query.Include(includeName);
+            }
+            return query;
+        }
+
+        /// <summary>
+        /// AsNoFilterGetAll
+        /// </summary>
+        /// <returns></returns>
+        public override IQueryable<TEntity> AsNoFilterGetAll()
+        {
+            return DbSet.AsNoFilter();
+        }
+
+        /// <summary>
+        /// AsNoFilterGetAll
+        /// </summary>
+        /// <param name="includeNames"></param>
+        /// <returns></returns>
+        public override IQueryable<TEntity> AsNoFilterGetAll(string[] includeNames)
+        {
+            var query = DbSet.AsNoFilter();
+
+            foreach (var includeName in includeNames)
+            {
+                query.Include(includeName);
+            }
+            return query;
+        }
         #endregion
 
         #region Insert
@@ -113,7 +273,7 @@ namespace WorkData.EntityFramework.Repositories
         }
 
         /// <summary>
-        /// Insert
+        ///     Insert
         /// </summary>
         /// <param name="entities"></param>
         public override void Insert(IEnumerable<TEntity> entities)
@@ -131,7 +291,7 @@ namespace WorkData.EntityFramework.Repositories
         #region Delete
 
         /// <summary>
-        /// Delete
+        ///     Delete
         /// </summary>
         /// <param name="entity"></param>
         public override void Delete(TEntity entity)
@@ -141,7 +301,7 @@ namespace WorkData.EntityFramework.Repositories
         }
 
         /// <summary>
-        /// Delete
+        ///     Delete
         /// </summary>
         /// <param name="entities"></param>
         public override void Delete(IEnumerable<TEntity> entities)
@@ -159,7 +319,7 @@ namespace WorkData.EntityFramework.Repositories
         #region Update
 
         /// <summary>
-        /// Update
+        ///     Update
         /// </summary>
         /// <param name="entity"></param>
         public override void Update(TEntity entity)
@@ -169,7 +329,7 @@ namespace WorkData.EntityFramework.Repositories
         }
 
         /// <summary>
-        /// Update
+        ///     Update
         /// </summary>
         /// <param name="entities"></param>
         public override void Update(IEnumerable<TEntity> entities)
@@ -182,17 +342,6 @@ namespace WorkData.EntityFramework.Repositories
             Context.SaveChanges();
         }
 
-        #endregion
-
-        #region DbContext
-        /// <summary>
-        /// GetDbContext
-        /// </summary>
-        /// <returns></returns>
-        public DbContext GetDbContext()
-        {
-            return Context;
-        } 
         #endregion
     }
 }

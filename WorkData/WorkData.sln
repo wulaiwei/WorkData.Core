@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkData.Service", "WorkDat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkData.WeiXin", "WorkData.WeiXin\WorkData.WeiXin.csproj", "{B7786B3D-A5C3-4DAD-ADCC-A29940736312}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkData.Util.Redis", "WorkData.Util.Redis\WorkData.Util.Redis.csproj", "{B680DB85-3AA3-4356-89A9-5609A08044DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkData.Util.Redis", "WorkData.Util.Redis\WorkData.Util.Redis.csproj", "{B680DB85-3AA3-4356-89A9-5609A08044DE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Util", "Util", "{DF6ACD6E-39D5-4E05-AE40-B4220801D2A5}"
 EndProject

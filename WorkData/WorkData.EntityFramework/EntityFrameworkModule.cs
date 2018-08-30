@@ -11,6 +11,7 @@
 
 #region
 
+using System.Reflection;
 using Autofac;
 using WorkData.Code.Entities.BaseInterfaces;
 using WorkData.Code.Helpers;
@@ -19,6 +20,8 @@ using WorkData.Code.UnitOfWorks;
 using WorkData.EntityFramework.Auditables;
 using WorkData.EntityFramework.Extensions;
 using WorkData.EntityFramework.Repositories;
+using WorkData.EntityFramework.Repositories.Filters;
+using WorkData.EntityFramework.Repositories.Filters.Configs;
 using WorkData.EntityFramework.UnitOfWorks;
 using WorkData.Extensions.Modules;
 using WorkData.Extensions.TypeFinders;
@@ -52,6 +55,19 @@ namespace WorkData.EntityFramework
 
             builder.RegisterType<EfUnitOfWork>()
                 .As<IUnitOfWork, IActiveUnitOfWork, IUnitOfWorkCompleteHandle>();
+
+            #region 动态审计注入
+            var filterTypes = _typeFinder.FindClassesOfType<IDynamicFilter>();
+
+            foreach (var filterType in filterTypes)
+            {
+                var dynamicFilterAttribute = filterType.GetCustomAttribute(typeof(DynamicFilterAttribute)) as DynamicFilterAttribute;
+                if (dynamicFilterAttribute == null)
+                    continue;
+
+                builder.RegisterType(filterType).Named<IDynamicFilter>(dynamicFilterAttribute.Name);
+            }
+            #endregion
 
             #region 动态审计注入
             var auditTypes = _typeFinder.FindClassesOfType<IAuditable>();

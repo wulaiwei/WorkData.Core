@@ -1,23 +1,10 @@
-﻿// ------------------------------------------------------------------------------
-// Copyright  吴来伟个人 版权所有。
-// 项目名：WorkData.EntityFramework
-// 文件名：WorkDataDbContext.cs
-// 创建标识：吴来伟 2017-12-05 9:36
-// 创建描述：
-//
-// 修改标识：吴来伟2017-12-05 10:13
-// 修改描述：
-//  ------------------------------------------------------------------------------
+﻿#region
 
-#region
-
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
+using Microsoft.EntityFrameworkCore;
 using WorkData.Code.Sessions;
-using WorkData.Dependency;
 using WorkData.EntityFramework.Auditables;
 
 #endregion
@@ -41,10 +28,9 @@ namespace WorkData.EntityFramework
         public IWorkDataSession WorkDataSession { get; set; }
 
         /// <summary>
-        /// ClaimsPrincipal
+        ///     ClaimsPrincipal
         /// </summary>
         public ClaimsPrincipal ClaimsPrincipal { get; set; }
-
 
         /// <summary>
         ///     SaveChange

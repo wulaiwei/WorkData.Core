@@ -1,102 +1,278 @@
-﻿@using Microsoft.AspNetCore.Http;
+﻿@using WorkData.Web.Models.WeiXinShare
 @model Senparc.Weixin.MP.Helpers.JsSdkUiPackage
-
+@{
+    var shareEnum = ViewBag.ShareEnum is ShareEnum ? (ShareEnum)ViewBag.ShareEnum : ShareEnum.默认;
+    var shareLike = ViewBag.WeiXinShareLike as WeiXinShareLikeViewModel ?? new WeiXinShareLikeViewModel();
+}
 <!DOCTYPE html>
 
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="full-screen" content="yes">
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="360-fullscreen" content="true" />
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="wap-font-scale" content="no">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no" />
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>分享</title>
     <!--jQuery非JS-SDK必须-->
     <script src="~/plugins/jquery.js"></script>
     <script src="@(this.Context.Request.Scheme)://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script>
         wx.config({
             debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId: '@Model.AppId', // 必填，公众号的唯一标识
             timestamp: '@Model.Timestamp', // 必填，生成签名的时间戳
             nonceStr: '@Model.NonceStr', // 必填，生成签名的随机串
-            signature: '@Model.Signature',// 必填，签名
+            signature: '@Model.Signature', // 必填，签名
             jsApiList: [
-                    'checkJsApi',
-                    'onMenuShareTimeline',
-                    'onMenuShareAppMessage',
-                    'onMenuShareQQ',
-                    'onMenuShareWeibo',
-                    'hideMenuItems',
-                    'showMenuItems',
-                    'hideAllNonBaseMenuItem',
-                    'showAllNonBaseMenuItem',
-                    'translateVoice',
-                    'startRecord',
-                    'stopRecord',
-                    'onRecordEnd',
-                    'playVoice',
-                    'pauseVoice',
-                    'stopVoice',
-                    'uploadVoice',
-                    'downloadVoice',
-                    'chooseImage',
-                    'previewImage',
-                    'uploadImage',
-                    'downloadImage',
-                    'getNetworkType',
-                    'openLocation',
-                    'getLocation',
-                    'hideOptionMenu',
-                    'showOptionMenu',
-                    'closeWindow',
-                    'scanQRCode',
-                    'chooseWXPay',
-                    'openProductSpecificView',
-                    'addCard',
-                    'chooseCard',
-                    'openCard'
-            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2。详见：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+                'onMenuShareTimeline', // 分享到朋友圈接口
+                'onMenuShareAppMessage' //  分享到朋友接口
+            ]
         });
 
-        wx.error(function (res) {
-            console.log(res);
+        wx.error(function(res) {
             alert('验证失败');
         });
 
-         wx.ready(function () {
-                var url = '@(Context.Request.Scheme)://sdk.weixin.senparc.com';
-                var link = url + '@(Context.Request.PathAndQuery())';
-                var imgUrl = url + '/images/v2/ewm_01.png';
-
-                //转发到朋友圈
-                wx.onMenuShareTimeline({
-                    title: 'JSSDK朋友圈转发测试',
-                    link: link,
-                    imgUrl: imgUrl,
-                    success: function () {
-                        alert('转发成功！');
-                    },
-                    cancel: function () {
-                        alert('转发失败！');
-                    }
-                });
-                //转发给朋友
-                wx.onMenuShareAppMessage({
-                    title: 'JSSDK朋友圈转发测试',
-                    desc: '转发给朋友',
-                    link: link,
-                    imgUrl: imgUrl,
-                    type: 'link',
-                    dataUrl: '',
-                    success: function () {
-                        alert('转发成功！');
-                    },
-                    cancel: function () {
-                        alert('转发失败！');
-                    }
-                });
+        wx.ready(function() {
+            var imgUrl = 'http://www.mblogs.top/images/portfolio-4.jpg';
+            //转发到朋友圈
+            wx.onMenuShareTimeline({
+                title: '分享有礼 ',
+                desc: '缇诺卫浴开业大酬宾，集赞领好礼',
+                link: '@shareLike.Url',
+                imgUrl: imgUrl,
+                success: function() {
+                    alert('转发成功！');
+                },
+                cancel: function() {
+                    alert('转发失败！');
+                }
             });
+            //转发给朋友
+            wx.onMenuShareAppMessage({
+                title: '分享有礼 ',
+                desc: '缇诺卫浴开业大酬宾，集赞领好礼',
+                link: '@shareLike.Url',
+                imgUrl: imgUrl,
+                type: 'link',
+                dataUrl: '',
+                success: function() {
+                    alert('转发成功！');
+                },
+                cancel: function() {
+                    alert('转发失败！');
+                }
+            });
+        });
     </script>
 </head>
 <body>
-<div>
-      分享
-</div>
+    <div class="content">
+        @switch (shareEnum)
+        {
+            case ShareEnum.默认:
+                <img alt="" src="~/images/share.jpg" />
+                <div id="chakan"></div>
+                break;
+            case ShareEnum.分享点赞:
+                <img alt="" src="~/images/like.jpg" />
+                <div id="like"></div>
+                break;
+            case ShareEnum.分享无法点赞:
+                <img alt="" src="~/images/share.jpg" />
+                <div id="chakan"></div>
+                break;
+            case ShareEnum.非法:
+                break;
+        }
+        <div id="huodong"></div>
+        <div id="paihangban"></div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="huodongModel" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 style="text-align: center">活动规则：</h4>
+                    1.用户可分享至群， 分享至好友，分享至朋友圈，点击链接获取点赞<br/>
+                    2.一个用户只能为同一个用户点赞一次，一个用户可点赞多个用户<br />
+                    3.点击右上角“...”分享此连接，可直接参与其中<br />
+                    4.转发好友链接可为好友集赞<br />
+                    5.188个赞以上可进入排名领取排名相应的奖品<br />
+                    6.活动时间（）-（）日<br />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="chakanModel" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row" id="chakanContent">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="paihangbanModel" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <ul class="list-group"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/imgAutoAdaScreenSize.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".content img").imgAutoAdaScreenSize({
+                isForceStretch: false
+            });
+
+            $("#huodong").AutoPosition({
+                //样式
+                style: {},
+                //范围
+                range: {
+                    btnBaseWidth: 304, //图片基础宽度
+                    btnBaseHeight: 1265, //图片基础高度
+                    btnWidth: 40, //图片中按钮宽度
+                    btnHeight: 10, //图片中按钮高度
+                    btnTop: 290, //图片中按钮距离顶部的距离，单位PX
+                    btnLeft: 125 //图片中按钮距离左边的距离，单位PX
+                }
+            }, function () {
+                $("#huodong").click(function() {
+                    $("#huodongModel").modal('show');
+                });
+            });
+
+            $("#chakan").AutoPosition({
+                //样式
+                style: {},
+                //范围
+                range: {
+                    btnBaseWidth: 304, //图片基础宽度
+                    btnBaseHeight: 1265, //图片基础高度
+                    btnWidth: 120, //图片中按钮宽度
+                    btnHeight: 40, //图片中按钮高度
+                    btnTop: 338, //图片中按钮距离顶部的距离，单位PX
+                    btnLeft: 28 //图片中按钮距离左边的距离，单位PX
+                }
+            }, function () {
+                $("#chakan").click(function() {
+                    $.get("/api/weiXinShare/loadMyLikeList?shareOpenId=@shareLike.OpenId",
+                        function(data) {
+                            if (data.status) {
+                                $("#chakanContent").html("");
+                                $(data.result).each(function (i, item) {
+                                    var $div = '<div class="col-sm-6 col-xs-3 col-md-4"><div class="thumbnail"><img src="' + item.headImgUrl + '" alt="' + item.nickName + '"></div></div>';
+                                    $("#chakanContent").append($div);
+                                });
+                                $("#chakanModel").modal('show');
+                            } else {
+                                alert("系统异常！");
+                            }
+                        });
+                });
+                });
+
+                $("#paihangban").AutoPosition({
+                    //样式
+                    style: {},
+                //范围
+                range: {
+                    btnBaseWidth: 304, //图片基础宽度
+                    btnBaseHeight: 1265, //图片基础高度
+                    btnWidth: 120, //图片中按钮宽度
+                    btnHeight: 40, //图片中按钮高度
+                    btnTop: 338, //图片中按钮距离顶部的距离，单位PX
+                    btnLeft: 148 //图片中按钮距离左边的距离，单位PX
+                }
+            }, function () {
+                $("#paihangban").click(function() {
+                    $.get("/api/weiXinShare/likeRanking",
+                        function(data) {
+                            if (data.status) {
+                                $(".list-group").html("");
+                                $(data.result).each(function(i, item) {
+                                    var $li = ' <li class="list-group-item"> <span class="badge">' + item.count +'</span>' + item.shareOpenNick + '</li>';
+                                    $(".list-group").append($li);
+                                });
+                                $("#paihangbanModel").modal('show');
+                            } else {
+                                alert("系统异常！");
+                            }
+                        });
+                });
+            });
+
+
+            $("#like").AutoPosition({
+                //样式
+                style: {},
+                //范围
+                range: {
+                    btnBaseWidth: 304, //图片基础宽度
+                    btnBaseHeight: 1265, //图片基础高度
+                    btnWidth: 120, //图片中按钮宽度
+                    btnHeight: 40, //图片中按钮高度
+                    btnTop: 338, //图片中按钮距离顶部的距离，单位PX
+                    btnLeft: 28 //图片中按钮距离左边的距离，单位PX
+                }
+            }, function () {
+                $("#like").click(function() {
+                    var data = {
+                        shareOpenId: "@shareLike.ShareId",
+                        likeOpenId: "@shareLike.OpenId"
+                    }
+                    $.ajax({
+                        type: "Post",
+                        contentType: 'application/json',
+                        url: "/api/weiXinShare/saveData",
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        success: function(result) {
+                            if (result.status) {
+                                alert("点赞成功！");
+                            } else {
+                                alert(result.message);
+                            }
+                        },
+                        error: function() {
+                            alert("你已经为你的好友点过赞了！");
+                        }
+                    });
+                });
+            });
+    });
+    </script>
 </body>
+
+
 </html>

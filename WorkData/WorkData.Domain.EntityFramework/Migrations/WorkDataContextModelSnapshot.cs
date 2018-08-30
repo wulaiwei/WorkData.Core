@@ -211,6 +211,67 @@ namespace WorkData.Domain.EntityFramework.Migrations
                     b.ToTable("WeiXinShare");
                 });
 
+            modelBuilder.Entity("WorkData.Domain.WeiXin.WeiXinUserInfo", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnName("City")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnName("Country")
+                        .HasMaxLength(300);
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnName("CreateTime")
+                        .HasColumnType("timestamp(0)");
+
+                    b.Property<string>("CreateUserId")
+                        .IsRequired()
+                        .HasColumnName("CreateUserId")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("HeadImgUrl")
+                        .IsRequired()
+                        .HasColumnName("HeadImgUrl")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("NickName")
+                        .IsRequired()
+                        .HasColumnName("NickName")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("OpenId")
+                        .IsRequired()
+                        .HasColumnName("OpenId")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("Province")
+                        .IsRequired()
+                        .HasColumnName("Province")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("Sex")
+                        .IsRequired()
+                        .HasColumnName("Sex")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("UnionId")
+                        .IsRequired()
+                        .HasColumnName("UnionId")
+                        .HasMaxLength(300);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WeiXinUserInfo");
+                });
+
             modelBuilder.Entity("WorkData.Domain.Permissions.UserRoles.UserRole", b =>
                 {
                     b.HasOne("WorkData.Domain.Permissions.Roles.BaseRole", "BaseRole")

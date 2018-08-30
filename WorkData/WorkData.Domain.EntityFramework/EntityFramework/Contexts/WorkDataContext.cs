@@ -11,7 +11,11 @@
 
 #region
 
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using WorkData.Code.Entities;
+using WorkData.Code.Entities.BaseInterfaces;
+using WorkData.Domain.EntityFramework.EntityFramework.Filters;
 using WorkData.Domain.EntityFramework.Mappings.Permissions;
 using WorkData.Domain.EntityFramework.Mappings.WeiXin;
 using WorkData.Domain.Permissions.Roles;
@@ -19,6 +23,8 @@ using WorkData.Domain.Permissions.UserRoles;
 using WorkData.Domain.Permissions.Users;
 using WorkData.Domain.WeiXin;
 using WorkData.EntityFramework;
+using WorkData.EntityFramework.Repositories.Filters;
+using Z.EntityFramework.Plus;
 
 #endregion
 
@@ -38,7 +44,9 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
 
         public DbSet<BaseUserMember> BaseUserMembers { get; set; }
 
-        public DbSet<WeiXinShare> WeiXinShare { get; set; }
+        public DbSet<WeiXinShare> WeiXinShares { get; set; }
+
+        public DbSet<WeiXinUserInfo> WeiXinUserInfos { get; set; }
 
         /// <summary>
         ///     重写模型创建函数
@@ -53,6 +61,9 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new UserRoleMap());
             modelBuilder.ApplyConfiguration(new BaseUserMemberMap());
             modelBuilder.ApplyConfiguration(new WeiXinShareMap());
+            modelBuilder.ApplyConfiguration(new WeiXinUserInfoMap());
+            //初始化对象
+            DynamicFilterManager.SetCacheGenericDynamicFilter();
         }
 
         /// <summary>

@@ -62,7 +62,7 @@ namespace Workdata.UnitTest
             #endregion
 
             ServiceCollection.Configure<WorkDataBaseJwt>(Configuration.GetSection("WorkDataBaseJwt"));
-            ServiceCollection.Configure<WorkDataDbConfig>(Configuration.GetSection("WorkDataDbContextConfig"));
+            ServiceCollection.Configure<WorkDataDbContextOptions>(Configuration.GetSection("WorkDataDbContextOptions"));
 
             #region Autofac
 

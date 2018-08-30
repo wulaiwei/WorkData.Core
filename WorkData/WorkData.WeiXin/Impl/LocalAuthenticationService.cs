@@ -5,8 +5,11 @@ using Senparc.Weixin.MP.AdvancedAPIs.OAuth;
 using Senparc.Weixin.MP.Entities.Request;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using WorkData.Code.Repositories;
 using WorkData.Dependency;
+using WorkData.Domain.WeiXin;
 using WorkData.WeiXin.Config;
 using WorkData.WeiXin.Interface;
 
@@ -16,9 +19,10 @@ namespace WorkData.WeiXin.Impl
     {
         public WechatAppSettings WechatAppSettings => IocManager.Instance.ResolveServiceValue<WechatAppSettings>();
 
-        public LocalAuthenticationService()
+        private readonly IBaseRepository<WeiXinUserInfo, string> _baseRepository;
+        public LocalAuthenticationService(IBaseRepository<WeiXinUserInfo, string> baseRepository)
         {
-
+            _baseRepository = baseRepository;
         }
 
         /// <summary>
@@ -49,8 +53,33 @@ namespace WorkData.WeiXin.Impl
                 oAuthAccessTokenResult.access_token,
                 oAuthAccessTokenResult.openid
                 );
+            var item = _baseRepository.GetAll().FirstOrDefault(x => x
+                                                                        .OpenId == userInfo.openid);
+            if (item==null)
+            {
+                var model = new WeiXinUserInfo
+                {
+                    City = userInfo.city,
+                    Country = userInfo.country,
+                    HeadImgUrl = userInfo.headimgurl,
+                    NickName = userInfo.nickname,
+                    OpenId = userInfo.openid,
+                    Province = userInfo.province,
+                    Sex = userInfo.sex.ToString(),
+                    UnionId = userInfo.unionid
+                };
+                _baseRepository.Insert(model);
+            }
 
-            returnUrl = returnUrl + "?access_token=" + oAuthAccessTokenResult.access_token + "&openid=" + oAuthAccessTokenResult.openid;
+            if (returnUrl.Contains("?"))
+            {
+                returnUrl = returnUrl + "&access_token=" + oAuthAccessTokenResult.access_token + "&openid=" + oAuthAccessTokenResult.openid;
+            }
+            else
+            {
+                returnUrl = returnUrl + "?access_token=" + oAuthAccessTokenResult.access_token + "&openid=" + oAuthAccessTokenResult.openid;
+            }
+
 
             return returnUrl;
         }

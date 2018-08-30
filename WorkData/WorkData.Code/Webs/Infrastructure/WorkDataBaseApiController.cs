@@ -42,7 +42,7 @@ namespace WorkData.Code.Webs.Infrastructure
         public virtual IActionResult AsErrorJson(string message)
         {
             var serverResponse = ResponseProvider.Error(default(BaseResponseEmpty), message);
-            return BadRequest(serverResponse);
+            return Ok(serverResponse);
         }
     }
 }

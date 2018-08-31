@@ -43,6 +43,13 @@ namespace WorkData.Web
         /// <returns></returns>
         public IActionResult Index()
         {
+            _baseRepository.GetAll().ToList();
+            _baseRepository.GetAll("CreateUserId","xxx假定不存在的筛选器").ToList();
+            _baseRepository.AsNoFilterGetAll().ToList();
+
+            _baseRepository.FindBy("1");
+            _baseRepository.FindBy("1", "CreateUserId", "xxx假定不存在的筛选器");
+            _baseRepository.AsNoFilterFindBy("1");
             return View();
         }
     }

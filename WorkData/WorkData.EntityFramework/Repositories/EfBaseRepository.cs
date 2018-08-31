@@ -124,6 +124,7 @@ namespace WorkData.EntityFramework.Repositories
         /// <returns></returns>
         public override TEntity AsNoFilterFindBy(TPrimaryKey primaryKey, string[] includeNames)
         {
+
             var query = DbSet.AsNoFilter();
             foreach (var includeName in includeNames)
             {

@@ -62,6 +62,7 @@ namespace WorkData.Domain.EntityFramework.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new BaseUserMemberMap());
             modelBuilder.ApplyConfiguration(new WeiXinShareMap());
             modelBuilder.ApplyConfiguration(new WeiXinUserInfoMap());
+
             //初始化对象
             DynamicFilterManager.SetCacheGenericDynamicFilter();
         }

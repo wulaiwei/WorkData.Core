@@ -31,25 +31,6 @@ namespace WorkData.EntityFramework.Repositories.Filters
         }
 
         /// <summary>
-        ///     AddDynamicFilter
-        /// </summary>
-        /// <param name="dbContext"></param>
-        /// <param name="filterStrings"></param>
-        /// <returns></returns>
-        public static void AddDynamicFilter(this DbContext dbContext, params string[] filterStrings)
-        {
-            if (dbContext == null) return;
-            foreach (var itemFilterString in filterStrings)
-            {
-                if (dbContext.Filter(itemFilterString) != null)
-                    continue;
-
-                var resulTryGetValue = CacheGenericDynamicFilter.TryGetValue(itemFilterString, out var dynamicFilter);
-                if (resulTryGetValue) dynamicFilter?.InitFilter(dbContext);
-            }
-        }
-
-        /// <summary>
         ///     AsWorkDataNoFilter
         /// </summary>
         /// <typeparam name="T"></typeparam>

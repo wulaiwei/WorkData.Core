@@ -50,7 +50,7 @@ namespace WorkData.EntityFramework.UnitOfWorks
         }
 
         /// <summary>
-        ///
+        ///GetCurrentDbContext
         /// </summary>
         /// <typeparam name="TDbContext"></typeparam>
         /// <param name="dic"></param>

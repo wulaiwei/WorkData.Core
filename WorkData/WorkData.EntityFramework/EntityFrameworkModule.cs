@@ -56,7 +56,7 @@ namespace WorkData.EntityFramework
             builder.RegisterType<EfUnitOfWork>()
                 .As<IUnitOfWork, IActiveUnitOfWork, IUnitOfWorkCompleteHandle>();
 
-            #region 动态审计注入
+            #region 动态筛选器注入
             var filterTypes = _typeFinder.FindClassesOfType<IDynamicFilter>();
 
             foreach (var filterType in filterTypes)

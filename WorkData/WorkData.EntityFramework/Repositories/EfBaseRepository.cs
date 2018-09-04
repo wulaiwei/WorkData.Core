@@ -36,17 +36,15 @@ namespace WorkData.EntityFramework.Repositories
         IRepositoryDbConntext where TEntity : class, IAggregateRoot, IEntity<TPrimaryKey>
         where TDbContext : DbContext
     {
-        //public IQueryable<EntityType> EntityTypes => Context.Model.EntityTypes.Where(t => t.Something == true);
-
         private readonly IDbContextProvider<TDbContext> _dbContextProvider;
-        private readonly IPredicateGroup<TEntity> _predicateGroup;
+        public sealed override IPredicateGroup<TEntity> PredicateGroup { get; set; }
 
         public EfBaseRepository(
             IDbContextProvider<TDbContext> dbContextProvider,
             IPredicateGroup<TEntity> predicateGroup)
         {
             _dbContextProvider = dbContextProvider;
-            _predicateGroup = predicateGroup;
+            PredicateGroup = predicateGroup;
         }
 
         /// <summary>
@@ -248,6 +246,7 @@ namespace WorkData.EntityFramework.Repositories
         #endregion
 
         #region Insert
+
 
         /// <summary>
         ///     Insert

@@ -41,6 +41,11 @@ namespace WorkData.Code.Repositories
         public IResolver IocResolver { get; set; }
 
         /// <summary>
+        /// PredicateGroup
+        /// </summary>
+        public abstract IPredicateGroup<TEntity> PredicateGroup { get; set; }
+
+        /// <summary>
         ///     Insert
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>

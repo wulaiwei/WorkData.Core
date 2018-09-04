@@ -18,6 +18,7 @@ using WorkData.Code.Entities;
 using WorkData.Code.Repositories;
 using WorkData.Code.ResponseExtensions;
 using WorkData.Code.Webs.Infrastructure;
+using WorkData.Domain;
 using WorkData.Domain.Permissions.Users;
 using WorkData.Domain.WeiXin;
 using WorkData.EntityFramework.Extensions;
@@ -30,26 +31,12 @@ namespace WorkData.Web
 {
     public class HomeController : WorkDataBaseController
     {
-        private readonly IBaseRepository<BaseUser, string> _baseRepository;
-
-        public HomeController(IBaseRepository<BaseUser, string> baseRepository)
-        {
-            _baseRepository = baseRepository;
-        }
-
         /// <summary>
         ///     Index
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
-            _baseRepository.GetAll().ToList();
-            _baseRepository.GetAll("CreateUserId","xxx假定不存在的筛选器").ToList();
-            _baseRepository.AsNoFilterGetAll().ToList();
-
-            _baseRepository.FindBy("1");
-            _baseRepository.FindBy("1", "CreateUserId", "xxx假定不存在的筛选器");
-            _baseRepository.AsNoFilterFindBy("1");
             return View();
         }
     }

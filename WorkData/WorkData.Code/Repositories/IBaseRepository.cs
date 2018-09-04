@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WorkData.Code.Entities;
+using WorkData.Code.Repositories.Predicates;
 
 #endregion
 
@@ -16,6 +17,11 @@ namespace WorkData.Code.Repositories
     public interface IBaseRepository<TEntity, TPrimaryKey>
         where TEntity : class, IAggregateRoot, IEntity<TPrimaryKey>
     {
+        /// <summary>
+        /// PredicateGroup
+        /// </summary>
+        IPredicateGroup<TEntity> PredicateGroup { get; set; }
+
         /// <summary>
         ///     Insert
         /// </summary>

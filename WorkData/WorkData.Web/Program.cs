@@ -39,7 +39,9 @@ namespace WorkData.Web
                 .Build();
             var host = BuildWebHost(args, config);
 
-            SeedData.Initialize(new WorkDataContext(IocManager.Instance.Resolve<DbContextOptions>()));
+            SeedData.Initialize(new WorkDataContext(new DbContextOptionsBuilder()
+                .UseNpgsql("User ID=workdata;Password=workdata;Host=119.27.185.32;Port=5432;Database=workdata;Pooling=true;")
+                .Options));
 
             host.Run();
         }

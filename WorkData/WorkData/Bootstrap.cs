@@ -98,7 +98,7 @@ namespace WorkData
         }
 
         /// <summary>
-        ///     初始化集成框架(配置方式)
+        ///  初始化集成框架(配置方式)
         /// </summary>
         [STAThread]
         public void InitiateConfig(IServiceCollection services, List<string> paths)

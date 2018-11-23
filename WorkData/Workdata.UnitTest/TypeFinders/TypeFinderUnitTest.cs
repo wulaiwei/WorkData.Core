@@ -21,7 +21,7 @@ namespace Workdata.UnitTest.TypeFinders
 
         public TypeFinderUnitTest()
         {
-            _typeFinder = IocManager.Instance.Resolve<ITypeFinder>();
+            _typeFinder = IocManager.ServiceLocatorCurrent.GetInstance<ITypeFinder>();
         }
 
         [Fact]

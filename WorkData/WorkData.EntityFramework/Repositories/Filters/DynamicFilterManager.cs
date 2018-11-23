@@ -60,7 +60,7 @@ namespace WorkData.EntityFramework.Repositories.Filters
 
             foreach (var item in dynamicFilterConfig.DynamicFilterList)
             {
-                var dynamicFilter = IocManager.Instance.ResolveName<IDynamicFilter>(item);
+                var dynamicFilter = IocManager.ServiceLocatorCurrent.GetInstance<IDynamicFilter>(item);
                 CacheGenericDynamicFilter.Add(item, dynamicFilter);
             }
         }

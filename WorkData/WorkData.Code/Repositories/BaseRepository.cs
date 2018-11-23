@@ -36,11 +36,6 @@ namespace WorkData.Code.Repositories
         public IUnitOfWorkManager UnitOfWorkManager { get; set; }
 
         /// <summary>
-        ///     IocResolver
-        /// </summary>
-        public IResolver IocResolver { get; set; }
-
-        /// <summary>
         /// PredicateGroup
         /// </summary>
         public abstract IPredicateGroup<TEntity> PredicateGroup { get; set; }

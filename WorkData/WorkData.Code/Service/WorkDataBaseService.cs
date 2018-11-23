@@ -19,8 +19,8 @@ namespace WorkData.Code.Service
 
         public WorkDataBaseService()
         {
-            WorkDataSession = IocManager.Instance.Resolve<IWorkDataSession>();
-            ClaimsPrincipal = IocManager.Instance.Resolve<IPrincipal>() as ClaimsPrincipal;
+            WorkDataSession = IocManager.ServiceLocatorCurrent.GetInstance<IWorkDataSession>();
+            ClaimsPrincipal = IocManager.ServiceLocatorCurrent.GetInstance<IPrincipal>() as ClaimsPrincipal;
         }
     }
 }

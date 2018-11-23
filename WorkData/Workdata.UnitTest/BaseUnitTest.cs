@@ -71,7 +71,7 @@ namespace Workdata.UnitTest
                 "Config/moduleConfig.json"
             };
 
-            BootstrapWarpper.InitiateConfig(ServiceCollection, paths);
+            BootstrapWarpper.InitiateConfig(paths, ServiceCollection);
             #endregion
         }
     }

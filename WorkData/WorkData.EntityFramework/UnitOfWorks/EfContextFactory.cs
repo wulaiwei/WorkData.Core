@@ -30,13 +30,6 @@ namespace WorkData.EntityFramework.UnitOfWorks
     /// </summary>
     public class EfContextFactory : IEfContextFactory
     {
-        private readonly IResolver _resolver;
-
-        public EfContextFactory(IResolver resolver)
-        {
-            _resolver = resolver;
-        }
-
         /// <summary>
         ///     default current context
         /// </summary>
@@ -73,7 +66,7 @@ namespace WorkData.EntityFramework.UnitOfWorks
             {
                 dic.Remove(conString + "DbContext");
             }
-            dbContext = _resolver.Resolve<TDbContext>();
+            dbContext = IocManager.ServiceLocatorCurrent.GetInstance<TDbContext>();
 
             //初始化拦截器
             dbContext.AddDynamicFilter();

@@ -16,12 +16,10 @@ namespace WorkData.Code.UnitOfWorks
     public class UnitOfWorkManager : IUnitOfWorkManager
     {
         private readonly ICurrentUnitOfWorkProvider _currentUnitOfWorkProvider;
-        private readonly IResolver _resolver;
 
-        public UnitOfWorkManager(ICurrentUnitOfWorkProvider currentUnitOfWorkProvider, IResolver resolver)
+        public UnitOfWorkManager(ICurrentUnitOfWorkProvider currentUnitOfWorkProvider)
         {
             _currentUnitOfWorkProvider = currentUnitOfWorkProvider;
-            _resolver = resolver;
         }
 
         /// <summary>
@@ -35,7 +33,7 @@ namespace WorkData.Code.UnitOfWorks
         /// <returns></returns>
         public IUnitOfWorkCompleteHandle Begin()
         {
-            var unitOfWork = _resolver.Resolve<IUnitOfWork>();
+            var unitOfWork = IocManager.ServiceLocatorCurrent.GetInstance<IUnitOfWork>();
             //开启事务
             unitOfWork.Begin();
             //设置定位

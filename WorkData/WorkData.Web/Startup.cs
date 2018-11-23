@@ -83,7 +83,8 @@ namespace WorkData.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IPrincipal>(provider =>
                 provider.GetService<IHttpContextAccessor>().HttpContext?.User);
-            services.AddSingleton<ITypeFinder, WebAppTypeFinder>();
+            //services.AddSingleton<ITypeFinder, WebAppTypeFinder>();
+  
 
             #region AutoMapper
 
@@ -115,7 +116,7 @@ namespace WorkData.Web
 
             #region Autofac
 
-            BootstrapWarpper.InitiateConfig(services, new List<string> {"Config/moduleConfig.json"});
+            BootstrapWarpper.InitiateConfig(new List<string> { "Config/moduleConfig.json" },services);
 
             #endregion
 

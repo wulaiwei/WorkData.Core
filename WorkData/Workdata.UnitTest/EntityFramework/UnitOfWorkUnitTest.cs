@@ -22,7 +22,7 @@ namespace Workdata.UnitTest.EntityFramework
 
         public UnitOfWorkUnitTest()
         {
-            _unitOfWorkManager = IocManager.Instance.Resolve<IUnitOfWorkManager>();
+            _unitOfWorkManager = IocManager.ServiceLocatorCurrent.GetInstance<IUnitOfWorkManager>();
         }
 
         [Fact]

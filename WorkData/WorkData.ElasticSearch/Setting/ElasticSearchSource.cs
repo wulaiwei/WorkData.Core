@@ -31,7 +31,7 @@ namespace WorkData.ElasticSearch.Setting
         ///     ElasticSearchSourceConfig
         /// </summary>
         public static ElasticSearchSourceConfig ElasticSearchSourceConfig { get; } =
-            IocManager.Instance.Resolve<ElasticSearchSourceConfig>();
+            IocManager.ServiceLocatorCurrent.GetInstance<ElasticSearchSourceConfig>();
 
         /// <summary>
         /// Node

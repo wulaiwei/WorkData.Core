@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using WorkData.Dependency;
 using WorkData.EntityFramework.Auditables;
 using WorkData.Extensions.ServiceCollections;
 
@@ -56,9 +57,7 @@ namespace WorkData.EntityFramework.Extensions
         /// <returns></returns>
         public static IServiceCollection InitAuditable(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<AuditableConfigs>();
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-            var auditableConfigs = serviceProvider.GetService<AuditableConfigs>();
+            var auditableConfigs = IocManager.ServiceLocatorCurrent.GetInstance<AuditableConfigs>();
             if (AuditableConfigs.AuditableDictionary == null)
             {
                 auditableConfigs.InitializedAuditables();

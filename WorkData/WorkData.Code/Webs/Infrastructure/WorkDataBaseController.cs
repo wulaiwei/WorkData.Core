@@ -16,13 +16,13 @@ namespace WorkData.Code.Webs.Infrastructure
         /// WorkDataSession
         /// </summary>s
         public IWorkDataSession WorkDataSession { get; set; } =
-            IocManager.Instance.Resolve<IWorkDataSession>();
+            IocManager.ServiceLocatorCurrent.GetInstance<IWorkDataSession>();
 
 
         /// <summary>
         /// ClaimsPrincipal
         /// </summary>s
         public ClaimsPrincipal ClaimsPrincipal { get; set; } =
-            IocManager.Instance.Resolve<IPrincipal>() as ClaimsPrincipal;
+            IocManager.ServiceLocatorCurrent.GetInstance<IPrincipal>() as ClaimsPrincipal;
     }
 }

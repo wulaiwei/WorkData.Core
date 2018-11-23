@@ -78,6 +78,11 @@ namespace WorkData.EntityFramework
             }
             #endregion
 
+            #region AuditableConfigs
+
+            builder.RegisterType<AuditableConfigs>();
+            #endregion
+
             #region Repository注入
             var types = _typeFinder.FindClassesOfType<WorkDataBaseDbContext>();
 

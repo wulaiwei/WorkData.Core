@@ -25,7 +25,7 @@ namespace WorkData.EntityFramework.Repositories.Filters.Impls
         /// <returns></returns>
         public BaseQueryFilter InitFilter(DbContext dbContext)
         {
-            var workdataSession = IocManager.Instance.Resolve<IWorkDataSession>();
+            var workdataSession = IocManager.ServiceLocatorCurrent.GetInstance<IWorkDataSession>();
             if (workdataSession == null)
                 return dbContext
                     .Filter<ICreate>("CreateUserId", x => x.Where(w => w.CreateUserId == string.Empty ));

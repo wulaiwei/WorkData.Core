@@ -20,7 +20,7 @@ using System;
 
 namespace WorkData.Dependency
 {
-    public interface IIocManager : IResolver, IRegistrar, IServiceCollectionResolve
+    public interface IIocManager : IServiceCollectionResolve
     {
         /// <summary>
         ///     Reference to the Autofac Container.
@@ -43,12 +43,5 @@ namespace WorkData.Dependency
         /// </summary>
         /// <param name="serviceCollection"></param>
         void SetServiceCollection(IServiceCollection serviceCollection);
-
-        /// <summary>
-        /// UpdateContainer
-        /// </summary>
-        /// <param name="containerBuilder"></param>
-        [Obsolete("Containers should generally be considered immutable. Register all of your dependencies before building/resolving. If you need to change the contents of a container, you technically should rebuild the container. This method may be removed in a future major release.")]
-        void UpdateContainer(ContainerBuilder containerBuilder);
     }
 }

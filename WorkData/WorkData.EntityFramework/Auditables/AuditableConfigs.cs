@@ -9,9 +9,9 @@
 // 修改描述：
 //  ------------------------------------------------------------------------------
 
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WorkData.Code.Entities.BaseInterfaces;
 using WorkData.Dependency;
 using WorkData.Extensions.TypeFinders;
@@ -58,7 +58,7 @@ namespace WorkData.EntityFramework.Auditables
                 var auditable = new Auditable
                 {
                     EntityState = item.EntityState,
-                    AuditableImpl = IocManager.Instance.ResolveName<IAuditable>(type.FullName)
+                    AuditableImpl = IocManager.ServiceLocatorCurrent.GetInstance<IAuditable>(type.FullName)
                 };
                 Auditables.Add(auditable);
             }

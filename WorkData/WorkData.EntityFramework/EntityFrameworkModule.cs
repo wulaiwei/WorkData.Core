@@ -80,7 +80,7 @@ namespace WorkData.EntityFramework
 
             #region AuditableConfigs
 
-            builder.RegisterType<AuditableConfigs>();
+            builder.RegisterType<AuditableConfigs>().SingleInstance();
             #endregion
 
             #region Repository注入

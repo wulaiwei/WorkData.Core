@@ -83,8 +83,6 @@ namespace WorkData.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IPrincipal>(provider =>
                 provider.GetService<IHttpContextAccessor>().HttpContext?.User);
-            //services.AddSingleton<ITypeFinder, WebAppTypeFinder>();
-  
 
             #region AutoMapper
 

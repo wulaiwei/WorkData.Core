@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using WorkData.Code.Entities;
 using WorkData.EntityFramework.Repositories.Filters.Configs;
 using Z.EntityFramework.Plus;
@@ -10,7 +10,7 @@ namespace WorkData.EntityFramework.Repositories.Filters.Impls
     /// SoftDeleteDynamicFilter
     /// </summary>
     [DynamicFilter(Name = "SoftDelete")]
-    public class SoftDeleteDynamicFilter: IDynamicFilter
+    public class SoftDeleteDynamicFilter : IDynamicFilter
     {
         public BaseQueryFilter InitFilter(DbContext dbContext)
         {

@@ -35,6 +35,5 @@ namespace WorkData.Code.Sessions
         ///     UserId
         /// </summary>
         public override string UserId => Principal.GetClaimValue(WorkDataClaimsType.UserId);
-
     }
 }

@@ -2,7 +2,7 @@
 
 namespace WorkData.Code.AutoMappers
 {
-    public  class WorkDataBaseProfile : Profile
+    public class WorkDataBaseProfile : Profile
     {
     }
 }

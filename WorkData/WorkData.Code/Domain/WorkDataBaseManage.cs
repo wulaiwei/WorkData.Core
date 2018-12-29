@@ -5,7 +5,7 @@ using WorkData.Dependency;
 
 namespace WorkData.Code.Domain
 {
-    public class WorkDataBaseManage: IWorkDataBaseManage
+    public class WorkDataBaseManage : IWorkDataBaseManage
     {
         /// <summary>
         ///     WorkDataSession

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using WorkData.Domain.EntityFramework.EntityFramework.Extensions;
-using WorkData.Domain.Permissions.Roles;
 using WorkData.Domain.WeiXin;
 
 namespace WorkData.Domain.EntityFramework.Mappings.WeiXin

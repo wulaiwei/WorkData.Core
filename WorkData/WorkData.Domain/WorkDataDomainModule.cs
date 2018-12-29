@@ -1,10 +1,9 @@
 ﻿#region
 
+using Autofac;
 using System;
 using System.Linq;
-using Autofac;
 using WorkData.Extensions.Modules;
-using WorkData.Extensions.TypeFinders;
 
 #endregion
 
@@ -22,7 +21,6 @@ namespace WorkData.Domain
             builder.RegisterAssemblyTypes(assemblys.ToArray())
                 .Where(t => t.Name.EndsWith("Manage"))
                 .AsSelf();
-
         }
     }
 }

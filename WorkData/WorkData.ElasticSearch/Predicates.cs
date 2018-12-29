@@ -343,6 +343,12 @@ namespace WorkData.ElasticSearch
                 case GroupOperator.Or:
                     return Predicates.Aggregate(query, (q, p) => q || p.GetQuery(query));
 
+                case GroupOperator.NotAnd:
+                    return Predicates.Aggregate(query, (q, p) => q && !p.GetQuery(query));
+
+                case GroupOperator.NotOr:
+                    return Predicates.Aggregate(query, (q, p) => q || !p.GetQuery(query));
+
                 default:
                     throw new ElasticsearchException("构建Elasticsearch查询谓词异常");
             }
@@ -355,6 +361,8 @@ namespace WorkData.ElasticSearch
     public enum GroupOperator
     {
         And,
-        Or
+        Or,
+        NotAnd,
+        NotOr
     }
 }

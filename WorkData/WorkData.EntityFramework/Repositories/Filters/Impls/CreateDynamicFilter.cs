@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
 using WorkData.Code.Entities.BaseInterfaces;
 using WorkData.Code.Sessions;
 using WorkData.Dependency;
-using WorkData.EntityFramework.Repositories.Filters;
-using Z.EntityFramework.Plus;
 using WorkData.EntityFramework.Repositories.Filters.Configs;
+using Z.EntityFramework.Plus;
 
 namespace WorkData.EntityFramework.Repositories.Filters.Impls
 {
@@ -28,7 +24,7 @@ namespace WorkData.EntityFramework.Repositories.Filters.Impls
             var workdataSession = IocManager.ServiceLocatorCurrent.GetInstance<IWorkDataSession>();
             if (workdataSession == null)
                 return dbContext
-                    .Filter<ICreate>("CreateUserId", x => x.Where(w => w.CreateUserId == string.Empty ));
+                    .Filter<ICreate>("CreateUserId", x => x.Where(w => w.CreateUserId == string.Empty));
 
             return dbContext
                 .Filter<ICreate>("CreateUserId", x => x.Where(w => w.CreateUserId == workdataSession.UserId || w.CreateUserId == ""));

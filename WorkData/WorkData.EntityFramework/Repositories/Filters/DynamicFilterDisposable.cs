@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
 using Z.EntityFramework.Plus;
 
 namespace WorkData.EntityFramework.Repositories.Filters

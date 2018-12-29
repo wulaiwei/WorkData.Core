@@ -1,7 +1,4 @@
 ﻿using Senparc.Weixin.MP.Entities.Request;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WorkData.WeiXin.Interface
 {
@@ -19,11 +16,10 @@ namespace WorkData.WeiXin.Interface
         /// </para>
         /// </summary>
         bool CallbackHandle(PostModel postModel);
-        
+
         /// <summary>
         /// Authorize
         /// </summary>
         string Authorize(string code, string returnUrl);
-
     }
 }

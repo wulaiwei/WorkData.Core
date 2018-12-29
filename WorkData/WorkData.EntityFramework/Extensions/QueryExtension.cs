@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using WorkData.Code.Repositories.Predicates;
 
 namespace WorkData.EntityFramework.Extensions
@@ -37,6 +37,5 @@ namespace WorkData.EntityFramework.Extensions
                     (current, predicate) =>
                         predicate.Condition ? current.Where(predicate.Expression) : current);
         }
-
     }
 }

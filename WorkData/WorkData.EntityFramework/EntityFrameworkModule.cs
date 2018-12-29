@@ -11,10 +11,10 @@
 
 #region
 
-using System.Reflection;
 using Autofac;
+using System.Reflection;
+using WorkData.Code.Entities;
 using WorkData.Code.Entities.BaseInterfaces;
-using WorkData.Code.Helpers;
 using WorkData.Code.Repositories;
 using WorkData.Code.UnitOfWorks;
 using WorkData.EntityFramework.Auditables;

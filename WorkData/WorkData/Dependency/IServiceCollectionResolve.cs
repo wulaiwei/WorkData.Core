@@ -9,6 +9,7 @@
 // 修改描述：
 //  ------------------------------------------------------------------------------
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace WorkData.Dependency
@@ -17,6 +18,11 @@ namespace WorkData.Dependency
     {
         IServiceCollection ServiceCollection { get; set; }
 
-        T ResolveServiceValue<T>() where T : class, new();
+        T ResolveServiceValue<T>(string key);
+
+        T ResolveEntityServiceValue<T>(string key) where T : class;
+
+
+       T ResolveServiceValue<T>() where T : class, new();
     }
 }

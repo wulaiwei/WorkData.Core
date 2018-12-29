@@ -1,14 +1,4 @@
-﻿// ------------------------------------------------------------------------------
-// Copyright  吴来伟个人 版权所有。
-// 项目名：WorkData.Code
-// 文件名：Totp.cs
-// 创建标识：吴来伟 2018-01-31 13:53
-// 创建描述：
-//
-// 修改标识：吴来伟2018-01-31 13:53
-// 修改描述：
-//  ------------------------------------------------------------------------------
-
+﻿
 #region
 
 using System;
@@ -18,7 +8,7 @@ using System.Text;
 
 #endregion
 
-namespace WorkData.Code.Extensions
+namespace WorkData.Util.Common.Extensions
 {
     /// <summary>
     ///     https://tools.ietf.org/html/rfc6238

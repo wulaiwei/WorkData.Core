@@ -1,0 +1,7 @@
+﻿{
+  "modules": [
+    {
+      "type": "WorkData.ApolloWeb.WorkDataApolloWebModule,WorkData.ApolloWeb"
+    }
+  ]
+}

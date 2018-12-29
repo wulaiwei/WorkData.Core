@@ -4,9 +4,7 @@ using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.AdvancedAPIs.OAuth;
 using Senparc.Weixin.MP.Entities.Request;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using WorkData.Code.Repositories;
 using WorkData.Dependency;
 using WorkData.Domain.WeiXin;
@@ -20,6 +18,7 @@ namespace WorkData.WeiXin.Impl
         public WechatAppSettings WechatAppSettings => IocManager.Instance.ResolveServiceValue<WechatAppSettings>();
 
         private readonly IBaseRepository<WeiXinUserInfo, string> _baseRepository;
+
         public LocalAuthenticationService(IBaseRepository<WeiXinUserInfo, string> baseRepository)
         {
             _baseRepository = baseRepository;
@@ -39,7 +38,7 @@ namespace WorkData.WeiXin.Impl
              WechatAppSettings.CorpSecret,
              code);
 
-            if (oAuthAccessTokenResult==null)
+            if (oAuthAccessTokenResult == null)
                 throw new Exception("错误消息:oAuthAccessTokenResult为空");
 
             if (oAuthAccessTokenResult != null
@@ -55,7 +54,7 @@ namespace WorkData.WeiXin.Impl
                 );
             var item = _baseRepository.GetAll().FirstOrDefault(x => x
                                                                         .OpenId == userInfo.openid);
-            if (item==null)
+            if (item == null)
             {
                 var model = new WeiXinUserInfo
                 {
@@ -79,7 +78,6 @@ namespace WorkData.WeiXin.Impl
             {
                 returnUrl = returnUrl + "?access_token=" + oAuthAccessTokenResult.access_token + "&openid=" + oAuthAccessTokenResult.openid;
             }
-
 
             return returnUrl;
         }

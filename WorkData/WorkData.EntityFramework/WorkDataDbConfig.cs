@@ -18,7 +18,6 @@ namespace WorkData.EntityFramework
         public List<WorkDataDbConfig> WorkDataDbConfigs { get; set; }
     }
 
-
     public class WorkDataDbConfig
     {
         /// <summary>

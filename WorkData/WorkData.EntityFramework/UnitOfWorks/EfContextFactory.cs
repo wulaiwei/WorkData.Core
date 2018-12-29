@@ -15,11 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using WorkData.Code.Entities.BaseInterfaces;
 using WorkData.Dependency;
 using WorkData.EntityFramework.Repositories.Filters;
-using Z.EntityFramework.Plus;
 
 #endregion
 

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Internal;
+using System;
+using System.Collections.Generic;
 using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
 using WorkData.Domain.Permissions.Roles;
 using WorkData.Domain.Permissions.UserRoles;
@@ -22,7 +22,7 @@ namespace WorkData.Domain.EntityFramework.Migrations
             {
                 Id = Guid.NewGuid().ToString(),
                 IsDelete = false,
-                UserName= "administrator",
+                UserName = "administrator",
                 UserRoles = new List<UserRole>
                 {
                     new UserRole

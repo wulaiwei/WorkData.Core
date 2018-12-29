@@ -12,12 +12,9 @@
 #region
 
 using Autofac;
-using Autofac.Core;
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using WorkData.Extensions.ServiceCollections;
 
 #endregion
@@ -30,6 +27,7 @@ namespace WorkData.Dependency
     public class IocManager : IIocManager
     {
         #region Instance
+
         /// <summary>
         ///     The Singleton instance.
         /// </summary>
@@ -41,7 +39,8 @@ namespace WorkData.Dependency
         static IocManager()
         {
             Instance = new IocManager();
-        } 
+        }
+
         #endregion
 
         #region IContainer
@@ -106,6 +105,7 @@ namespace WorkData.Dependency
         }
 
         #region serviceCollection
+
         /// <summary>
         /// SetServiceCollection
         /// </summary>
@@ -123,7 +123,30 @@ namespace WorkData.Dependency
         public T ResolveServiceValue<T>() where T : class, new()
         {
             return ServiceCollection.ResolveServiceValue<T>();
-        } 
+        }
+
+        /// <summary>
+        /// ResolveServiceValue
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public T ResolveServiceValue<T>(string key)
+        {
+            return ServiceCollection.ResolveConfig<T>(key);
+        }
+
+        /// <summary>
+        /// ResolveServiceValue
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public T ResolveEntityServiceValue<T>(string key) where T : class
+        {
+            return ServiceCollection.ResolveEntityConfig<T>(key);
+        }
+
         #endregion
     }
 }

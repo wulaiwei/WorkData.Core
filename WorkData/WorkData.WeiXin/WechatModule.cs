@@ -6,7 +6,7 @@ using WorkData.WeiXin.Interface;
 namespace WorkData.WeiXin
 {
     /// <summary>
-    /// Wechat 
+    /// Wechat
     /// </summary>
     public class WechatModule : WorkDataBaseModule
     {

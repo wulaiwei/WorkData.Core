@@ -17,6 +17,5 @@ namespace WorkData.Code.AutoMappers
             }
             return configurationExpression;
         }
-
     }
 }

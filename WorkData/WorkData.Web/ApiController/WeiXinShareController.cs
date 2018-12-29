@@ -1,15 +1,9 @@
 ﻿using System;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+using WorkData.BaseWeb.Infrastructure;
 using WorkData.Code.Repositories;
-using WorkData.Code.Webs.Infrastructure;
 using WorkData.Domain.WeiXin;
-using WorkData.Util.Common.ExceptionExtensions;
-using WorkData.Web.Models.OAuths;
 using WorkData.Web.Models.WeiXinShare;
 
 namespace WorkData.Web.ApiController
@@ -20,18 +14,20 @@ namespace WorkData.Web.ApiController
         private readonly IBaseRepository<WeiXinShare, string> _baseRepository;
         private readonly IBaseRepository<WeiXinUserInfo, string> _weiXinUserInfoRepository;
 
-        public WeiXinShareController(IBaseRepository<WeiXinShare, string> baseRepository, IBaseRepository<WeiXinUserInfo, string> weiXinUserInfoRepository)
+        public WeiXinShareController(IBaseRepository<WeiXinShare, string> baseRepository,
+            IBaseRepository<WeiXinUserInfo, string> weiXinUserInfoRepository)
         {
             _baseRepository = baseRepository;
             _weiXinUserInfoRepository = weiXinUserInfoRepository;
         }
 
         /// <summary>
-        /// AccessToken
+        ///     AccessToken
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost, Route("saveData")]
+        [HttpPost]
+        [Route("saveData")]
         public IActionResult SaveData([FromBody] WeiXinShareViewModel model)
         {
             if (DateTime.Now < Convert.ToDateTime("2018-08-31 23:59:59"))
@@ -43,41 +39,44 @@ namespace WorkData.Web.ApiController
             var item = _baseRepository.GetAll()
                 .FirstOrDefault(x => x.ShareOpenId == model.ShareOpenId && x.LikeOpenId == model.LikeOpenId);
 
-            if (item!=null)
+            if (item != null)
                 return AsErrorJson("你已经点过赞了");
 
             var share = _weiXinUserInfoRepository.GetAll().FirstOrDefault(x => x.OpenId == model.ShareOpenId);
             var like = _weiXinUserInfoRepository.GetAll().FirstOrDefault(x => x.OpenId == model.LikeOpenId);
             var weiXinShare = new WeiXinShare
             {
-                LikeOpenId= model.LikeOpenId,
-                LikeOpenNick= like?.NickName,
-                ShareOpenId= model.ShareOpenId,
-                ShareOpenNick= share?.NickName
+                LikeOpenId = model.LikeOpenId,
+                LikeOpenNick = like?.NickName,
+                ShareOpenId = model.ShareOpenId,
+                ShareOpenNick = share?.NickName
             };
 
-            var entity= _baseRepository.Insert(weiXinShare);
+            var entity = _baseRepository.Insert(weiXinShare);
             return AsSuccessJson(entity);
         }
 
         /// <summary>
-        /// LoadMyLikeList
+        ///     LoadMyLikeList
         /// </summary>
         /// <returns></returns>
-        [HttpGet, Route("loadMyLikeList")]
+        [HttpGet]
+        [Route("loadMyLikeList")]
         public IActionResult LoadMyLikeList()
         {
             var shareOpenId = Request.Query["shareOpenId"];
-            var data= _baseRepository.GetAll().Where(x => x.ShareOpenId == shareOpenId).Select(x=>x.LikeOpenId).ToList();
+            var data = _baseRepository.GetAll().Where(x => x.ShareOpenId == shareOpenId).Select(x => x.LikeOpenId)
+                .ToList();
             var weiXinUserInfoList = _weiXinUserInfoRepository.GetAll().Where(x => data.Contains(x.OpenId)).ToList();
             return AsSuccessJson(weiXinUserInfoList);
         }
 
         /// <summary>
-        /// LikeRanking
+        ///     LikeRanking
         /// </summary>
         /// <returns></returns>
-        [HttpGet, Route("likeRanking")]
+        [HttpGet]
+        [Route("likeRanking")]
         public IActionResult LikeRanking()
         {
             var data = _baseRepository.GetAll();
@@ -93,11 +92,9 @@ namespace WorkData.Web.ApiController
                     g.Key.ShareOpenId,
                     g.Key.ShareOpenNick,
                     Count = g.Count()
-                }).OrderByDescending(x=>x.Count).Take(50).ToList();
+                }).OrderByDescending(x => x.Count).Take(50).ToList();
 
             return AsSuccessJson(item);
         }
-
-      
     }
 }

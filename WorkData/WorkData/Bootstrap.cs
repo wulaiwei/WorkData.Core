@@ -40,6 +40,7 @@ namespace WorkData
         public IIocManager IocManager { get; set; }
 
         #region Instance
+
         /// <summary>
         ///     instance bootstrap
         /// </summary>
@@ -64,9 +65,11 @@ namespace WorkData
         {
             IocManager = iocManager;
         }
+
         #endregion
 
         #region 初始化集成框架(Core)
+
         /// <summary>
         ///  初始化集成框架(Core)
         /// </summary>
@@ -101,6 +104,7 @@ namespace WorkData
             IocManager.SetContainer(builder);
             _isInit = true;
         }
+
         #endregion
     }
 }

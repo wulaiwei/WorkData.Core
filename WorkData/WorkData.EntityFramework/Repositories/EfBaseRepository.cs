@@ -11,10 +11,10 @@
 
 #region
 
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using WorkData.Code.Entities;
 using WorkData.Code.Repositories;
 using WorkData.Code.Repositories.Predicates;
@@ -72,8 +72,6 @@ namespace WorkData.EntityFramework.Repositories
 
         #region Query
 
-
-
         /// <summary>
         ///     FindBy
         /// </summary>
@@ -122,7 +120,6 @@ namespace WorkData.EntityFramework.Repositories
         /// <returns></returns>
         public override TEntity AsNoFilterFindBy(TPrimaryKey primaryKey, string[] includeNames)
         {
-
             var query = DbSet.AsNoFilter();
             foreach (var includeName in includeNames)
             {
@@ -132,7 +129,6 @@ namespace WorkData.EntityFramework.Repositories
 
             return entity;
         }
-
 
         /// <summary>
         ///     FindBy
@@ -166,7 +162,6 @@ namespace WorkData.EntityFramework.Repositories
             return entity;
         }
 
-
         /// <summary>
         ///     GetAll
         /// </summary>
@@ -175,7 +170,6 @@ namespace WorkData.EntityFramework.Repositories
         {
             return DbSet;
         }
-
 
         /// <summary>
         /// GetAll
@@ -243,10 +237,10 @@ namespace WorkData.EntityFramework.Repositories
             }
             return query;
         }
+
         #endregion
 
         #region Insert
-
 
         /// <summary>
         ///     Insert

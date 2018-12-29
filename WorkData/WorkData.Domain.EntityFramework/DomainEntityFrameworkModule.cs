@@ -11,10 +11,10 @@
 
 #region
 
-using System.Security.Claims;
-using System.Security.Principal;
 using Autofac;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.Security.Principal;
 using WorkData.Code.Sessions;
 using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
 using WorkData.Domain.EntityFramework.EntityFramework.Sessions;

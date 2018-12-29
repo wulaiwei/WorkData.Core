@@ -29,6 +29,7 @@ namespace WorkData.Web.ApiController
     [Route("/api/oauth")]
     public class OAuthController : WorkDataBaseApiController
     {
+        asfsadf
         public WorkDataBaseJwt WorkDataBaseJwt { get; set; } =
             IocManager.Instance.ResolveServiceValue<WorkDataBaseJwt>();
 

@@ -8,4 +8,8 @@
     <ProjectReference Include="..\WorkData.Code\WorkData.Code.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="WorkDataMiddlewares\" />
+  </ItemGroup>
+
 </Project>

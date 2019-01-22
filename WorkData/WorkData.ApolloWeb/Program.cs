@@ -3,6 +3,7 @@ using Com.Ctrip.Framework.Apollo;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System.IO;
 
 namespace WorkData.ApolloWeb
@@ -17,6 +18,7 @@ namespace WorkData.ApolloWeb
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+
                 .ConfigureAppConfiguration((hostingContext, webBuilder) =>
                 {
                     webBuilder

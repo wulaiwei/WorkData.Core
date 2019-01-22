@@ -12,11 +12,14 @@ namespace WorkData.BaseWeb.Infrastructure
 {
     public class WorkDataBaseController : Controller
     {
+
         /// <summary>
         /// WorkDataSession
         /// </summary>s
         public IWorkDataSession WorkDataSession { get; set; } =
             IocManager.ServiceLocatorCurrent.GetInstance<IWorkDataSession>();
+
+        private IPrincipal Principal { get; set; } 
 
         /// <summary>
         /// ClaimsPrincipal

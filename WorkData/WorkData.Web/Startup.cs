@@ -26,9 +26,9 @@ using Senparc.CO2NET.RegisterServices;
 using Senparc.Weixin;
 using Senparc.Weixin.Entities;
 using Senparc.Weixin.RegisterServices;
+using WorkData.BaseWeb;
 using WorkData.BaseWeb.Extension;
 using WorkData.BaseWeb.Filters;
-using WorkData.BaseWeb.WorkDataMiddlewares;
 using WorkData.Code.AutoMappers;
 using WorkData.Code.JwtSecurityTokens;
 using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
@@ -41,9 +41,9 @@ using WorkData.WeiXin.Config;
 
 namespace WorkData.Web
 {
-    public class Startup
+    public class Startup: BaseStartup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env, IConfiguration configuration) : base(env, configuration)
         {
             var builder = new ConfigurationBuilder();
             builder.SetBasePath(env.ContentRootPath)
@@ -52,13 +52,6 @@ namespace WorkData.Web
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
-
-        /// <summary>
-        ///     Gets a reference to the <see cref="Bootstrap" /> instance.
-        /// </summary>
-        public static Bootstrap BootstrapWarpper { get; } = Bootstrap.Instance();
-
-        public IConfigurationRoot Configuration { get; }
 
         /// <summary>
         ///     ConfigureServices
@@ -141,8 +134,6 @@ namespace WorkData.Web
             app.UseStaticFiles();
             //启用验证
             app.UseAuthentication();
-            //Response
-            app.UseResponse();
             //MVC
             app.UseMvc(routes =>
             {

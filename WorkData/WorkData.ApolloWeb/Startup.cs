@@ -13,19 +13,15 @@ using Com.Ctrip.Framework.Apollo;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using WorkData.Code.JwtSecurityTokens;
+using WorkData.BaseWeb;
 
 namespace WorkData.ApolloWeb
 {
-    public class Startup
+    public class Startup:BaseStartup
     {
-        public Startup(IHostingEnvironment env, IConfiguration configuration)
+        public Startup(IHostingEnvironment env, IConfiguration configuration) : base(env, configuration)
         {
-            Configuration = configuration;
         }
-
-        public static Bootstrap BootstrapWarpper { get; } = Bootstrap.Instance();
-
-        public IConfiguration Configuration { get; }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {

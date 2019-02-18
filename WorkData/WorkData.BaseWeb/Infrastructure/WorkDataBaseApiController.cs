@@ -7,7 +7,7 @@ using WorkData.Code.ResponseExtensions;
 
 namespace WorkData.BaseWeb.Infrastructure
 {
-    public class WorkDataBaseApiController : WorkDataBaseController
+    public abstract class WorkDataBaseApiController : WorkDataBaseController
     {
         /// <summary>
         /// AsSuccess

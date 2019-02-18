@@ -87,7 +87,7 @@ namespace WorkData.Web
             {
                 options.Filters.Add(typeof(WebUowFilter));
                 options.Filters.Add(typeof(WorkDataExpectionFilter));
-            });
+            }).AddControllersAsServices();
 
             #endregion
 

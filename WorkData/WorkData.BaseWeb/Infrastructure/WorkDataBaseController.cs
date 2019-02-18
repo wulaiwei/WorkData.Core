@@ -10,21 +10,9 @@ using WorkData.Dependency;
 
 namespace WorkData.BaseWeb.Infrastructure
 {
-    public class WorkDataBaseController : Controller
+    public abstract class WorkDataBaseController : Controller
     {
-
-        /// <summary>
-        /// WorkDataSession
-        /// </summary>s
-        public IWorkDataSession WorkDataSession { get; set; } =
-            IocManager.ServiceLocatorCurrent.GetInstance<IWorkDataSession>();
-
-        private IPrincipal Principal { get; set; } 
-
-        /// <summary>
-        /// ClaimsPrincipal
-        /// </summary>s
-        public ClaimsPrincipal ClaimsPrincipal { get; set; } =
-            IocManager.ServiceLocatorCurrent.GetInstance<IPrincipal>() as ClaimsPrincipal;
+        public virtual IWorkDataSession WorkDataSession { get; set; }
+        public virtual ClaimsPrincipal ClaimsPrincipal { get; set; }
     }
 }

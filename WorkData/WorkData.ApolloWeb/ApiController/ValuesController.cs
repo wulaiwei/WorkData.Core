@@ -14,7 +14,7 @@ namespace WorkData.ApolloWeb.ApiController
         [HttpGet]
         public IActionResult Get(string key)
         {
-            var data = IocManager.Instance.ResolveEntityServiceValue<WorkDataDbContextOptions>(key);
+            var data = IocManager.Instance.ResolveServiceValue<string>(key);
             return Json(data);
         }
     }

@@ -26,6 +26,7 @@ namespace WorkData.Web
         /// <returns></returns>
         public IActionResult Index()
         {
+            var s = WorkDataSession;
             return View();
         }
     }

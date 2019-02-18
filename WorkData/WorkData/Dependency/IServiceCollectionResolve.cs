@@ -22,7 +22,6 @@ namespace WorkData.Dependency
 
         T ResolveEntityServiceValue<T>(string key) where T : class;
 
-
        T ResolveServiceValue<T>() where T : class, new();
     }
 }

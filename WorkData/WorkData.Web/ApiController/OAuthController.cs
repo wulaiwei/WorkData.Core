@@ -15,6 +15,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using WorkData.BaseWeb.Infrastructure;
@@ -61,6 +62,19 @@ namespace WorkData.Web.ApiController
                 creds);
 
             return AsSuccessJson(new {token = new JwtSecurityTokenHandler().WriteToken(token)});
+        }
+
+        /// <summary>
+        ///     AccessToken
+        /// </summary>
+        /// <param name="requestOAuthViewModel"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("v_token")]
+        [Authorize]
+        public IActionResult VaToken()
+        {
+            return AsSuccessJson(new { token ="123123" });
         }
     }
 }

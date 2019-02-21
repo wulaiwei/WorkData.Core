@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using CommonServiceLocator;
 using System;
+using System.Collections.Generic;
 
 namespace WorkData.AutofacServiceLocator
 {
@@ -9,8 +10,6 @@ namespace WorkData.AutofacServiceLocator
         private static IServiceLocator _locator;
         static void Main(string[] args)
         {
-
-
             var builder = new ContainerBuilder();
 
             builder
@@ -25,10 +24,10 @@ namespace WorkData.AutofacServiceLocator
             _locator = new AutofacServiceLocator(container);
 
             for (int i = 0; i < 10000000; i++)
-                {
-                    var log = _locator.GetInstance<ILogger>();
-                    log.Get();
-                }
+            {
+                var log = _locator.GetInstance<ILogger>();
+                log.Get();
+            }
         }
     }
 }

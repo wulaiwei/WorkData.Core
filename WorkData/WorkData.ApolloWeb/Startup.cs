@@ -25,7 +25,7 @@ namespace WorkData.ApolloWeb
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.Configure<WorkDataBaseJwt>(Configuration.GetSection("WorkDataBaseJwt"));
+            //services.Configure<WorkDataBaseJwt>(Configuration.GetSection("WorkDataBaseJwt"));
             services.AddMvc();
             #region Autofac
             BootstrapWarpper.InitiateConfig(new List<string> { "Config/moduleConfig.json" }, services);

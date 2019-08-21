@@ -2,6 +2,7 @@
 
 using System;
 using System.Linq;
+using System.Text;
 
 #endregion NameSpace
 
@@ -12,6 +13,29 @@ namespace WorkData.Util.Common.Extensions
     /// </summary>
     public static class StringExtensions
     {
+        ///<summary>
+        /// Base 64 Encoding with URL and Filename Safe Alphabet using UTF-8 character set.
+        ///</summary>
+        ///<param name="str">The origianl string</param>
+        ///<returns>The Base64 encoded string</returns>
+        public static string Base64ForUrlEncode(this string str)
+        {
+            byte[] c = Convert.FromBase64String(str);
+            return Encoding.Default.GetString(c);
+        }
+
+        ///<summary>
+        /// Decode Base64 encoded string with URL and Filename Safe Alphabet using UTF-8.
+        ///</summary>
+        ///<param name="str">Base64 code</param>
+        ///<returns>The decoded string.</returns>
+        public static string Base64ForUrlDecode(this string str)
+        {
+            var b = Encoding.Default.GetBytes(str);
+            //转成 Base64 形式的 System.String
+            return Convert.ToBase64String(b);
+        }
+
         /// <summary>
         /// SplitString
         /// </summary>

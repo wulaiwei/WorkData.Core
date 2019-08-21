@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using WorkData;
+using WorkData.Dependency;
 using WorkData.ElasticSearch.Config;
+using WorkData.Extensions.TypeFinders;
 using WorkDataEs.WorkDataElasticSearchs.Contents;
 using WorkDataEs.WorkDataElasticSearchs.Contents.Dto;
 
@@ -26,13 +28,14 @@ namespace WorkDataEs
                 "Config/moduleConfig.json",
                 "Config/commonConfig.json"
             };
-            BootstrapWarpper.InitiateConfig(paths);
+            BootstrapWarpper.InitiateConfig(paths,null);
 
             #endregion 初始化
 
             //初始化service
-            var service = BootstrapWarpper.IocManager.Resolve<IContentService>();
-
+            var service = IocManager.ServiceLocatorCurrent.GetInstance<IContentService>();
+            //初始化service
+            var service1 = IocManager.ServiceLocatorCurrent.GetInstance<ITypeFinder>();
             //初始化预置数据
             Contents = InitData();
             //赋值

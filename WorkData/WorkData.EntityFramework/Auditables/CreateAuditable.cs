@@ -13,26 +13,24 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Security.Claims;
 using WorkData.Code.Entities.BaseInterfaces;
-using WorkData.Code.Extensions;
 using WorkData.Code.Sessions;
+using WorkData.Util.Common.Extensions;
 
 namespace WorkData.EntityFramework.Auditables
 {
     /// <summary>
-    /// CreateAuditable
+    ///     CreateAuditable
     /// </summary>
     [Audit(EntityState.Added)]
     public class CreateAuditable : IAuditable
     {
-        public void AttemptSetEntityProperty(object entityAsObj, IWorkDataSession workDataSession, ClaimsPrincipal claimsPrincipal)
+        public void AttemptSetEntityProperty(object entityAsObj, IWorkDataSession workDataSession,
+            ClaimsPrincipal claimsPrincipal)
         {
             var entity = entityAsObj.As<ICreate>();
             if (entity == null) return;
 
-            if (string.IsNullOrEmpty(entity.CreateUserId))
-            {
-                entity.CreateUserId = workDataSession?.UserId;
-            }
+            if (string.IsNullOrEmpty(entity.CreateUserId)) entity.CreateUserId = workDataSession?.UserId;
 
             entity.CreateTime = DateTime.Now;
         }

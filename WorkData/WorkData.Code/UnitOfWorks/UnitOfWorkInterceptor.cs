@@ -10,12 +10,12 @@
 //  ------------------------------------------------------------------------------
 
 using Castle.DynamicProxy;
-using WorkData.Code.Helpers;
+using WorkData.Util.Common.Helpers;
 
 namespace WorkData.Code.UnitOfWorks
 {
     /// <summary>
-    /// 自动工作单元（AOP）
+    ///     自动工作单元（AOP）
     /// </summary>
     public class UnitOfWorkInterceptor : IInterceptor
     {
@@ -27,23 +27,19 @@ namespace WorkData.Code.UnitOfWorks
         }
 
         /// <summary>
-        /// Intercept
+        ///     Intercept
         /// </summary>
         /// <param name="invocation"></param>
         public void Intercept(IInvocation invocation)
         {
             if (AsyncHelper.IsAsyncMethod(invocation.Method))
-            {
                 PerformUowAsync(invocation);
-            }
             else
-            {
                 PerformUow(invocation);
-            }
         }
 
         /// <summary>
-        /// PerformUow
+        ///     PerformUow
         /// </summary>
         /// <param name="invocation"></param>
         private void PerformUow(IInvocation invocation)
@@ -56,7 +52,7 @@ namespace WorkData.Code.UnitOfWorks
         }
 
         /// <summary>
-        /// PerformUow
+        ///     PerformUow
         /// </summary>
         /// <param name="invocation"></param>
         private void PerformUowAsync(IInvocation invocation)

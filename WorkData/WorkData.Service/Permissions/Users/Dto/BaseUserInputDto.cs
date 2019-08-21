@@ -6,7 +6,5 @@
         ///     Id
         /// </summary>
         public string Id { get; set; }
-
-
     }
 }

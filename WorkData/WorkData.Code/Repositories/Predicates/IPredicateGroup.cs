@@ -8,6 +8,6 @@ namespace WorkData.Code.Repositories.Predicates
     {
         List<IPredicate<T>> Predicates { get; set; }
 
-       void AddPredicate(bool condition, Expression<Func<T, bool>> expression);
+        void AddPredicate(bool condition, Expression<Func<T, bool>> expression);
     }
 }

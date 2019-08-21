@@ -3,6 +3,6 @@
     public enum QueryFilterEnum
     {
         IsSoftDelete = 1,
-        Create=2
+        Create = 2
     }
 }

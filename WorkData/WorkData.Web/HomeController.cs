@@ -11,19 +11,8 @@
 
 #region
 
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using WorkData.Code.Entities;
-using WorkData.Code.Repositories;
-using WorkData.Code.ResponseExtensions;
-using WorkData.Code.Webs.Infrastructure;
-using WorkData.Domain;
-using WorkData.Domain.Permissions.Users;
-using WorkData.Domain.WeiXin;
-using WorkData.EntityFramework.Extensions;
-using WorkData.EntityFramework.Repositories;
-using Z.EntityFramework.Plus;
+using WorkData.BaseWeb.Infrastructure;
 
 #endregion
 
@@ -37,6 +26,7 @@ namespace WorkData.Web
         /// <returns></returns>
         public IActionResult Index()
         {
+            var s = WorkDataSession;
             return View();
         }
     }

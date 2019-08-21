@@ -2,7 +2,6 @@
 
 using Autofac;
 using AutoMapper;
-using WorkData.Code.Extensions;
 using WorkData.Extensions.Modules;
 
 #endregion
@@ -21,6 +20,5 @@ namespace WorkData.Service
                  cfg.AddProfiles(GetType().Assembly);
              })).SingleInstance();
         }
-
     }
 }

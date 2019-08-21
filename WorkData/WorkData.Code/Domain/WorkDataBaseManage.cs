@@ -5,7 +5,7 @@ using WorkData.Dependency;
 
 namespace WorkData.Code.Domain
 {
-    public class WorkDataBaseManage: IWorkDataBaseManage
+    public class WorkDataBaseManage : IWorkDataBaseManage
     {
         /// <summary>
         ///     WorkDataSession
@@ -19,8 +19,8 @@ namespace WorkData.Code.Domain
 
         public WorkDataBaseManage()
         {
-            WorkDataSession = IocManager.Instance.Resolve<IWorkDataSession>();
-            ClaimsPrincipal = IocManager.Instance.Resolve<IPrincipal>() as ClaimsPrincipal;
+            WorkDataSession = IocManager.ServiceLocatorCurrent.GetInstance<IWorkDataSession>();
+            ClaimsPrincipal = IocManager.ServiceLocatorCurrent.GetInstance<IPrincipal>() as ClaimsPrincipal;
         }
     }
 }

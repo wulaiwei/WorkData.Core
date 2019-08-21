@@ -1,7 +1,5 @@
-﻿using System.Security.Claims;
-using WorkData.Code.Domain;
+﻿using WorkData.Code.Domain;
 using WorkData.Code.Repositories;
-using WorkData.Code.Sessions;
 
 namespace WorkData.Domain.Permissions.Users
 {
@@ -12,6 +10,7 @@ namespace WorkData.Domain.Permissions.Users
     public class BaseUserManage : WorkDataBaseManage
     {
         private readonly IBaseRepository<BaseUser, string> _baseUserRepository;
+
         public BaseUserManage(IBaseRepository<BaseUser, string> baseUserRepository)
         {
             _baseUserRepository = baseUserRepository;

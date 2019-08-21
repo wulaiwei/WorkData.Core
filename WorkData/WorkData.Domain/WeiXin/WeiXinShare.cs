@@ -9,7 +9,7 @@ namespace WorkData.Domain.WeiXin
     /// <summary>
     /// 微信分享逻辑
     /// </summary>
-    public class WeiXinShare: ICreate, IAggregateRoot, IEntity<string>
+    public class WeiXinShare : ICreate, IAggregateRoot, IEntity<string>
     {
         /// <summary>
         /// Id
@@ -45,7 +45,7 @@ namespace WorkData.Domain.WeiXin
         /// <summary>
         /// 创建者Id
         /// </summary>
-        
+
         public virtual string CreateUserId { get; set; }
     }
 }

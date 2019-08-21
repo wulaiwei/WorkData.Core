@@ -42,7 +42,7 @@ namespace WorkData.Ocelot
                "Config/moduleConfig.json"
             };
 
-            BootstrapWarpper.InitiateConfig(services, paths);
+            BootstrapWarpper.InitiateConfig(paths,services);
 
             return new AutofacServiceProvider
                 (BootstrapWarpper.IocManager.IocContainer);

@@ -13,11 +13,11 @@
 
 using System;
 using System.Reflection;
-using WorkData.Code.Entities;
+using WorkData.Util.Common.Helpers;
 
 #endregion
 
-namespace WorkData.Code.Helpers
+namespace WorkData.Code.Entities
 {
     public class EntityHelper
     {

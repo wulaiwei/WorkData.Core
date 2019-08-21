@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using WorkData.Code.Entities;
 using WorkData.Code.Entities.BaseInterfaces;
 using WorkData.Code.Repositories;
@@ -66,6 +64,5 @@ namespace WorkData.Domain.WeiXin
         /// </summary>
 
         public virtual string CreateUserId { get; set; }
-
     }
 }

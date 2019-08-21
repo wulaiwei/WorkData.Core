@@ -58,7 +58,7 @@ namespace WorkData.EntityFramework.Auditables
                 var auditable = new Auditable
                 {
                     EntityState = item.EntityState,
-                    AuditableImpl = IocManager.Instance.ResolveName<IAuditable>(type.FullName)
+                    AuditableImpl = IocManager.ServiceLocatorCurrent.GetInstance<IAuditable>(type.FullName)
                 };
                 Auditables.Add(auditable);
             }

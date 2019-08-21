@@ -27,6 +27,6 @@ namespace WorkData.Util.Redis
         ///     Singleton InstanceManager.
         /// </summary>
         public static BaseRedisServiceManager InstanceManager { get; } =
-            IocManager.Instance.Resolve<BaseRedisServiceManager>();
+            IocManager.ServiceLocatorCurrent.GetInstance<BaseRedisServiceManager>();
     }
 }

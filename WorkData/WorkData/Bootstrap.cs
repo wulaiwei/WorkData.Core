@@ -19,7 +19,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using WorkData.Dependency;
-using WorkData.Extensions.Modules;
 
 #endregion
 
@@ -40,19 +39,7 @@ namespace WorkData
         /// </summary>
         public IIocManager IocManager { get; set; }
 
-        /// <summary>
-        ///     StartupModule
-        /// </summary>
-        public Type StartupModule { get; set; }
-
-        /// <summary>
-        ///     Instance
-        /// </summary>
-        /// <returns></returns>
-        public static Bootstrap Instance<TStartupModule>() where TStartupModule : WorkDataBaseModule
-        {
-            return new Bootstrap(typeof(TStartupModule));
-        }
+        #region Instance
 
         /// <summary>
         ///     instance bootstrap
@@ -73,42 +60,30 @@ namespace WorkData
         /// <summary>
         ///     Bootstrap
         /// </summary>
-        public Bootstrap(Type startupModule) : this(startupModule, Dependency.IocManager.Instance)
-        {
-        }
-
-        /// <summary>
-        ///     Bootstrap
-        /// </summary>
         /// <param name="iocManager"></param>
         public Bootstrap(IIocManager iocManager)
         {
             IocManager = iocManager;
         }
 
-        /// <summary>
-        ///     Bootstrap
-        /// </summary>
-        /// <param name="startupModule"></param>
-        /// <param name="iocManager"></param>
-        public Bootstrap(Type startupModule, IIocManager iocManager)
-        {
-            StartupModule = startupModule;
-            IocManager = iocManager;
-        }
+        #endregion
+
+        #region 初始化集成框架(Core)
 
         /// <summary>
-        ///     初始化集成框架(配置方式)
+        ///  初始化集成框架(Core)
         /// </summary>
         [STAThread]
-        public void InitiateConfig(IServiceCollection services, List<string> paths)
+        public void InitiateConfig(List<string> paths, IServiceCollection services)
         {
             if (_isInit) return;
             var builder = new ContainerBuilder();
-
-            //初始化IServiceCollection
-            IocManager.SetServiceCollection(services);
-            builder.Populate(services);
+            if (services != null)
+            {
+                //初始化IServiceCollection
+                IocManager.SetServiceCollection(services);
+                builder.Populate(services);
+            }
 
             #region RegisterConfig
             var config = new ConfigurationBuilder();
@@ -130,48 +105,6 @@ namespace WorkData
             _isInit = true;
         }
 
-        /// <summary>
-        /// InitiateConfig
-        /// </summary>
-        /// <param name="paths"></param>
-        public void InitiateConfig(List<string> paths)
-        {
-            if (_isInit) return;
-            var builder = new ContainerBuilder();
-
-            #region RegisterConfig
-            var config = new ConfigurationBuilder();
-            config.SetBasePath(AppDomain.CurrentDomain.BaseDirectory);
-            if (paths != null)
-            {
-                foreach (var item in paths)
-                {
-                    config.AddJsonFile(item);
-                }
-            }
-
-            var module = new ConfigurationModule(config.Build());
-            builder.RegisterModule(module);
-
-            #endregion
-
-            //注入初始module
-            builder.RegisterModule(new WorkDataModule());
-
-            IocManager.SetContainer(builder);
-            _isInit = true;
-        }
-
-        /// <summary>
-        /// UpdateContainer
-        /// </summary>
-        /// <param name="services"></param>
-        [Obsolete("Containers should generally be considered immutable. Register all of your dependencies before building/resolving. If you need to change the contents of a container, you technically should rebuild the container. This method may be removed in a future major release.")]
-        public void CoreUpdateContainer(IServiceCollection services)
-        {
-            var builder = new ContainerBuilder();
-            builder.Populate(services);
-            IocManager.UpdateContainer(builder);
-        }
+        #endregion
     }
 }

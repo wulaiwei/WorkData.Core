@@ -1,14 +1,4 @@
-﻿// ------------------------------------------------------------------------------
-// Copyright  吴来伟个人 版权所有。
-// 项目名：WorkData.Code
-// 文件名：ObejctExtensions.cs
-// 创建标识：吴来伟 2017-12-21 15:58
-// 创建描述：
-//
-// 修改标识：吴来伟2017-12-21 15:58
-// 修改描述：
-//  ------------------------------------------------------------------------------
-namespace WorkData.Code.Extensions
+﻿namespace WorkData.Util.Common.Extensions
 {
     public static class ObejctExtensions
     {

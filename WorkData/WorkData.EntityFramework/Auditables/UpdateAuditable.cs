@@ -13,23 +13,21 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Security.Claims;
 using WorkData.Code.Entities.BaseInterfaces;
-using WorkData.Code.Extensions;
 using WorkData.Code.Sessions;
+using WorkData.Util.Common.Extensions;
 
 namespace WorkData.EntityFramework.Auditables
 {
     [Audit(EntityState.Modified)]
     public class UpdateAuditable : IAuditable
     {
-        public void AttemptSetEntityProperty(object entityAsObj, IWorkDataSession workDataSession, ClaimsPrincipal claimsPrincipal)
+        public void AttemptSetEntityProperty(object entityAsObj, IWorkDataSession workDataSession,
+            ClaimsPrincipal claimsPrincipal)
         {
             var entity = entityAsObj.As<IModifier>();
             if (entity == null) return;
 
-            if (string.IsNullOrEmpty(entity.ModifierUserId))
-            {
-                entity.ModifierUserId = workDataSession?.UserId;
-            }
+            if (string.IsNullOrEmpty(entity.ModifierUserId)) entity.ModifierUserId = workDataSession?.UserId;
 
             entity.ModifierTime = DateTime.Now;
         }

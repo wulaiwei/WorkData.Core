@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using WorkData.Dependency;
 using WorkData.EntityFramework.Auditables;
 using WorkData.Extensions.ServiceCollections;
 
@@ -16,19 +17,19 @@ namespace WorkData.EntityFramework.Extensions
         /// <param name="serviceCollection"></param>
         /// <param name="keyName"></param>
         /// <returns></returns>
-        public static IServiceCollection AddWorkDataDbContext<TContext>(this IServiceCollection serviceCollection,string keyName) where TContext : DbContext
+        public static IServiceCollection AddWorkDataDbContext<TContext>(this IServiceCollection serviceCollection, string keyName) where TContext : DbContext
         {
-            var dbContextOptions = serviceCollection.ResolveServiceValue<WorkDataDbContextOptions>() ?? 
+            var dbContextOptions = serviceCollection.ResolveServiceValue<WorkDataDbContextOptions>() ??
                 throw new Exception("WorkDataDbContextOptions 不能为空！");
 
-            if (dbContextOptions.WorkDataDbConfigs==null)
+            if (dbContextOptions.WorkDataDbConfigs == null)
                 throw new Exception("dbContextOptions.WorkDataDbConfigs 不能为空！");
 
             var workDataDbConfig = dbContextOptions.WorkDataDbConfigs
                 .Single(x => x.KeyName == keyName);
 
-            if(workDataDbConfig==null)
-                throw  new Exception("workDataDbConfig 不能为空！");
+            if (workDataDbConfig == null)
+                throw new Exception("workDataDbConfig 不能为空！");
 
             return serviceCollection.AddDbContext<TContext>(optionsAction =>
             {
@@ -56,9 +57,7 @@ namespace WorkData.EntityFramework.Extensions
         /// <returns></returns>
         public static IServiceCollection InitAuditable(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<AuditableConfigs>();
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-            var auditableConfigs = serviceProvider.GetService<AuditableConfigs>();
+            var auditableConfigs = IocManager.ServiceLocatorCurrent.GetInstance<AuditableConfigs>();
             if (AuditableConfigs.AuditableDictionary == null)
             {
                 auditableConfigs.InitializedAuditables();

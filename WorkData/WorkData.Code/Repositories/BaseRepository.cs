@@ -16,7 +16,6 @@ using System.Linq;
 using WorkData.Code.Entities;
 using WorkData.Code.Repositories.Predicates;
 using WorkData.Code.UnitOfWorks;
-using WorkData.Dependency;
 
 #endregion
 
@@ -34,11 +33,6 @@ namespace WorkData.Code.Repositories
         ///     UnitOfWorkManager
         /// </summary>
         public IUnitOfWorkManager UnitOfWorkManager { get; set; }
-
-        /// <summary>
-        ///     IocResolver
-        /// </summary>
-        public IResolver IocResolver { get; set; }
 
         /// <summary>
         /// PredicateGroup

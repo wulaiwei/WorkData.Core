@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using WorkData.Dependency;
 using WorkData.EntityFramework.Repositories.Filters.Configs;
 using Z.EntityFramework.Plus;
@@ -47,8 +47,8 @@ namespace WorkData.EntityFramework.Repositories.Filters
             var items = CacheGenericDynamicFilter.Where(x => filterStrings.Contains(x.Key));
 
             query1 = items.Select(key => context.Filter(key.Key)).Where(item => item != null)
-                .Aggregate(query1, (current, item) => (IQueryable) item.ApplyFilter<T>(current));
-            return (IQueryable<T>) query1;
+                .Aggregate(query1, (current, item) => (IQueryable)item.ApplyFilter<T>(current));
+            return (IQueryable<T>)query1;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace WorkData.EntityFramework.Repositories.Filters
 
             foreach (var item in dynamicFilterConfig.DynamicFilterList)
             {
-                var dynamicFilter = IocManager.Instance.ResolveName<IDynamicFilter>(item);
+                var dynamicFilter = IocManager.ServiceLocatorCurrent.GetInstance<IDynamicFilter>(item);
                 CacheGenericDynamicFilter.Add(item, dynamicFilter);
             }
         }

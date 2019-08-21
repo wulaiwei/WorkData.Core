@@ -11,11 +11,7 @@
 
 #region
 
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using WorkData.Code.Entities;
-using WorkData.Code.Entities.BaseInterfaces;
-using WorkData.Domain.EntityFramework.EntityFramework.Filters;
 using WorkData.Domain.EntityFramework.Mappings.Permissions;
 using WorkData.Domain.EntityFramework.Mappings.WeiXin;
 using WorkData.Domain.Permissions.Roles;
@@ -24,7 +20,6 @@ using WorkData.Domain.Permissions.Users;
 using WorkData.Domain.WeiXin;
 using WorkData.EntityFramework;
 using WorkData.EntityFramework.Repositories.Filters;
-using Z.EntityFramework.Plus;
 
 #endregion
 

@@ -16,9 +16,5 @@ namespace WorkData.Extensions.Modules
 {
     public abstract class WorkDataBaseModule : Module
     {
-        /// <summary>
-        /// Gets a reference to the IOC manager.
-        /// </summary>
-        public IIocManager IocManager { get; set; }
     }
 }

@@ -13,6 +13,7 @@
 
 using Autofac;
 using WorkData.Dependency;
+using WorkData.Extensions.TypeFinders;
 
 #endregion
 
@@ -23,9 +24,9 @@ namespace WorkData
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<IocManager>()
-                .As<IIocManager, IResolver, IRegistrar>();
+                .As<IIocManager, IServiceCollectionResolve>();
 
-            //builder.RegisterType<WebAppTypeFinder>().As<ITypeFinder>();
+            builder.RegisterType<WebAppTypeFinder>().As<ITypeFinder>();
         }
     }
 }

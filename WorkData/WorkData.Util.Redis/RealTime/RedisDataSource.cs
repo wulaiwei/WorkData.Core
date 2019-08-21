@@ -20,7 +20,7 @@ namespace WorkData.Util.Redis.RealTime
         /// WorkDataRedisConfig
         /// </summary>
         public static WorkDataRedisConfig WorkDataRedisConfig { get; }
-            = IocManager.Instance.Resolve<WorkDataRedisConfig>();
+            = IocManager.ServiceLocatorCurrent.GetInstance<WorkDataRedisConfig>();
 
         private static ConnectionMultiplexer _instance;
         private static readonly object Locker = new object();

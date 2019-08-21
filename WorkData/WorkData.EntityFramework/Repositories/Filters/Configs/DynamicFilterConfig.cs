@@ -7,6 +7,6 @@ namespace WorkData.EntityFramework.Repositories.Filters.Configs
     /// </summary>
     public class DynamicFilterConfig
     {
-        public List<string> DynamicFilterList{ get; set; }
+        public List<string> DynamicFilterList { get; set; }
     }
 }

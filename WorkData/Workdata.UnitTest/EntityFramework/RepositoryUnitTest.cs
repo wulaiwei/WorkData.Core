@@ -33,9 +33,9 @@ namespace Workdata.UnitTest.EntityFramework
         /// </summary>
         public RepositoryUnitTest()
         {
-            _unitOfWorkManager = IocManager.Instance.Resolve<IUnitOfWorkManager>();
-            _baseUserRepository = IocManager.Instance.Resolve<IBaseRepository<BaseUser, string>>();
-            var workDataSession = IocManager.Instance.Resolve<IWorkDataSession>();
+            _unitOfWorkManager = IocManager.ServiceLocatorCurrent.GetInstance<IUnitOfWorkManager>();
+            _baseUserRepository = IocManager.ServiceLocatorCurrent.GetInstance<IBaseRepository<BaseUser, string>>();
+            var workDataSession = IocManager.ServiceLocatorCurrent.GetInstance<IWorkDataSession>();
         }
 
         [Fact]

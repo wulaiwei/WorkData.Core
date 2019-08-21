@@ -13,7 +13,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Principal;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -27,46 +26,32 @@ using Senparc.CO2NET.RegisterServices;
 using Senparc.Weixin;
 using Senparc.Weixin.Entities;
 using Senparc.Weixin.RegisterServices;
+using WorkData.BaseWeb;
+using WorkData.BaseWeb.Extension;
+using WorkData.BaseWeb.Filters;
 using WorkData.Code.AutoMappers;
-using WorkData.Code.Entities;
 using WorkData.Code.JwtSecurityTokens;
-using WorkData.Code.Sessions;
-using WorkData.Code.Webs.Extension;
-using WorkData.Code.Webs.Filters;
-using WorkData.Code.Webs.WorkDataMiddlewares;
-using WorkData.Dependency;
 using WorkData.Domain.EntityFramework.EntityFramework.Contexts;
-using WorkData.Domain.EntityFramework.EntityFramework.Filters;
 using WorkData.EntityFramework;
 using WorkData.EntityFramework.Extensions;
 using WorkData.EntityFramework.Repositories.Filters.Configs;
-using WorkData.Extensions.ServiceCollections;
-using WorkData.Extensions.TypeFinders;
 using WorkData.WeiXin.Config;
-using Z.EntityFramework.Plus;
 
 #endregion
 
 namespace WorkData.Web
 {
-    public class Startup
+    public class Startup: BaseStartup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env, IConfiguration configuration) : base(env, configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
+            var builder = new ConfigurationBuilder();
+            builder.SetBasePath(env.ContentRootPath)
                 .AddJsonFile("Config/appsettings.json", true, true)
                 .AddJsonFile($"Config/appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
-
-        /// <summary>
-        ///     Gets a reference to the <see cref="Bootstrap" /> instance.
-        /// </summary>
-        public static Bootstrap BootstrapWarpper { get; } = Bootstrap.Instance();
-
-        public IConfigurationRoot Configuration { get; }
 
         /// <summary>
         ///     ConfigureServices
@@ -83,7 +68,6 @@ namespace WorkData.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IPrincipal>(provider =>
                 provider.GetService<IHttpContextAccessor>().HttpContext?.User);
-            services.AddSingleton<ITypeFinder, WebAppTypeFinder>();
 
             #region AutoMapper
 
@@ -103,7 +87,7 @@ namespace WorkData.Web
             {
                 options.Filters.Add(typeof(WebUowFilter));
                 options.Filters.Add(typeof(WorkDataExpectionFilter));
-            });
+            }).AddControllersAsServices();
 
             #endregion
 
@@ -115,7 +99,7 @@ namespace WorkData.Web
 
             #region Autofac
 
-            BootstrapWarpper.InitiateConfig(services, new List<string> {"Config/moduleConfig.json"});
+            BootstrapWarpper.InitiateConfig(new List<string> {"Config/moduleConfig.json"}, services);
 
             #endregion
 
@@ -125,11 +109,11 @@ namespace WorkData.Web
 
             #endregion
 
-            services.AddMemoryCache();//使用本地缓存必须添加
-            services.AddSession();//使用Session
+            services.AddMemoryCache(); //使用本地缓存必须添加
+            services.AddSession(); //使用Session
 
-            services.AddSenparcGlobalServices(Configuration)//Senparc.CO2NET 全局注册
-                .AddSenparcWeixinServices(Configuration);//Senparc.Weixin 注册
+            services.AddSenparcGlobalServices(Configuration) //Senparc.CO2NET 全局注册
+                .AddSenparcWeixinServices(Configuration); //Senparc.Weixin 注册
 
 
             return new AutofacServiceProvider
@@ -137,20 +121,19 @@ namespace WorkData.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptions<SenparcSetting> senparcSetting,
+            IOptions<SenparcWeixinSetting> senparcWeixinSetting)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
-            var register = RegisterService.Start(env, senparcSetting.Value).UseSenparcGlobal();// 启动 CO2NET 全局注册，必须！
+            var register = RegisterService.Start(env, senparcSetting.Value).UseSenparcGlobal(); // 启动 CO2NET 全局注册，必须！
 
-            register.UseSenparcWeixin(senparcWeixinSetting.Value, senparcSetting.Value);//微信全局注册，必须！
+            register.UseSenparcWeixin(senparcWeixinSetting.Value, senparcSetting.Value); //微信全局注册，必须！
 
             //静态资源
             app.UseStaticFiles();
             //启用验证
             app.UseAuthentication();
-            //Response
-            app.UseResponse();
             //MVC
             app.UseMvc(routes =>
             {

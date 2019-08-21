@@ -11,14 +11,15 @@
 
 #region
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using WorkData.BaseWeb.Infrastructure;
 using WorkData.Code.JwtSecurityTokens;
-using WorkData.Code.Webs.Infrastructure;
 using WorkData.Dependency;
 using WorkData.Web.Models.OAuths;
 
@@ -33,16 +34,17 @@ namespace WorkData.Web.ApiController
             IocManager.Instance.ResolveServiceValue<WorkDataBaseJwt>();
 
         /// <summary>
-        /// AccessToken
+        ///     AccessToken
         /// </summary>
         /// <param name="requestOAuthViewModel"></param>
         /// <returns></returns>
-        [HttpPost, Route("access_token")]
+        [HttpPost]
+        [Route("access_token")]
         public IActionResult AccessToken([FromBody] RequestOAuthViewModel requestOAuthViewModel)
         {
             var claim = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier,"1"), 
+                new Claim(ClaimTypes.NameIdentifier, "1"),
                 new Claim(ClaimTypes.Name, requestOAuthViewModel.UserName),
                 new Claim(ClaimTypes.Role, "admin")
             };
@@ -59,7 +61,20 @@ namespace WorkData.Web.ApiController
                 DateTime.Now.AddMinutes(WorkDataBaseJwt.Expires),
                 creds);
 
-            return AsSuccessJson(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+            return AsSuccessJson(new {token = new JwtSecurityTokenHandler().WriteToken(token)});
+        }
+
+        /// <summary>
+        ///     AccessToken
+        /// </summary>
+        /// <param name="requestOAuthViewModel"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("v_token")]
+        [Authorize]
+        public IActionResult VaToken()
+        {
+            return AsSuccessJson(new { token ="123123" });
         }
     }
 }

@@ -109,7 +109,6 @@ namespace WorkData.Code.Repositories
         /// <returns></returns>
         TEntity AsNoFilterFindBy(TPrimaryKey primaryKey, string[] includeNames);
 
-
         /// <summary>
         ///     FindBy
         /// </summary>

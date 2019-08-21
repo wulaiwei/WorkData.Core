@@ -15,11 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using WorkData.Code.Entities.BaseInterfaces;
 using WorkData.Dependency;
 using WorkData.EntityFramework.Repositories.Filters;
-using Z.EntityFramework.Plus;
 
 #endregion
 
@@ -30,13 +27,6 @@ namespace WorkData.EntityFramework.UnitOfWorks
     /// </summary>
     public class EfContextFactory : IEfContextFactory
     {
-        private readonly IResolver _resolver;
-
-        public EfContextFactory(IResolver resolver)
-        {
-            _resolver = resolver;
-        }
-
         /// <summary>
         ///     default current context
         /// </summary>
@@ -73,7 +63,7 @@ namespace WorkData.EntityFramework.UnitOfWorks
             {
                 dic.Remove(conString + "DbContext");
             }
-            dbContext = _resolver.Resolve<TDbContext>();
+            dbContext = IocManager.ServiceLocatorCurrent.GetInstance<TDbContext>();
 
             //初始化拦截器
             dbContext.AddDynamicFilter();

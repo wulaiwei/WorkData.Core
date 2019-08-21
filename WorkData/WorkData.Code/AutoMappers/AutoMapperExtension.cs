@@ -6,7 +6,7 @@ namespace WorkData.Code.AutoMappers
 {
     public static class AutoMapperExtension
     {
-        public static IMapper Mapper => IocManager.Instance.Resolve<IMapper>();
+        public static IMapper Mapper => IocManager.ServiceLocatorCurrent.GetInstance<IMapper>();
 
         /// <summary>
         /// AddWorkDataAutoMapper
